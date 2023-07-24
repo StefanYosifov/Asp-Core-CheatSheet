@@ -1,1 +1,3 @@
-# Asp-Core-CheatSheet
+You can find previous commits here => https://github.com/StefanYosifov/Csharp-Web/tree/master/Project/%5BProject%5DCheatSheet
+
+To be updated...

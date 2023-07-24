@@ -1,0 +1,17 @@
+.resource-wrapper{
+    background: blue;
+    display: flex;
+    justify-content: center;
+    width: 85%;
+    flex-direction: column;
+    background: #f2f2f2;
+    border: 2px solid black;
+    flex-wrap: wrap;
+}
+
+
+.resource-sort{
+    height: 10%;
+    width: 100%;
+    background-color: rgb(245, 225, 225);
+}

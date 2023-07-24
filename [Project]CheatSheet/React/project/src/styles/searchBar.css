@@ -1,0 +1,19 @@
+.search-bar{
+    background: #fffff9;
+    height: 1.15rem;
+    margin-right: 0.2rem;
+    border: 1px solid #fffff9;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+.search-bar:hover{
+    transform: scale(1.01);
+}
+
+.search-submit{
+    background: #fffff9;
+    border-radius: 0.25rem;
+    transform: scale(1.01);
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    color: #222831;
+}

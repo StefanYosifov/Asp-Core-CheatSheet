@@ -1,0 +1,53 @@
+.resource-item {
+    color: white;
+    text-align: center;
+    display:inline-flex;
+    background-color: #333333;
+    width: 20%;
+    max-height: 450px;
+    margin: 2rem;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.resource-card {
+    background-color: #333333;
+    width: 100%;
+    height: 100%;
+    border-radius: 2px;
+    border: 1px solid #555555;
+}
+
+.resource-item-image {
+    width: 100%;
+}
+
+.resource-info {
+    font-size: 0.7rem;
+    background-color: #212121;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #f9efef;
+}
+
+.resource-info span {
+    margin-left: 0.8rem;
+}
+
+.resource-image {
+    width: 100%;
+    height: 100%;
+    border-radius: 6px;
+    object-fit: cover;
+    height: 100%;
+}
+
+
+.resource-textbox {
+    word-spacing: 0.15%;
+    font-size: 0.65rem;
+    overflow: hidden;
+    text-align: justify;
+    margin: 5%;
+    height: 30%;
+    word-wrap: break-word;
+}

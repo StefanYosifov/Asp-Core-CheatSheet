@@ -68,7 +68,7 @@ const useDetailsStore = create((set) => ({
             }
             set({ isLoading: false });
         } catch (error) {
-            setIsLoading(false);
+            set({isLoading: false});
         }
     },
     changeVisibility: async (id) => {

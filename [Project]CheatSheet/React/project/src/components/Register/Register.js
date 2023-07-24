@@ -1,8 +1,5 @@
 import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { register } from '../../api/Requests/authentication'
-import LoginPage from '../Login/Login';
-import useAuth from '../../hooks/useAuth';
 import { useUserDetails } from '../../stores/useUserDetails';
 import { URLS } from '../../constants/URLConstants';
 

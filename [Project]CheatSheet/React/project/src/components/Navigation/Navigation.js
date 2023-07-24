@@ -1,8 +1,7 @@
-import { Link, NavLink, useNavigate } from 'react-router-dom';
-import { useContext, useEffect, useState } from 'react';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 import { getUserId } from '../../api/Requests/profile';
 import { validateToken } from '../../api/Requests/validateJWTtoken';
-import { UserContext, UserDataProvider } from '../../context/UserDataProvider';
 import { useUserDetails } from '../../stores/useUserDetails';
 import { URLS } from '../../constants/URLConstants';
 

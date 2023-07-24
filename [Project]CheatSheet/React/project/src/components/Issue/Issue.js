@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { getIssueCategories, postIssue } from "../../api/Requests/issues";
-import { useParams } from "react-router-dom";
 
 export const Issue = ({ showIssue, topicId }) => {
 

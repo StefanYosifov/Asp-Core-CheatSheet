@@ -1,16 +1,4 @@
 import { useState } from "react";
-import { Navigation } from "../Navigation/Navigation"
-
-
-const renderContent = () => {
-    switch (activeItem) {
-      case "course":
-        return <ProfileContent profileData={profileData} />;
-      default:
-        return <ProfileContent profileData={profileData} />;
-    }
-  };
-
 
 const PrivateNavigation = () => {
     const [activeItem, setActiveItem] = useState("courses");

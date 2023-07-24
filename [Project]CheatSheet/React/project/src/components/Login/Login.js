@@ -28,10 +28,6 @@ export function LoginPage() {
         try {
             const result=setUser(formData.userName,formData.password);
             if (result.status === 200) {
-                const accessToken = response?.data?.accessToken;
-                const roles = response?.data?.roles;
-                setAuth({ user: formData.userName, roles, accessToken });
-                console.log(`${formData.userName} ${accessToken} ${roles}`);
                 navigate(from, { replace: true });
             } else {
             }

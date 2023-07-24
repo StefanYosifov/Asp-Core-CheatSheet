@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { getAllCourses } from "../../api/Requests/courses";
-import { CoursesItem } from "./CoursesItem";
 import { useLocation, useNavigate, useParams, useSearchParams } from "react-router-dom";
 
 

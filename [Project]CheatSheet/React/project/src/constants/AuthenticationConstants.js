@@ -1,7 +1,7 @@
 export const AuthenticationConstants={
     USERNAME_MIN_LENGTH:6,
     PASSWORD_MIN_LENGTH:8,
-    EMAIL_REGEX:`.+\@.+\..+`,
+    EMAIL_REGEX:`.+\.+\..+`,
 }
 
 export const AuthenticationMessage={

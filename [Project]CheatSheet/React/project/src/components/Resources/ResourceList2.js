@@ -1,12 +1,12 @@
 import { useEffect } from "react";
-import useResourceListStore from "../../stores/useResourceListStore"
+import useResourceListStore from "../../stores/useResourceListStore";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import { Pagination } from "../Helper components/Pagination";
 import ResourceItem from "./ResourceItem";
 import { DropDown } from "../Helper components/DropDown";
 import SearchBar from "../Helper components/SearchBar";
 import useDropDownStore from "../../stores/useDropDownStore";
-import { APP_URLS, URLS } from "../../constants/URLConstants";
+import { URLS } from "../../constants/URLConstants";
 
 
 const URL_CHANGE = {

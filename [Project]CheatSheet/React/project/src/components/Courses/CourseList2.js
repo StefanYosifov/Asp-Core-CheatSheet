@@ -3,7 +3,7 @@ import useCourseStore from "../../stores/useCourseStore"
 import { CourseFeaturedItem } from "./CourseFeaturedItem";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import { Link, useLocation, useNavigate, useParams, useSearchParams } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import { CategoryItem } from "../Helper components/CategoryItem";
 import SearchBar from "../Helper components/SearchBar";
 import { RadioButtonList } from "../Helper components/RadioButtonList";

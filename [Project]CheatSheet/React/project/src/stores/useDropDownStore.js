@@ -1,6 +1,5 @@
 import { create } from "zustand";
 import { getCategories } from "../api/Requests/categories";
-import {shallow} from "zustand/shallow"
 
 const useDropDownStore = create((set) => ({
     inputSearch:"",

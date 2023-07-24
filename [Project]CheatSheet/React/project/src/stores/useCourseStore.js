@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { getAllCourses, getCourseDetailsPreview, getCoursePreviewDetailsExtra, getCoursesCategories, getFeaturedCourses,getCoursePreviewDetails } from "../api/Requests/courses";
+import { getAllCourses, getCoursePreviewDetailsExtra, getCoursesCategories, getFeaturedCourses, getCoursePreviewDetails } from "../api/Requests/courses";
 import { toast } from "react-toastify";
 
 const useCourseStore = create((set) => ({

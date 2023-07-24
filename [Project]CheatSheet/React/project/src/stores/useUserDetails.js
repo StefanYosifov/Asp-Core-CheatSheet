@@ -1,5 +1,5 @@
-import create from "zustand"
-import { persist } from "zustand/middleware"
+import create from "zustand";
+import { persist } from "zustand/middleware";
 import { login, register } from "../api/Requests/authentication";
 import { clearUserData, clearUserToken } from "../api/util";
 import { toast } from "react-toastify";
@@ -27,7 +27,7 @@ export const useUserDetails = create(persist(
             if( userName.length <AuthenticationConstants.USERNAME_MIN_LENGTH){
                 return toast.error(AuthenticationMessage.USERNAME_TOO_SHORT)
             }
-            if(new RegExp(AuthenticationConstants.EMAIL_REGEX).test(email)==false){
+            if(new RegExp(AuthenticationConstants.EMAIL_REGEX).test(email)===false){
                 return toast.error(AuthenticationMessage.EMAIL_INVALID);
             }
             if(password.length<AuthenticationConstants.PASSWORD_MIN_LENGTH){
@@ -38,7 +38,6 @@ export const useUserDetails = create(persist(
                 const response = await register(data);
                 if (response.status === 200) {
                     set({ user: data });
-                    console.log(user);
                     set({ isAuthenticated: true });
                     return response;
                 }
@@ -47,8 +46,8 @@ export const useUserDetails = create(persist(
             }
         },
         logout: () => {
-            set({ user: null }),
-                set({ isAuthenticated: false })
+            set({ user: null });
+            set({ isAuthenticated: false });
             clearUserData();
             clearUserToken();
         }

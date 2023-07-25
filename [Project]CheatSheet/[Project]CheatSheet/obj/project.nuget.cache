@@ -1,12 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "MPK4Jk2QFxx0LvWp0ao7qChclkWBVdNOGoJMb6pe0XLcchTB0kWrACzoeBno0A0eOQFpnraYjLf6R/MRYwrpFQ==",
+  "dgSpecHash": "SaiFz21cTSGS+IYOltm3RjkJvmhzgikFzsy1u6Bj+Hpbpe9Wu1LuWpJxTI8sFTdIdFhZsf6ndNt36JueW02onA==",
   "success": true,
   "projectFilePath": "C:\\Users\\Stefan\\Desktop\\Asp-Core-CheatSheet\\[Project]CheatSheet\\[Project]CheatSheet\\[Project]CheatSheet.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Stefan\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\Stefan\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",
     "C:\\Users\\Stefan\\.nuget\\packages\\awssdk.core\\3.7.200.1\\awssdk.core.3.7.200.1.nupkg.sha512",
+    "C:\\Users\\Stefan\\.nuget\\packages\\awssdk.extensions.netcore.setup\\3.7.7\\awssdk.extensions.netcore.setup.3.7.7.nupkg.sha512",
     "C:\\Users\\Stefan\\.nuget\\packages\\awssdk.s3\\3.7.200.1\\awssdk.s3.3.7.200.1.nupkg.sha512",
     "C:\\Users\\Stefan\\.nuget\\packages\\awssdk.securitytoken\\3.7.100.14\\awssdk.securitytoken.3.7.100.14.nupkg.sha512",
     "C:\\Users\\Stefan\\.nuget\\packages\\dnsclient\\1.6.1\\dnsclient.1.6.1.nupkg.sha512",

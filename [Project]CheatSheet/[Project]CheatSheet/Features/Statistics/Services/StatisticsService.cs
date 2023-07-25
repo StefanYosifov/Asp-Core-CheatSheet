@@ -7,12 +7,12 @@
     using Microsoft.Extensions.Caching.Memory;
     using Models;
 
-    public class StatisticService : IStatisticsService
+    public class StatisticsService : IStatisticsService
     {
         private readonly IMemoryCache cache;
         private readonly ICacheService cacheService;
         private readonly CheatSheetDbContext context;
-        public StatisticService(
+        public StatisticsService(
             CheatSheetDbContext context,
             ICacheService cacheService,
             IMemoryCache cache)

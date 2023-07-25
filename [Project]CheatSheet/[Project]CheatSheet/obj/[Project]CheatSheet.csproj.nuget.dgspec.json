@@ -278,6 +278,10 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "AWSSDK.Extensions.NETCore.Setup": {
+              "target": "Package",
+              "version": "[3.7.7, )"
+            },
             "AWSSDK.S3": {
               "target": "Package",
               "version": "[3.7.200.1, )"

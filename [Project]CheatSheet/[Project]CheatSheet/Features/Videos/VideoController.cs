@@ -11,15 +11,21 @@
     public class VideoController : ApiController
     {
         private readonly IVideoService service;
+        private readonly IConfiguration configuration;
 
-        public VideoController(IVideoService service)
+        public VideoController(
+            IVideoService service, 
+            IConfiguration configuration)
         {
             this.service = service;
+            this.configuration = configuration;
         }
 
         [HttpGet("id/{videoId}")]
         [ActionFilter("", VideoMessages.OnUnsuccessfulGetVideoId)]
         public async Task<string> GetVideoId(string videoId)
             => await service.GetVideoId(videoId.ToLower());
+
     }
 }
+

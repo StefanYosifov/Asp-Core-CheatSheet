@@ -31,8 +31,8 @@
         public bool HasPaid { get; set; }
 
         [Required] 
-        public ICollection<string> Categories{ get; set; } = null!;
+        public ICollection<string> Categories{ get; set; }
 
-        public ICollection<TopicsRespondModel> Topics { get; set; } = null!;
+        public ICollection<TopicsRespondModel> Topics { get; set; }
     }
 }

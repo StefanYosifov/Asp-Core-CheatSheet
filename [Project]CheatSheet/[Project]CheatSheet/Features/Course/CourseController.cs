@@ -8,18 +8,18 @@
     using Microsoft.AspNetCore.Mvc;
     using Models;
 
-    [Authorize]
+    [AllowAnonymous]
     [Route("/course")]
     public class CourseController : ApiController
     {
         private readonly ICourseService service;
-        private readonly ICourseServiceMongo serviceMongo;
+        private readonly ICourseMongoService mongoService;
 
         public CourseController(ICourseService service, 
-            ICourseServiceMongo serviceMongo)
+            ICourseMongoService mongoService)
         {
             this.service = service;
-            this.serviceMongo = serviceMongo;
+            this.mongoService = mongoService;
         }
 
         [HttpGet("{id}")]
@@ -62,6 +62,6 @@
 
         [HttpGet("preview/extra/{id}")]
         public async Task<CourseDetails> GetCourseExtraDetails(string id)
-            => await serviceMongo.GetDetails(id);
+            => await mongoService.GetDetails(id);
     }
 }

@@ -3,7 +3,7 @@
     using _Project_CheatSheet.Features.Course.Models;
     using _Project_CheatSheet.Infrastructure.MongoDb.Models;
 
-    public interface ICourseServiceMongo
+    public interface ICourseMongoService
     {
         Task<CourseDetails> GetDetails(string id);
     }

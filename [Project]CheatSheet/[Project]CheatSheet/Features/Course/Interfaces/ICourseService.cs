@@ -1,6 +1,5 @@
 ﻿namespace _Project_CheatSheet.Features.Course.Interfaces
 {
-    using _Project_CheatSheet.Infrastructure.MongoDb.Models;
     using Models;
 
     public interface ICourseService

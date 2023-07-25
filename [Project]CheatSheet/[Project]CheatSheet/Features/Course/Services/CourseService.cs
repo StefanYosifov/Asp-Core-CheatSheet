@@ -1,8 +1,7 @@
 ﻿namespace _Project_CheatSheet.Features.Course.Services
 {
-    using _Project_CheatSheet.Common.CachingConstants;
-    using _Project_CheatSheet.Features.Course.Enums;
-    using _Project_CheatSheet.Infrastructure.MongoDb.Models;
+    using Common.CachingConstants;
+    using Enums;
     using _Project_CheatSheet.Infrastructure.MongoDb.Services;
     using AutoMapper;
     using AutoMapper.QueryableExtensions;
@@ -15,14 +14,13 @@
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Caching.Memory;
     using Models;
-    using System.Diagnostics;
-    using static _Project_CheatSheet.Common.CachingConstants.CachingConstants;
+
     using static Common.CachingConstants.CachingConstants.Course;
     using Course = Infrastructure.Data.Models.Course;
 
     public class CourseService : ICourseService
     {
-        private readonly string[] FeaturedCategories = { "C#", "JavaScript", "Python", "Java", "Web" };
+        private readonly string[] FeaturedCategories = new string[] { "C#", "JavaScript", "Python", "Java", "Web" };
         private const int FeaturedCategoriesCount = 6;
         private const byte CoursesPerPage = 6;
 

@@ -11,6 +11,6 @@
 
         public string Content{get;set; }
 
-        public ICollection<string> Resources { get; set; } = null!;
+        public ICollection<string> Resources { get; set; }
     }
 }

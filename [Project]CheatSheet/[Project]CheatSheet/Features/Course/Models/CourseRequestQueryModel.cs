@@ -1,13 +1,13 @@
 ﻿namespace _Project_CheatSheet.Features.Course.Models
 {
-    using _Project_CheatSheet.Features.Course.Enums;
+    using Enums;
 
     public class CourseRequestQueryModel
     {
 
         public CourseRequestQueryModel()
         {
-            this.Categories = new List<string>();
+            Categories = new List<string>();
         }
 
         public string? Search { get; set; }

@@ -1,5 +1,6 @@
 ﻿namespace _Project_CheatSheet.Features.Topics.Services
 {
+    using Amazon.S3;
     using AutoMapper;
     using AutoMapper.QueryableExtensions;
     using Infrastructure.Data;
@@ -11,13 +12,16 @@
     {
         private readonly CheatSheetDbContext context;
         private readonly IMapper mapper;
+        private readonly IAmazonS3 amazonS3;
 
         public TopicService(
             CheatSheetDbContext context,
-            IMapper mapper)
+            IMapper mapper,
+            IAmazonS3 amazonS3)
         {
             this.context = context;
             this.mapper = mapper;
+            this.amazonS3 = amazonS3;
         }
 
         public async Task<TopicRespondModel> GetTopic(string id)

@@ -26,7 +26,7 @@
                })
                .ToArrayAsync();
 
-            var sortring=((ResourceSorting[])Enum.GetValues(typeof(ResourceSorting))).Select(s=>new SortingModel()
+            var sorting=((ResourceSorting[])Enum.GetValues(typeof(ResourceSorting))).Select(s=>new SortingModel()
             {
                 Id=(int)s,
                 Name=s.ToString(),
@@ -35,7 +35,7 @@
             return new CategorySortingModel()
             {
                 Categories=categories,
-                Sorting = sortring
+                Sorting = sorting
             };
         }
 

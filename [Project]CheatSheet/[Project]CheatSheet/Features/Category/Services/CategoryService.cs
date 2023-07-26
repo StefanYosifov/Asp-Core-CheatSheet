@@ -1,6 +1,6 @@
 ﻿namespace _Project_CheatSheet.Features.Category.Services
 {
-    using _Project_CheatSheet.Features.Resources.Enums;
+    using Resources.Enums;
     using Infrastructure.Data;
     using Interfaces;
     using Microsoft.EntityFrameworkCore;

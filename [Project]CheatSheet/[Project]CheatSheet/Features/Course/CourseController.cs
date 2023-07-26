@@ -8,7 +8,7 @@
     using Microsoft.AspNetCore.Mvc;
     using Models;
 
-    [AllowAnonymous]
+    [Authorize]
     [Route("/course")]
     public class CourseController : ApiController
     {

@@ -13,23 +13,30 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
-builder.Services.RegisterApplicationServices(typeof(IAuthenticateService));
 
-builder.Services.AddScoped<ICurrentUser, CurrentUser>();
-builder.Services.AddScoped<ICacheService, CacheService>();
 
+//Identity
 
 builder.Services.AddDbContext<CheatSheetDbContext>(options =>
         options.UseSqlServer(connectionString))
     .RegisterIdentity()
     .RegisterJwtAuthentication(builder.Configuration);
 
+//Services
+
+builder.Services.RegisterApplicationServices(typeof(IAuthenticateService));
+builder.Services.AddScoped<ICurrentUser, CurrentUser>();
+builder.Services.AddScoped<ICacheService, CacheService>();
+
+//Data providers
 builder.Services
-    .RegisterMongoDb(builder.Configuration);
+    .RegisterMongoDb(builder.Configuration)
+    .RegisterAwsService(builder.Configuration);
+
+//Auto mapper
 builder.Services
     .RegisterAutoMapper(builder.Configuration);
 
-builder.Services.RegisterAwsService(builder.Configuration);
 
 builder.Services
     .RegisterPolicies()

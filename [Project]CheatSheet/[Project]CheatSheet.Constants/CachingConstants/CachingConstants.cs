@@ -10,6 +10,7 @@
             public const int UpComingCourses=60;
             public const int HomeStatistics = 5;
             public const int CourseStatistics=5;
+            public const int YoutubeUrl = 5;
         }
     }
 }

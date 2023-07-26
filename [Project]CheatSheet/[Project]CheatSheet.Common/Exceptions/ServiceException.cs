@@ -1,14 +1,10 @@
 ﻿namespace _Project_CheatSheet.Common.Exceptions
 {
-    public class ServiceException : Exception
+    public class ServiceException : CustomException
     {
-        public ServiceException()
+        public ServiceException(string message):base(message)
         {
         }
 
-        public ServiceException(string message)
-            : base(message)
-        {
-        }
     }
 }

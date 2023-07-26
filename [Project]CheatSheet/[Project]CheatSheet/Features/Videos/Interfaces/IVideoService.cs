@@ -2,6 +2,6 @@
 {
     public interface IVideoService
     {
-        public Task<string> GetVideoId(string videoId);
+        public Task<string?> GetVideoId(Guid topicId);
     }
 }

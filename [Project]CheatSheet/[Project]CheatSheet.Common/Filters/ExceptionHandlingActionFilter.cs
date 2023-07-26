@@ -17,9 +17,7 @@ public class ExceptionHandlingActionFilter : ExceptionFilterAttribute
 
     public override async Task OnExceptionAsync(ExceptionContext context)
     {
-
-        string message;
-        message = context.Exception is ServiceException ? context.Exception.Message : "There was an error";
+        var message = context.Exception is CustomException ? context.Exception.Message : "There was an error";
 
         context.ExceptionHandled = true;
         context.HttpContext.Response.StatusCode = statusCode;

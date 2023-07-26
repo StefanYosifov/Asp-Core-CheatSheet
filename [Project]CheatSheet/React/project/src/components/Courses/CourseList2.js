@@ -13,9 +13,6 @@ import { CgSearch } from "react-icons/cg"
 import { Pagination } from "../Helper components/Pagination";
 
 
-const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-
-
 const FeaturedCourses = () => {
     const isLoading = useCourseStore((state) => state.isFeaturedLoading);
     const featuredCourses = useCourseStore((state) => state.featuredCourses);
@@ -127,7 +124,7 @@ const ALLCourses = () => {
     return (
         <div className="mx-28 bg-slate-50 p-1 my-8 shadow-sm">
             <section>
-            <button onClick={(event) => { event.preventDefault; setQueryParameters(queryParameters) }}>
+            <button onClick={(event) => { event.preventDefault(); setQueryParameters(queryParameters) }}>
             <CgSearch/> Search
             </button>
             </section>
@@ -159,7 +156,7 @@ const ALLCourses = () => {
                                         <img className="h-full w-full object-scale-down object-center max-h-40" src={course.imageUrl} alt="Course Thumbnail" />
                                         <section className="bg-slate-800 text-slate-100 font-sans flex flex-col justify-between">
                                             <Link
-                                                to={course.hasPaid === true ? `${URLS.COURSES_ID}${course.id}/${decodeURI(course.title)}` : `${URLS.COURSES_JOIN}${course.id}`}>
+                                                to={course.hasPaid === true ? `${URLS.COURSES_ID}${course.id}/${decodeURI(course.title)}` : `${URLS.COURSES_OVERVIEW}${course.id}`}>
                                                 <div className="p-4 dark:text-white text-gray-900 overflow-hidden hover:cursor-pointer">
                                                     <p className="mb-2 text-lg font-medium overflow-hidden">{course.title}</p>
                                                     <div className="flex justify-between mt-4 overflow-hidden">

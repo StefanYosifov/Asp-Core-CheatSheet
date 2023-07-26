@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { FaCalendarCheck } from "react-icons/fa";
 import { getAllTopics } from "../../api/Requests/topics";
 import { Link, useLocation, useParams } from "react-router-dom";
 import { TiWarningOutline, TiSocialYoutube } from "react-icons/ti";
 import { Issue } from "../Issue/Issue";
+import { URLS } from "../../constants/URLConstants";
 
 export const CoursePage = () => {
   const [expandedItem, setExpandedItem] = useState(null);
@@ -67,7 +67,7 @@ export const CoursePage = () => {
                               <div className="flex items-center">
                                 <TiSocialYoutube className="mr-2" />
                                 <Link
-                                  to={`/course/trainings/videos/${item.videoId}/${item.videoName}`}
+                                  to={`${URLS.COURSES_LESSON}${item.id}/${item.name}`}
                                 >
                                   <span>Video for {item.name}</span>
                                 </Link>

@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { BsCheck, BsClock, BsGraphUp, BsPeople, BsYoutube } from "react-icons/bs";
-import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
-import YouTube, { YouTubeProps } from 'react-youtube';
+import { useLocation, useNavigate, useParams } from "react-router-dom";
+import YouTube from 'react-youtube';
 import useCourseStore from "../../stores/useCourseStore";
 import { Accordion } from "../Helper components/Accordion";
 import { URLS } from "../../constants/URLConstants";
-import { AiOutlineFilePdf, AiOutlinePlayCircle } from "react-icons/ai"
-import { GrCertificate } from "react-icons/gr"
+import { AiOutlineFilePdf, AiOutlinePlayCircle } from "react-icons/ai";
+import { GrCertificate } from "react-icons/gr";
 
 
 const HeaderView = () => {
@@ -59,7 +59,7 @@ const Main = () => {
         height: '250px'
     };
 
-    const navigateURL=`${URLS.COURSES_JOIN}${id}`;
+    const navigateURL = `${URLS.COURSES_JOIN}${id}`;
 
     const handleTabChange = (tab) => {
         setActiveTab(tab);
@@ -87,21 +87,21 @@ const Main = () => {
                                     }`}
                                 onClick={() => handleTabChange("tab1")}
                             >
-                                Tab 1
+                                Contents
                             </button>
                             <button
                                 className={`flex-1 px-4 py-2 border-b-2 ${activeTab === "tab2" ? "border-slate-600" : "border-transparent"
                                     }`}
                                 onClick={() => handleTabChange("tab2")}
                             >
-                                Tab 2
+                                Description
                             </button>
                             <button
                                 className={`flex-1 px-4 py-2 border-b-2 ${activeTab === "tab3" ? "border-slate-600" : "border-transparent"
                                     }`}
                                 onClick={() => handleTabChange("tab3")}
                             >
-                                Tab 3
+                                FAQ
                             </button>
                         </div>
                         {activeTab === "tab1" && (
@@ -134,17 +134,31 @@ const Main = () => {
                         )}
 
                         {activeTab === "tab3" && (
-                            <div>
-                                <table className="w-full table-auto">
-                                    <thead>
-                                        <tr>
-                                            <th>Header 7</th>
-                                            <th>Header 8</th>
-                                            <th>Header 9</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody></tbody>
-                                </table>
+                            <div className="px-8">
+                                <article className="my-5">
+                                    <h1 className="font-sans font-bold mb-1 text-lg">Course - Frequently Asked Questions</h1>
+                                    <p className="text-gray-700">How this course help me to design layout?
+                                        My name is Jason Woo and I work as human duct tape at Gatsby, that means that I do a lot of different things. Everything from dev roll to writing content to writing code. And I used to work as an architect at IBM. I live in Portland, Oregon.
+                                    </p>
+                                </article>
+                                <article className="my-5">
+                                    <h1 className="font-sans font-bold mb-1 text-lg">What is important of this course?</h1>
+                                    <p className="text-gray-700">
+                                        We'll dive into GraphQL, the fundamentals of GraphQL. We're only gonna use the pieces of it that we need to build in Gatsby. We're not gonna be doing a deep dive into what GraphQL is or the language specifics. We're also gonna get into MDX. MDX is a way to write React components in your markdown.
+                                    </p>
+                                </article>
+                                <article className="my-5">
+                                    <h1 className="font-sans font-bold mb-1 text-lg">Why Take This Course?</h1>
+                                    <p className="text-gray-700">We'll dive into GraphQL, the fundamentals of GraphQL. We're only gonna use the pieces of it that we need to build in Gatsby. We're not gonna be doing a deep dive into what GraphQL is or the language specifics. We're also gonna get into MDX. MDX is a way to write React components in your markdown.</p>
+                                </article>
+                                <article className="my-5">
+                                    <h1 className="font-sans font-bold mb-1 text-lg">Is able to create application after this course?</h1>
+                                    <p className="text-gray-700">
+                                        We'll dive into GraphQL, the fundamentals of GraphQL. We're only gonna use the pieces of it that we need to build in Gatsby. We're not gonna be doing a deep dive into what GraphQL is or the language specifics. We're also gonna get into MDX. MDX is a way to write React components in your markdown.
+
+                                        We'll dive into GraphQL, the fundamentals of GraphQL. We're only gonna use the pieces of it that we need to build in Gatsby. We're not gonna be doing a deep dive into what GraphQL is or the language specifics. We're also gonna get into MDX. MDX is a way to write React components in your markdown.
+                                    </p>
+                                </article>
                             </div>
                         )}
                     </div>
@@ -166,35 +180,36 @@ const Main = () => {
                             </div>
                         </div>
                     </div>
-
-                    <div className="bg-pink-900 w-full h-80 my-16 rounded-md px-4">
-                        <section className="bg-slate-100 py-8">
-                            <h2>What's included</h2>
+                    <div className="w-full h-96 rounded-md justify-center items-center border border-collapse shadow-md mt-10">
+                        <section className="py-8 px-4">
+                            <h1 className="font-bold text-xl">What's included</h1>
                         </section>
-                        <section>
-                            <div className="flex items-center divide-y">
+                        <section className="px-4">
+                            <div className="flex items-center">
                                 <span className="mr-2"><AiOutlineFilePdf /></span>
-                                {previewDetails && Array(previewDetails).length} lectures and exercises
+                                <span>{previewDetails && Array(previewDetails).length} lectures and exercises</span>
                             </div>
-                            <div className="flex items-center divide-y">
+                            <hr className="my-2" />
+                            <div className="flex items-center">
                                 <span className="mr-2"><AiOutlinePlayCircle /></span>
-                                Over 24 hours of footage
+                                <span>Over 24 hours of footage</span>
                             </div>
-                            <div className="flex items-center divide-y">
+                            <hr className="my-2" />
+                            <div className="flex items-center">
                                 <span className="mr-2"><GrCertificate /></span>
-                                Certificate
+                                <span>Certificate</span>
                             </div>
-                            <div className="flex items-center divide-y">
+                            <hr className="my-2" />
+                            <div className="flex items-center">
                                 <span className="mr-2"><BsYoutube /></span>
-                                Watch online
+                                <span>Watch online</span>
                             </div>
-                            <div className="flex items-center divide-y">
+                            <hr className="my-2" />
+                            <div className="flex items-center">
                                 <span className="mr-2"><BsClock /></span>
-                                Lifetime access
+                                <span>Lifetime access</span>
                             </div>
                         </section>
-                    </div>
-                    <div className="bg-pink-900 w-full h-80 rounded-md">
 
                     </div>
                 </div>

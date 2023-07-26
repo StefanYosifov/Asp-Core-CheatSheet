@@ -4,7 +4,7 @@ import { URLS } from "../../constants/URLConstants";
 
 export const CourseFeaturedItem = ({ course }) => {
 
-    const redirectURL=course.hasPaid===true?`${URLS.COURSES_ID}${course.id}/${decodeURI(course.title)}`:`${URLS.COURSES_JOIN}${course.id}`;
+    const redirectURL=course.hasPaid===true?`${URLS.COURSES_ID}${course.id}/${decodeURI(course.title)}`:`${URLS.COURSES_OVERVIEW}${course.id}`;
     return (
         <div className="mx-auto m-2 w-80 transform overflow-hidden rounded-lg bg-white dark:bg-slate-800 shadow-md duration-300 hover:scale-105 hover:shadow-lg">
             <img className="h-64 w-full object-cover object-center" src={course.imageUrl} alt="Course Thumbnail" />

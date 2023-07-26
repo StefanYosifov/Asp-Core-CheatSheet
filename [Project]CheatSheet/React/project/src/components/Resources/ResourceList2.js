@@ -48,12 +48,12 @@ export const ResourceList2 = () => {
         } else {
             queryParams.delete(URL_CHANGE.SEARCH);
         }
-        if (selectedCategory.length > 0 && selectedCategory != NONE) {
+        if (selectedCategory.length > 0 && selectedCategory !== NONE) {
             queryParams.set(URL_CHANGE.CATEGORY, selectedCategory);
         } else {
             queryParams.delete(URL_CHANGE.CATEGORY);
         }
-        if (selectedSort.length > 0 && selectedSort != NONE) {
+        if (selectedSort.length > 0 && selectedSort !== NONE) {
             queryParams.set(URL_CHANGE.SORT, selectedSort);
         } else {
             queryParams.delete(URL_CHANGE.SORT);

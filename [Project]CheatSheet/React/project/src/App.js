@@ -52,7 +52,7 @@ function App() {
               <Route path={APP_URLS.COURSES} Component={CoursesList} />
               <Route path={APP_URLS.COURSES_ALL} Component={CourseList2} />
               <Route path={APP_URLS.COURSES_TRAININGS} Component={CoursePage} />
-              <Route path={APP_URLS.COURSES_VIDEOS} Component={CourseVideo} />
+              <Route path={APP_URLS.COURSES_LESSON} Component={CourseVideo} />
               <Route path={APP_URLS.COURSES_JOIN} Component={CourseJoin} />
               <Route path={APP_URLS.COURSES_MINE} Component={CourseMy} />
               <Route path={APP_URLS.PRIVATE} Component={Private}/>

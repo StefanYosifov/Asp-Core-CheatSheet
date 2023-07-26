@@ -1,9 +1,6 @@
-import React, { useContext, useState } from 'react';
-import RegisterPage from '../Register/Register';
+import React, { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { login } from '../../api/Requests/authentication';
 import useAuth from '../../hooks/useAuth';
-import { UserContext } from '../../context/UserDataProvider';
 import { useUserDetails } from '../../stores/useUserDetails';
 
 export function LoginPage() {

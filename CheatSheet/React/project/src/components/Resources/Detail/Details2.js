@@ -103,7 +103,9 @@ export const Details2 = () => {
           </div>
           <div className="max-w-2xl mb-4 dark:text-primary-50">
             <h2 className="text-2xl font-bold mb-2">{details.title}</h2>
+            <div >
             {parse(String(details.content).toString())}
+            </div>
           </div>
           <div className="flex justify-between w-full">
             {details.hasLiked == false ?

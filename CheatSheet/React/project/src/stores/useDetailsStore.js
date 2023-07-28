@@ -1,8 +1,10 @@
 import { create } from "zustand"
 import { getDetails } from "../api/Requests/details";
-import { changeVisibility, deleteResource, getResourceToEdit } from "../api/Requests/resources";
+import { changeVisibility, deleteResource, editResource, getResourceToEdit } from "../api/Requests/resources";
 import { dislikeResource, likeResource } from "../api/Requests/likes";
 import { toast } from "react-toastify";
+import { RESOURCE_VALIDATIONS } from "../constants/ResourceConstants/ResourceFormValidationConstants";
+import { resourceFormValidator } from "../constants/ResourceConstants/ResourceFormValidator";
 
 
 const useDetailsStore = create((set) => ({
@@ -104,51 +106,79 @@ const useDetailsStore = create((set) => ({
     addCategory: (value) => {
         set((state) => {
             const isCategorySelected = state.editData.chosenCategories.some(
-              (category) => category.name === value
+                (category) => category.name === value
             );
-          
+
             if (isCategorySelected) {
-              return state; 
+                return state;
             }
             const updatedCategories = [
-              ...state.editData.chosenCategories,
-              { name: value },
+                ...state.editData.chosenCategories,
+                { name: value },
             ];
-          
+
             return {
-              ...state,
-              editData: {
-                ...state.editData,
-                chosenCategories: updatedCategories,
-              },
+                ...state,
+                editData: {
+                    ...state.editData,
+                    chosenCategories: updatedCategories,
+                },
             };
-          });
+        });
     },
     removeCategory: (value) => {
         console.log(value);
         set((state) => {
             console.log(state.editData.chosenCategories);
-            const isCategorySelected = state.editData.chosenCategories.some((ctg)=>ctg.name===value);
+            const isCategorySelected = state.editData.chosenCategories.some((ctg) => ctg.name === value);
             console.log(isCategorySelected);
-          
+
             if (!isCategorySelected) {
-              return state; 
+                return state;
             }
-          
+
             const updatedCategories = state.editData.chosenCategories.filter(
-              (category) => category.name !== value
+                (category) => category.name !== value
             );
-          
+
             return {
-              ...state,
-              editData: {
-                ...state.editData,
-                chosenCategories: updatedCategories,
-              },
+                ...state,
+                editData: {
+                    ...state.editData,
+                    chosenCategories: updatedCategories,
+                },
             };
-          });
-          
-      }
+        });
+
+    },
+    setEditedResource: async (id, resource) => {
+        const errors=resourceFormValidator(resource);
+        console.log(errors);
+        if(Object.values(errors).length>0){
+            Object.values(errors).forEach((error)=>toast.error(error));
+            return;
+        }
+
+        try {
+            set({ isLoading: true });
+            const response = await editResource(id, resource);
+            console.log(response);
+            toast.success(response.data);
+            set({ isLoading: false });
+        }
+        catch (error) {
+            console.log(error.message);
+        }
+    },
+    setEditData: (newEditData) => {
+        set((state) => ({
+            editData: {
+                ...state.editData,
+                ...newEditData,
+            },
+        }));
+    }
 }))
+
 
 export default useDetailsStore;

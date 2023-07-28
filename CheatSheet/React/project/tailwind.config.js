@@ -6,6 +6,8 @@ module.exports = {
       colors: {
         pinkUI: { 0: '#754FFE' },
         bgGray: { 0: '#bdc3c7' },
+        bgWhiteUI:{0:'#FFFFFF'},
+        bgBlackUI:{0:'252525'}
       },
       width: {
         '1/7': '14.2857143%',

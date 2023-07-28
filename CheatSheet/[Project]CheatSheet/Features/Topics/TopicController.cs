@@ -1,7 +1,9 @@
 ﻿namespace _Project_CheatSheet.Features.Topics
 {
     using Common.Filters;
-    using Infrastructure.Data.GlobalConstants.Topic;
+
+    using Constants.GlobalConstants.Topic;
+
     using Interfaces;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;

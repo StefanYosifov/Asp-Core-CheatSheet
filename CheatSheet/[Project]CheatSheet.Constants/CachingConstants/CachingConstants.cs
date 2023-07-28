@@ -1,4 +1,4 @@
-﻿namespace _Project_CheatSheet.Common.CachingConstants
+﻿namespace _Project_CheatSheet.Constants.CachingConstants
 {
     public static class CachingConstants
     {

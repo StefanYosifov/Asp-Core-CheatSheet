@@ -1,7 +1,8 @@
 ﻿namespace _Project_CheatSheet.Infrastructure.Data.Models
 {
-    using GlobalConstants.Category;
     using System.ComponentModel.DataAnnotations;
+
+    using Constants.GlobalConstants.Category;
 
     public class Category
     {

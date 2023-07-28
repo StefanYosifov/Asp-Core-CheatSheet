@@ -1,7 +1,9 @@
 ﻿namespace _Project_CheatSheet.Features.Videos
 {
     using Common.Filters;
-    using Common.GlobalConstants.Videos;
+
+    using Constants.GlobalConstants.Videos;
+
     using Interfaces;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;

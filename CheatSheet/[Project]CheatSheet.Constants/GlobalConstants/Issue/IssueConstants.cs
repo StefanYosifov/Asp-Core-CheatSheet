@@ -1,4 +1,4 @@
-﻿namespace _Project_CheatSheet.Infrastructure.Data.GlobalConstants.Issue
+﻿namespace _Project_CheatSheet.Constants.GlobalConstants.Issue
 {
     public class IssueConstants
     {

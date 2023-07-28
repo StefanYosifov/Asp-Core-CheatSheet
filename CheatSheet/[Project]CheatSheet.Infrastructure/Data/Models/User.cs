@@ -1,9 +1,11 @@
 ﻿namespace _Project_CheatSheet.Infrastructure.Data.Models;
 
 using Base.Interfaces;
-using GlobalConstants.User;
+
 using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
+
+using Constants.GlobalConstants.User;
 
 public class User : IdentityUser, IEntity
 {

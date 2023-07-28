@@ -1,10 +1,16 @@
 ﻿namespace _Project_CheatSheet.Features.Resources.Models
 {
-    using _Project_CheatSheet.Infrastructure.Data.GlobalConstants.Resource;
     using System.ComponentModel.DataAnnotations;
+
+    using Constants.GlobalConstants.Resource;
 
     public class ResourceEditModel
     {
+        public ResourceEditModel()
+        {
+            CategoryIds = new HashSet<int>();
+        }
+
         [Required]
         [StringLength(ResourceConstants.TitleMaxLength, MinimumLength = ResourceConstants.TitleMinLength)]
         public string Title { get; set; } = null!;

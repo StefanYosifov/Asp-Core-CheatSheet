@@ -1,9 +1,11 @@
 ﻿namespace _Project_CheatSheet.Infrastructure.Data.Models;
 
 using Base;
-using GlobalConstants.Issue;
+
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+
+using Constants.GlobalConstants.Issue;
 
 public class Issue : DeletableEntity
 {

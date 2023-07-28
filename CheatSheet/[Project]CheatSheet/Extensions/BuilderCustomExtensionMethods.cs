@@ -3,6 +3,14 @@
     using System.Reflection;
     using System.Text;
 
+    using _Project_CheatSheet.Common.Exceptions;
+    using _Project_CheatSheet.Common.UserService.Interfaces;
+    using _Project_CheatSheet.Infrastructure.Data;
+    using _Project_CheatSheet.Infrastructure.Data.Models;
+    using _Project_CheatSheet.Infrastructure.Data.Models.Enums;
+    using _Project_CheatSheet.Infrastructure.MongoDb.Services;
+    using _Project_CheatSheet.Infrastructure.MongoDb.Store;
+
     using Amazon;
     using Amazon.Extensions.NETCore.Setup;
     using Amazon.Runtime;
@@ -10,18 +18,12 @@
 
     using AutoMapper;
 
-    using Common.Exceptions;
     using Common.Mapping;
-    using Common.UserService.Interfaces;
-
-    using Infrastructure.Data;
-    using Infrastructure.Data.Models;
-    using Infrastructure.Data.Models.Enums;
-    using Infrastructure.MongoDb.Services;
-    using Infrastructure.MongoDb.Store;
 
     using Microsoft.AspNetCore.Authentication.JwtBearer;
     using Microsoft.AspNetCore.Identity;
+    using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Options;
     using Microsoft.IdentityModel.Tokens;
     using Microsoft.OpenApi.Models;

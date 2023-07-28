@@ -2,7 +2,9 @@
 {
     using _Project_CheatSheet.Infrastructure.MongoDb.Models;
     using Common.Filters;
-    using Infrastructure.Data.GlobalConstants.Course;
+
+    using Constants.GlobalConstants.Course;
+
     using Interfaces;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;

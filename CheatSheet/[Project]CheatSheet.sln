@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "[Project]CheatSheet.Infrast
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "[Project]CheatSheet.Common", "[Project]CheatSheet.Common\[Project]CheatSheet.Common.csproj", "{AA1B2E51-BC3B-4E72-863A-96703A5AE81C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "[Project]CheatSheet.Constants", "[Project]CheatSheet.Constants\[Project]CheatSheet.Constants.csproj", "{079014F0-67A3-4E66-85C1-94D3F70AF898}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "[Project]CheatSheet.Constants", "[Project]CheatSheet.Constants\[Project]CheatSheet.Constants.csproj", "{079014F0-67A3-4E66-85C1-94D3F70AF898}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "[Project]CheatSheet.Tests", "[Project]CheatSheet.Tests\[Project]CheatSheet.Tests.csproj", "{DFB23F79-0239-4A43-BA10-87297A326EEA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{079014F0-67A3-4E66-85C1-94D3F70AF898}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{079014F0-67A3-4E66-85C1-94D3F70AF898}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{079014F0-67A3-4E66-85C1-94D3F70AF898}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DFB23F79-0239-4A43-BA10-87297A326EEA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DFB23F79-0239-4A43-BA10-87297A326EEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DFB23F79-0239-4A43-BA10-87297A326EEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DFB23F79-0239-4A43-BA10-87297A326EEA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

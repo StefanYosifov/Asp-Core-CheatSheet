@@ -1,6 +1,5 @@
 ﻿namespace _Project_CheatSheet.Features.Course.Services
 {
-    using Common.CachingConstants;
     using Enums;
     using _Project_CheatSheet.Infrastructure.MongoDb.Services;
     using AutoMapper;
@@ -8,6 +7,9 @@
     using Common.Caching;
     using Common.Pagination;
     using Common.UserService.Interfaces;
+
+    using Constants.CachingConstants;
+
     using Infrastructure.Data;
     using Infrastructure.Data.Models;
     using Interfaces;
@@ -15,7 +17,7 @@
     using Microsoft.Extensions.Caching.Memory;
     using Models;
 
-    using static Common.CachingConstants.CachingConstants.Course;
+    using static Constants.CachingConstants.CachingConstants.Course;
     using Course = Infrastructure.Data.Models.Course;
 
     public class CourseService : ICourseService

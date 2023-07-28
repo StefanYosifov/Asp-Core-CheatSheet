@@ -1,12 +1,13 @@
 ﻿namespace _Project_CheatSheet.Features.Videos.Services
 {
     using Common.Caching;
-    using Common.CachingConstants;
     using Common.Exceptions;
     using Common.UserService.Interfaces;
 
+    using Constants.CachingConstants;
+    using Constants.GlobalConstants.Course;
+
     using Infrastructure.Data;
-    using Infrastructure.Data.GlobalConstants.Course;
 
     using Interfaces;
 

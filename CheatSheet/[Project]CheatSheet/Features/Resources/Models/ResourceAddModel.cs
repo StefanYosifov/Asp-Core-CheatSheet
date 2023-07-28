@@ -1,7 +1,8 @@
 ﻿namespace _Project_CheatSheet.Features.Resources.Models
 {
-    using _Project_CheatSheet.Infrastructure.Data.GlobalConstants.Resource;
     using System.ComponentModel.DataAnnotations;
+
+    using Constants.GlobalConstants.Resource;
 
     public class ResourceAddModel
     {

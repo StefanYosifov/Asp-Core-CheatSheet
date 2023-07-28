@@ -1,4 +1,4 @@
-﻿namespace _Project_CheatSheet.Infrastructure.Data.GlobalConstants.Likes
+﻿namespace _Project_CheatSheet.Constants.GlobalConstants.Likes
 {
      public class LikeMessages
     {

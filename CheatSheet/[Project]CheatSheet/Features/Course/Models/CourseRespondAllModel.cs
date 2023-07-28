@@ -1,7 +1,8 @@
 ﻿namespace _Project_CheatSheet.Features.Course.Models
 {
-    using Infrastructure.Data.GlobalConstants.Course;
     using System.ComponentModel.DataAnnotations;
+
+    using Constants.GlobalConstants.Course;
 
     public class CourseRespondAllModel
     {

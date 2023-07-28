@@ -11,10 +11,11 @@
     using Common.Pagination;
     using Common.UserService.Interfaces;
 
+    using Constants.GlobalConstants.Resource;
+
     using Enums;
 
     using Infrastructure.Data;
-    using Infrastructure.Data.GlobalConstants.Resource;
     using Infrastructure.Data.Models;
 
     using Interfaces;
@@ -206,7 +207,7 @@
                 .ToArrayAsync();
 
             mappedResource.ChosenCategories = selectedCategories;
-            mappedResource.AllAvaialbleCategories = allCategories;
+            mappedResource.AllAvailableCategories = allCategories;
             return mappedResource;
         }
 

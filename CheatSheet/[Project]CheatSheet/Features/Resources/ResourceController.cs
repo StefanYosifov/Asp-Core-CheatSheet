@@ -1,7 +1,9 @@
 ﻿namespace _Project_CheatSheet.Features.Resources
 {
-    using _Project_CheatSheet.Infrastructure.Data.GlobalConstants.Resource;
     using Common.Filters;
+
+    using Constants.GlobalConstants.Resource;
+
     using Interfaces;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
@@ -50,7 +52,7 @@
         public async Task<EditResources> GetResourceToEdit(Guid id) 
             => await resourceService.GetMyResourceToEdit(id);
 
-        [HttpPatch("post/edit/{id}")]
+        [HttpPatch("patch/edit/{id}")]
         [ActionFilter]
         [ExceptionHandlingActionFilter]
         public async Task<IActionResult> EditResource(string id, [FromBody] ResourceEditModel resourceEdit)

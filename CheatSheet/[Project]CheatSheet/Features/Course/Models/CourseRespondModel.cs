@@ -1,8 +1,10 @@
 ﻿namespace _Project_CheatSheet.Features.Course.Models
 {
     using _Project_CheatSheet.Features.Topics.Models;
-    using Infrastructure.Data.GlobalConstants.Course;
+
     using System.ComponentModel.DataAnnotations;
+
+    using Constants.GlobalConstants.Course;
 
     public class CourseRespondModel
     {

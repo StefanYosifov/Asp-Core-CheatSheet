@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <RootNamespace>_Project_CheatSheet.Tests</RootNamespace>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="7.0.9" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.6.3" />
+    <PackageReference Include="Moq" Version="4.18.4" />
+    <PackageReference Include="xunit" Version="2.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\[Project]CheatSheet.Constants\[Project]CheatSheet.Constants.csproj" />
+    <ProjectReference Include="..\[Project]CheatSheet.Infrastructure\[Project]CheatSheet.Infrastructure.csproj" />
+    <ProjectReference Include="..\[Project]CheatSheet\[Project]CheatSheet.csproj" />
+  </ItemGroup>
+
+</Project>

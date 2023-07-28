@@ -1,4 +1,4 @@
-﻿namespace _Project_CheatSheet.Infrastructure.Data.GlobalConstants.Topic
+﻿namespace _Project_CheatSheet.Constants.GlobalConstants.Topic
 {
     public class TopicMessages
     {

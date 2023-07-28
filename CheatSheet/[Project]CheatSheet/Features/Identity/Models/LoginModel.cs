@@ -1,7 +1,8 @@
 ﻿namespace _Project_CheatSheet.Features.Identity.Models
 {
-    using _Project_CheatSheet.Infrastructure.Data.GlobalConstants.User;
     using System.ComponentModel.DataAnnotations;
+
+    using Constants.GlobalConstants.User;
 
     public class LoginModel
     {

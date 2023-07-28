@@ -2,8 +2,10 @@
 {
     using Base;
     using Enums;
-    using GlobalConstants.Course;
+
     using System.ComponentModel.DataAnnotations;
+
+    using Constants.GlobalConstants.Course;
 
     public class Course : Entity
     {

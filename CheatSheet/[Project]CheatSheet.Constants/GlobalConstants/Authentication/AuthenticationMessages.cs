@@ -1,4 +1,4 @@
-﻿namespace _Project_CheatSheet.Common.GlobalConstants.Authentication
+﻿namespace _Project_CheatSheet.Constants.GlobalConstants.Authentication
 {
     public class AuthenticationMessages
     {

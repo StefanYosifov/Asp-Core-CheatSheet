@@ -2,6 +2,8 @@
 {
     using AutoMapper;
 
+    using Constants.GlobalConstants;
+
     using Features.Category.Models;
     using Features.Comment.Models;
     using Features.Course.Models;
@@ -11,7 +13,7 @@
     using Features.Profile.Models;
     using Features.Resources.Models;
     using Features.Topics.Models;
-    using Infrastructure.Data.GlobalConstants;
+
     using Infrastructure.Data.Models;
     using Infrastructure.MongoDb.Models;
     using UserService.Interfaces;

@@ -1,4 +1,4 @@
-﻿namespace _Project_CheatSheet.Infrastructure.Data.GlobalConstants.User
+﻿namespace _Project_CheatSheet.Constants.GlobalConstants.User
 {
     public static class UserConstants
     {

@@ -7,12 +7,13 @@ using Common.Pagination;
 using Common.UserService.Interfaces;
 using Enums;
 using Infrastructure.Data;
-using Infrastructure.Data.GlobalConstants.Issue;
 using Infrastructure.Data.Models;
 using Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Models;
 using System.Linq;
+
+using Constants.GlobalConstants.Issue;
 
 public class IssueService : IIssueService
 {

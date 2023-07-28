@@ -1,7 +1,9 @@
 ﻿namespace _Project_CheatSheet.Features.Statistics.Services
 {
     using _Project_CheatSheet.Common.Caching;
-    using _Project_CheatSheet.Common.CachingConstants;
+
+    using Constants.CachingConstants;
+
     using Infrastructure.Data;
     using Interfaces;
     using Microsoft.Extensions.Caching.Memory;

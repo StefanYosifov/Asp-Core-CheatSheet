@@ -1,9 +1,11 @@
 ﻿namespace _Project_CheatSheet.Features.Likes.Services
 {
-    using _Project_CheatSheet.Infrastructure.Data.GlobalConstants.Likes;
     using AutoMapper;
     using Common.Exceptions;
     using Common.UserService.Interfaces;
+
+    using Constants.GlobalConstants.Likes;
+
     using Infrastructure.Data;
     using Infrastructure.Data.Models;
     using Interfaces;
@@ -121,13 +123,13 @@
 
         public async Task<IEnumerable<LikeResourceModel>> ResourcesLikes()
         {
-            var currentUser = await currentUserService.GetUser();
+            var userId = currentUserService.GetUserId();
             var resourceLikes = await context.ResourceLikes
                 .Include(rl => rl.User)
                 .Select(rl => new LikeResourceModel
                 {
                     ResourceId = rl.ResourceId.ToString(),
-                    HasLiked = rl.Resource.ResourceLikes.Any(u => u.UserId == currentUser.Id),
+                    HasLiked = rl.Resource.ResourceLikes.Any(u => u.UserId == userId),
                     TotalLikes = context.ResourceLikes.Count(x => x.ResourceId == rl.ResourceId)
                 })
                 .Distinct()

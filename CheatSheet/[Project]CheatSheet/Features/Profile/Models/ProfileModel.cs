@@ -1,7 +1,8 @@
 ﻿namespace _Project_CheatSheet.Features.Profile.Models
 {
-    using _Project_CheatSheet.Infrastructure.Data.GlobalConstants.Profile;
     using System.ComponentModel.DataAnnotations;
+
+    using Constants.GlobalConstants.Profile;
 
     public class ProfileModel
     {

@@ -1,4 +1,4 @@
-﻿namespace _Project_CheatSheet.Common.GlobalConstants.Videos
+﻿namespace _Project_CheatSheet.Constants.GlobalConstants.Videos
 {
     public static class VideoMessages
     {

@@ -1,4 +1,4 @@
-﻿namespace _Project_CheatSheet.Infrastructure.Data.GlobalConstants.Course
+﻿namespace _Project_CheatSheet.Constants.GlobalConstants.Course
 {
     public static class CourseConstants
     {

@@ -4,14 +4,14 @@
     using Amazon.S3.Model;
 
     using Common.Caching;
-    using Common.CachingConstants;
     using Common.Exceptions;
     using Common.UserService.Interfaces;
 
+    using Constants.CachingConstants;
     using Constants.GlobalConstants.AWS;
+    using Constants.GlobalConstants.Course;
 
     using Infrastructure.Data;
-    using Infrastructure.Data.GlobalConstants.Course;
 
     using Interfaces;
 

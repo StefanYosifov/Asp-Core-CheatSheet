@@ -26,7 +26,7 @@ export const Navigation = () => {
   console.log(userData);
   console.log(userIsAuthenticated);
   return (
-    <nav className="bg-gray-800">
+    <nav className="bg-gradient-to-r from-bgBlackUI-0 to to-black border-b  border-bg">
       <ul className="flex justify-start text-lg items-center py-4 px-6 m-0">
         <div className="text-lg font-bold md:py-0 py-4">
           Logo

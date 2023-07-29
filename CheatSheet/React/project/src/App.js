@@ -33,7 +33,7 @@ function App() {
   return (
 
     <UserDataProvider>
-      <div className="App h-screen">
+      <div className="h-screen w-full">
         <Navigation />
         <Routes>
           <Route path='/' element={<Layout />}>
@@ -61,7 +61,7 @@ function App() {
             </Route>
           </Route>
         </Routes>
-        {/* <Footer /> */}
+        <Footer />
         <ToastContainer
           position="top-right"
           autoClose={2499}

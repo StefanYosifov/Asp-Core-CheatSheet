@@ -1,6 +1,10 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom'
 import { GetStatistics } from '../../api/Requests/statistics'
+import image from '../../for the project.jpg'
+import { BsGithub, BsDiscord } from "react-icons/bs"
+import { URLS } from '../../constants/URLConstants';
+
 
 
 const HomePage = () => {
@@ -18,187 +22,175 @@ const HomePage = () => {
 
   const Hero = () => {
     return (
-      <div className='hero h-screen bg-bgBlackUI-0'>
-        <div className='wrap flex'>
-          <div className='bg-blue-950'>
-            <svg width="235.95" height="53.207197742164595" viewBox="0 0 370 83.4357413206226" class="css-1j8o68f"><defs id="SvgjsDefs1262"></defs><g id="SvgjsG1263" featurekey="hmhgWD-0" transform="matrix(0.777505174306155,0,0,0.777505174306155,-3.887525871530775,12.371768685634716)" fill="#c4aff0"><path xmlns="http://www.w3.org/2000/svg" d="M95,61.8c-0.4-4.1-1.7-6.7-4.1-8c1.6-1.7,3.7-5.5,3.2-10.4c-0.4-3.9-1.3-5.9-3.4-7.3c1.8-1.9,3.9-5.7,3.4-10.1  c-0.8-7-4.5-8.7-8.4-9.6L50.1,8.6c-0.7-0.1-1.4-0.1-2,0L8.3,17.8c-0.6,0.1-1.1,0.7-1.1,1.3c0,0.6,0.3,1.2,0.9,1.4l6.6,2.5  c0.5,0.7,2.5,4,0.7,6.1l-8.7,3.9c-0.2,0.1-0.4,0.2-0.5,0.4c-0.4,0.3-0.9,0.9-0.9,1.9c0,1.5,0.9,2.1,1.3,2.2l8.9,4.3  c0.3,0.5,1.7,2.6-0.1,4.7l-8.9,3.2c-0.1,0-0.1,0-0.2,0.1C6,49.9,5,50.5,5,52c0,1.6,1,2.1,1.4,2.2c0,0,0,0,0.1,0l0,0l10,5.1  c0.3,0.8,1.2,3.8-0.2,5.5L6.4,69c-0.5,0.2-0.9,0.7-0.9,1.3c0,0.6,0.3,1.1,0.8,1.3L44.6,91c0.6,0.3,1.2,0.4,1.9,0.4  c0.5,0,1.1-0.1,1.6-0.3l40.6-17.7c0.5-0.2,0.9-0.4,1.3-0.8C91.9,71.2,95.4,67,95,61.8z M8.4,19.2c0-0.1,0-0.2,0.2-0.2l39.8-9.2  c0.5-0.1,1-0.1,1.5,0l35.6,7.7c4,0.9,6.9,2.7,7.5,8.6c0.5,4.5-1.9,8.2-3.6,9.6c0,0-2.3,1.8-5.6,3.2c0,0,0,0,0,0l-9.4,3.9  c-0.1-0.5-0.3-1-0.4-1.5l-0.6,0.2l0.6-0.2c-0.1-0.3-0.2-0.7-0.2-1l0-0.1c-0.1-0.4-0.2-0.8-0.2-1.2c0,0,0-0.1,0-0.1l12.4-5  c0,0,4.7-1.7,4.7-7.5c0-1.9-0.5-3.3-1.6-4.3c-1.6-1.4-3.8-1.2-3.9-1.2c0,0-0.1,0-0.1,0L48.1,32.6c-0.6,0.2-1.2,0.3-1.8,0.3  c-0.1-0.1-0.3-0.1-0.5,0c-1,0-2-0.1-2.9-0.5l-34.4-13C8.4,19.4,8.4,19.3,8.4,19.2z M87.2,40c1.4,0.6,2.1,1.9,2.1,3.9  c0,1.2-0.2,2.3-0.6,3.3c-0.9,2.2-2.7,4-5,4.9l-2.8,1.2c0,0,0,0,0,0c-0.2-0.2-0.4-0.4-0.7-0.6c-1.6-1.5-3.8-4.2-5.5-8.8l9.5-4l0,0  c0,0,0,0,0,0C85.2,39.6,86.3,39.6,87.2,40z M65.1,48c0.6,1.6,1.1,3,1.4,4.3c0,0.1,0.9,3.1,3.3,5.7l-22.3,8.8  c-0.2,0.1-0.3,0.1-0.5,0.1c2.6-6.7,1.3-10.2,0.3-11.6c0.3-0.1,0.6-0.2,0.9-0.3L65.1,48z M71.6,58.3c-0.1-0.1-0.3-0.3-0.5-0.4  c0,0,0,0,0,0c0,0,0,0,0,0c-0.1-0.1-0.2-0.3-0.4-0.4l-0.1-0.1c-2.2-2.5-3.1-5.4-3.1-5.4c-0.4-1.4-0.9-3.1-1.6-5  c-0.5-1.2-1.1-2.6-1.7-4c-0.2-0.4-0.4-0.8-0.6-1.2c-1.2-2.4-2.2-4.4-2.7-5.2l8.9-2.9c0,0.1,0.1,0.1,0.1,0.2c2,2.1,2.1,5.2,2.1,5.3  c0,0,0,0.1,0,0.1c0.1,0.4,0.2,0.8,0.3,1.2l0,0.1c0.1,0.4,0.2,0.7,0.3,1c0,0,0,0.1,0,0.1c0.2,0.7,0.4,1.5,0.6,2.1  c1.7,5.1,4.2,8.2,6,9.8c0.3,0.3,0.6,0.5,0.8,0.7l-5.9-0.8c-0.2,0-0.3,0-0.5,0.1c-0.1,0.1-0.2,0.3-0.2,0.4v5.5  c-0.1-0.1-0.2-0.1-0.3-0.2l-0.1-0.1c-0.2-0.1-0.3-0.2-0.5-0.4c-0.1-0.1-0.3-0.2-0.4-0.3l-0.1-0.1C71.9,58.6,71.8,58.5,71.6,58.3  l-0.3,0.5L71.6,58.3z M71.1,33.3l4.4-1.5c0.3-0.1,0.5-0.4,0.4-0.7c-0.1-0.3-0.4-0.5-0.7-0.4l-18.1,6c-0.3,0.1-0.5,0.4-0.4,0.7  c0.1,0.2,0.3,0.4,0.6,0.4c0.1,0,0.1,0,0.2,0l2.5-0.8c0.3,0.5,1.3,2.4,2.5,4.7l-15.2,5.8c3.3-7.4,1.4-11.8,0.1-13.6  c0.4-0.1,0.8-0.2,1.1-0.3l36.7-11.5c0.3,0,1.8-0.1,3,0.9c0.8,0.7,1.2,1.9,1.2,3.4c0,4.9-3.7,6.3-3.9,6.4l-12.2,4.9  C72.9,36.5,72.4,34.8,71.1,33.3z M16.3,29.9c1.8-2,1-4.6,0.2-6.2l26,9.8c1.1,0.4,2.2,0.6,3.4,0.6c0.9,0.9,3.9,5.2-0.2,13.7  c-0.4,0-0.7-0.1-1.1-0.2L12.7,33.7C13.9,32.6,15.9,30.8,16.3,29.9z M7.1,36.5c-0.4-0.1-0.6-0.5-0.6-1.1c0-0.5,0.1-0.8,0.4-1  c0,0,0.1-0.1,0.1-0.1c0,0,0.1-0.1,0.1-0.1l6.4-2.9c-0.7,0.7-1.6,1.5-2.4,2.2C11.1,33.6,11,33.8,11,34c0,0.2,0.2,0.4,0.3,0.5  l32.7,14.3c1,0.4,2.2,0.5,3.2,0.1l15.5-6c0.1,0.2,0.2,0.5,0.3,0.7c0.5,1.2,1,2.3,1.5,3.4l-17,7.1c-1.4,0.6-3,0.5-4.3-0.1l-27.1-13  c0,0,0,0,0,0l-9-4.3C7.2,36.5,7.1,36.5,7.1,36.5z M16.3,47.3c1.4-1.6,1.4-3.3,1-4.7l25.6,12.3c0.9,0.4,1.8,0.6,2.8,0.6  c0.1,0,0.1,0,0.2,0c0.6,0.5,3,3.5-0.1,11.4c-0.2,0-0.4-0.1-0.5-0.2L12.7,51.1C13.9,50.1,15.9,48.2,16.3,47.3z M7,53.2  C6.9,53.2,6.9,53.2,7,53.2c-0.1-0.1-0.1-0.1-0.2-0.1c-0.2-0.1-0.6-0.3-0.6-1.1c0-0.8,0.4-1,0.6-1.1c0,0,0.1,0,0.1,0c0,0,0,0,0.1,0  l7-2.5c-0.8,0.8-1.8,1.7-2.8,2.5C11.1,51,11,51.2,11,51.4c0,0.2,0.1,0.4,0.3,0.5l33.3,16c1,0.4,2.2,0.5,3.2,0.1l22.7-9  c0.1,0.1,0.1,0.1,0.2,0.2l0.1,0.1c0.1,0.1,0.3,0.2,0.4,0.4l0.1,0.1c0.2,0.1,0.3,0.2,0.5,0.4c0,0,0.1,0,0.1,0  c0.2,0.1,0.4,0.3,0.6,0.4l0.1,0.1c0.1,0.1,0.3,0.2,0.5,0.3l0.1,0.1c0.2,0.1,0.4,0.2,0.6,0.3c0.1,0,0.2,0.1,0.2,0.1  c0.1,0,0.2,0,0.3-0.1c0.2-0.1,0.3-0.3,0.3-0.5v-5.8l7.9,1.1c0.3,0,0.5-0.2,0.6-0.4c0.1-0.3-0.1-0.6-0.4-0.7c-0.1-0.1-0.5-0.2-1-0.6  l2.2-0.9c2.6-1.1,4.7-3.1,5.6-5.6c0.5-1.2,0.7-2.5,0.7-3.8c0-3.1-1.5-4.4-2.8-5c-0.2-0.1-0.5-0.2-0.7-0.2c1.3-0.7,2.3-1.4,2.8-1.8  c1.8,1.1,2.8,2.5,3.2,6.6c0.6,5-2.1,8.9-3.3,9.9c0,0,0,0-0.1,0c0,0,0,0-0.1,0.1c0,0,0,0,0,0c0,0-2.5,2.8-4.8,3.7l-8.4,3.5L48.1,72.5  c-1.1,0.5-2.4,0.4-3.5-0.1L7,53.2C7,53.2,7,53.2,7,53.2z M88.1,58.3c1.4,0.6,2.1,1.9,2.1,3.9c0,4.9-3.7,6.3-3.9,6.4L47.8,84.5  c-0.2,0.1-0.5,0.1-0.7,0.2c3.2-5.4,1.4-9.1,0.2-10.8c0.4-0.1,0.9-0.2,1.3-0.4l28.1-11.7l8.4-3.5C86,57.9,87.1,57.9,88.1,58.3z   M17.2,65.6c1.4-1.7,1.1-4,0.7-5.5l26.1,13.3c0.5,0.3,1.1,0.4,1.7,0.5c0.7,0.6,4.1,4.3,0,10.7c-0.1,0-0.2-0.1-0.3-0.1l-31.9-15  C14.8,68.4,16.8,66.5,17.2,65.6z M89.2,71.8c-0.3,0.2-0.7,0.4-1.1,0.6L47.6,90.1c-0.8,0.3-1.7,0.3-2.5-0.1L6.8,70.5  c-0.1-0.1-0.1-0.2-0.1-0.2c0-0.1,0-0.2,0.2-0.2l7.8-3.2c-0.7,0.7-1.7,1.6-2.5,2.3c-0.2,0.1-0.2,0.3-0.2,0.5c0,0.2,0.2,0.4,0.3,0.5  L45,85.6c1,0.4,2.2,0.5,3.2,0.1l38.4-15.9c0,0,4.7-1.7,4.7-7.5c0-3.1-1.5-4.4-2.8-5c-0.4-0.2-0.7-0.3-1.1-0.3  c1.1-0.9,2.1-1.8,2.6-2.3c2.2,1,3.4,3.3,3.8,7.2C94.2,66.8,90.7,70.7,89.2,71.8z"></path></g><g id="SvgjsG1264" featurekey="1RRcwp-0" transform="matrix(2.653022527677519,0,0,2.653022527677519,88.19594450407092,15.88592475757299)" fill="#ffffff"><path d="M8.14 20.22 c-1 0 -1.98 -0.2 -2.9 -0.58 c-0.88 -0.38 -1.68 -0.92 -2.36 -1.6 c-0.7 -0.68 -1.24 -1.48 -1.6 -2.38 c-0.4 -0.92 -0.6 -1.88 -0.6 -2.9 c0 -4.1 3.36 -7.44 7.46 -7.44 c1.16 0 2.32 0.28 3.34 0.8 c1.02 0.5 1.94 1.28 2.62 2.2 l0.32 0.4 l-2.14 1.58 l-0.3 -0.4 c-0.9 -1.22 -2.3 -1.92 -3.84 -1.92 c-2.64 0 -4.8 2.14 -4.8 4.78 c0 2.66 2.16 4.82 4.8 4.82 c1.52 0 2.92 -0.7 3.84 -1.92 l0.3 -0.38 l2.12 1.56 l-0.32 0.4 c-0.7 0.94 -1.58 1.68 -2.62 2.2 c-1.02 0.52 -2.16 0.78 -3.32 0.78 z M24.98 20 l-2.52 0 l0 -4.9 c0 -1.08 -0.86 -1.92 -1.94 -1.92 c-1.04 0 -1.94 0.86 -1.94 1.92 l0 4.9 l-2.5 0 l0 -14.68 l2.5 0 l0 6.18 c0.62 -0.62 1.28 -0.84 1.94 -0.84 c1.2 0 2.32 0.46 3.16 1.28 c0.84 0.86 1.3 1.98 1.3 3.16 l0 4.9 z M31.04 20.22 l-0.02 0 c-0.58 0 -1.18 -0.14 -1.74 -0.4 c-0.52 -0.22 -1 -0.58 -1.44 -1.04 c-0.7 -0.76 -1.12 -1.76 -1.22 -2.8 c-0.02 -0.18 -0.04 -0.36 -0.04 -0.56 c0 -0.4 0.06 -0.82 0.16 -1.24 c0.18 -0.8 0.56 -1.54 1.1 -2.1 c0.4 -0.44 0.86 -0.78 1.44 -1.06 c0.54 -0.26 1.14 -0.38 1.76 -0.38 c0.64 0 1.22 0.12 1.76 0.38 c0.6 0.28 1.08 0.64 1.44 1.06 c0.52 0.56 0.92 1.28 1.12 2.1 c0.1 0.38 0.14 0.78 0.14 1.24 l0 0.46 l-6.72 0 l0.02 0.14 c0.26 1.24 1.2 2.14 2.24 2.14 l0.02 0 c0.58 -0.04 1.22 -0.4 1.6 -0.72 l0.22 -0.18 l1.66 1.44 l-0.3 0.26 c-0.22 0.2 -0.5 0.44 -0.8 0.6 l-0.02 0 c-0.72 0.42 -1.5 0.64 -2.38 0.66 z M31.04 12.719999999999999 c-0.78 0 -1.56 0.54 -1.98 1.38 l-0.08 0.16 l4.14 0 l-0.08 -0.16 c-0.46 -0.86 -1.22 -1.38 -2 -1.38 z M41.519999999999996 20.18 c-1.26 0 -2.46 -0.48 -3.38 -1.38 c-0.9 -0.92 -1.4 -2.12 -1.4 -3.38 s0.5 -2.46 1.4 -3.38 c0.9 -0.9 2.1 -1.38 3.38 -1.38 c0.84 0 1.6 0.3 2.26 0.9 l0.1 0.08 l0 -0.8 l2.42 0 l0 9.16 l-2.42 0 l0 -0.72 l-0.1 0.1 c-0.72 0.7 -1.54 0.8 -2.26 0.8 z M41.519999999999996 13 c-1.28 0 -2.36 1.12 -2.36 2.42 c0 1.32 1.08 2.42 2.36 2.42 s2.36 -1.1 2.36 -2.42 c0 -1.3 -1.08 -2.42 -2.36 -2.42 z M55.05999999999999 20 l-2.4 0 c-0.88 0 -1.7 -0.34 -2.3 -0.94 c-0.62 -0.62 -0.94 -1.42 -0.94 -2.3 l0 -3.8 l-1.28 0 l0 -2.06 l1.28 0 l0 -3.6 l2.38 0 l0 3.6 l2.66 0 l0 2.06 l-2.66 0 l0 3.76 c0 0.5 0.44 0.96 0.88 0.96 l1.74 0 z M62.07999999999999 20.12 c-0.46 0 -0.94 -0.06 -1.44 -0.16 c-1.48 -0.3 -2.92 -1.02 -4.18 -2.12 l-0.38 -0.34 l1.76 -2 l0.38 0.34 c0.92 0.8 1.94 1.34 2.94 1.54 l0.02 0 c0.3 0.06 0.6 0.1 0.9 0.1 c0.5 0 0.96 -0.1 1.34 -0.28 c0.48 -0.2 1.04 -0.64 1.04 -1.46 c0 -0.44 -0.22 -0.78 -0.68 -1.06 c-0.56 -0.34 -1.32 -0.52 -1.86 -0.62 c-0.24 -0.04 -2.28 -0.46 -3.22 -0.98 c-0.62 -0.38 -1.1 -0.86 -1.44 -1.42 c-0.34 -0.58 -0.5 -1.22 -0.5 -1.92 c0 -0.76 0.24 -1.52 0.7 -2.22 c0.44 -0.58 1.04 -1.06 1.76 -1.4 s1.52 -0.52 2.38 -0.52 c0.34 0 0.7 0.04 1.06 0.08 c1.32 0.24 2.62 0.84 3.76 1.8 l0.38 0.32 l-1.7 2.06 l-0.38 -0.32 c-1.3 -1.06 -2.42 -1.3 -3.14 -1.3 c-0.46 0 -0.88 0.1 -1.24 0.26 c-0.56 0.26 -0.92 0.74 -0.92 1.22 c0 0.44 0.16 0.72 0.54 0.98 s0.96 0.46 1.88 0.66 c0.12 0.02 0.28 0.06 0.44 0.1 c0.84 0.16 1.96 0.4 2.74 0.86 c0.68 0.36 1.2 0.86 1.56 1.44 s0.54 1.26 0.54 1.98 c0 0.9 -0.24 1.7 -0.72 2.38 c-0.42 0.58 -1.04 1.08 -1.86 1.48 c-0.7 0.36 -1.48 0.52 -2.46 0.52 z M77.78 20 l-2.52 0 l0 -4.9 c0 -1.08 -0.86 -1.92 -1.94 -1.92 c-1.04 0 -1.94 0.86 -1.94 1.92 l0 4.9 l-2.5 0 l0 -14.68 l2.5 0 l0 6.18 c0.62 -0.62 1.28 -0.84 1.94 -0.84 c1.2 0 2.32 0.46 3.16 1.28 c0.84 0.86 1.3 1.98 1.3 3.16 l0 4.9 z M83.83999999999999 20.22 l-0.02 0 c-0.58 0 -1.18 -0.14 -1.74 -0.4 c-0.52 -0.22 -1 -0.58 -1.44 -1.04 c-0.7 -0.76 -1.12 -1.76 -1.22 -2.8 c-0.02 -0.18 -0.04 -0.36 -0.04 -0.56 c0 -0.4 0.06 -0.82 0.16 -1.24 c0.18 -0.8 0.56 -1.54 1.1 -2.1 c0.4 -0.44 0.86 -0.78 1.44 -1.06 c0.54 -0.26 1.14 -0.38 1.76 -0.38 c0.64 0 1.22 0.12 1.76 0.38 c0.6 0.28 1.08 0.64 1.44 1.06 c0.52 0.56 0.92 1.28 1.12 2.1 c0.1 0.38 0.14 0.78 0.14 1.24 l0 0.46 l-6.72 0 l0.02 0.14 c0.26 1.24 1.2 2.14 2.24 2.14 l0.02 0 c0.58 -0.04 1.22 -0.4 1.6 -0.72 l0.22 -0.18 l1.66 1.44 l-0.3 0.26 c-0.22 0.2 -0.5 0.44 -0.8 0.6 l-0.02 0 c-0.72 0.42 -1.5 0.64 -2.38 0.66 z M83.83999999999999 12.719999999999999 c-0.78 0 -1.56 0.54 -1.98 1.38 l-0.08 0.16 l4.14 0 l-0.08 -0.16 c-0.46 -0.86 -1.22 -1.38 -2 -1.38 z M94.02 20.22 l-0.02 0 c-0.58 0 -1.18 -0.14 -1.74 -0.4 c-0.52 -0.22 -1 -0.58 -1.44 -1.04 c-0.7 -0.76 -1.12 -1.76 -1.22 -2.8 c-0.02 -0.18 -0.04 -0.36 -0.04 -0.56 c0 -0.4 0.06 -0.82 0.16 -1.24 c0.18 -0.8 0.56 -1.54 1.1 -2.1 c0.4 -0.44 0.86 -0.78 1.44 -1.06 c0.54 -0.26 1.14 -0.38 1.76 -0.38 c0.64 0 1.22 0.12 1.76 0.38 c0.6 0.28 1.08 0.64 1.44 1.06 c0.52 0.56 0.92 1.28 1.12 2.1 c0.1 0.38 0.14 0.78 0.14 1.24 l0 0.46 l-6.72 0 l0.02 0.14 c0.26 1.24 1.2 2.14 2.24 2.14 l0.02 0 c0.58 -0.04 1.22 -0.4 1.6 -0.72 l0.22 -0.18 l1.66 1.44 l-0.3 0.26 c-0.22 0.2 -0.5 0.44 -0.8 0.6 l-0.02 0 c-0.72 0.42 -1.5 0.64 -2.38 0.66 z M94.02 12.719999999999999 c-0.78 0 -1.56 0.54 -1.98 1.38 l-0.08 0.16 l4.14 0 l-0.08 -0.16 c-0.46 -0.86 -1.22 -1.38 -2 -1.38 z M106.22 20 l-2.4 0 c-0.88 0 -1.7 -0.34 -2.3 -0.94 c-0.62 -0.62 -0.94 -1.42 -0.94 -2.3 l0 -3.8 l-1.28 0 l0 -2.06 l1.28 0 l0 -3.6 l2.38 0 l0 3.6 l2.66 0 l0 2.06 l-2.66 0 l0 3.76 c0 0.5 0.44 0.96 0.88 0.96 l1.74 0 z"></path></g></svg>
-            <img src='' />
+      <div className='hero h-128 bg-gradient-to-r from-bgBlackUI-0 to to-black w-full'>
+        <div className='flex flex-wrap mx-14 content-center justify-center pt-8'>
+          <div className='basis-12 items-start'>
+            <img src={image} className='max-w-xs border rounded-full border-bgBlackUI-0 shadow-sm' />
           </div>
-          <div>
-            <div className='bg-red-700'>
-              <div className=''>SDADSADAS</div>
+          <div className='flex items-start flex-col h-full ml-16'>
+            <div className='text-bgWhiteUI-0'>
+              <div className='flex justify-end h-20'>
+                <ul className='flex justify-end'>
+                  <li className='ml-2 py-2'><BsGithub /></li>
+                  <li className='ml-2 py-2'><BsDiscord /></li>
+                </ul>
+              </div>
+              <div className='p-4'>
+                <h1 className='text-5xl'>Project Cheat Sheet</h1>
+                <h1 className='mt-4 text-2xl'>Sharpen your computer science skills</h1>
+              </div>
+            </div>
+            <div className='mt-4 p-4'>
+              <Link
+                to={`${URLS.COURSES}1`}
+                className="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border-2 bg-bgWhiteUI-0 border-purple-100 font-semibold text-pinkUI-0-500 hover:text-white hover:bg-pinkUI-0 hover:border-pinkUI-0 focus:outline-none focus:ring-2 focus:ring-purple-200 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
+                View Courses
+              </Link>
+              <Link
+                to={`${URLS.RESOURCES}1`}
+                className="py-3 px-4 ml-4 inline-flex justify-center items-center gap-2 rounded-md border-2 bg-bgWhiteUI-0 border-purple-100 font-semibold text-pinkUI-0-500 hover:text-white hover:bg-pinkUI-0 hover:border-pinkUI-0 focus:outline-none focus:ring-2 focus:ring-purple-200 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
+                View Resources
+              </Link>
             </div>
             <div>
-
+            </div>
+            <div>
             </div>
           </div>
         </div>
       </div>
+
     )
   }
 
-
-  function Welcome() {
+  const Features = () => {
     return (
-      <div class="container my-24 md:px-6">
-        <Hero />
-        <section class="mb-32 text-center">
-          <div class="flex justify-center">
-            <div class="max-w-[700px] text-center">
-              <h2 class="mb-6 text-center text-3xl font-bold">
-                <u class="text-primary dark:text-primary-400">
-                  Why choose us?
-                </u>
-              </h2>
-              <p class="mb-16 text-neutral-500 dark:text-primary-400">
-                Minus fuga aliquid vero facere ducimus quos, quisquam nemo?
-                Molestias ullam provident vitae error aliquam dolorum temporibus?
-                Doloremque, quasi
-              </p>
-            </div>
-          </div>
-
-          <div class="grid gap-x-6 md:grid-cols-2 lg:grid-cols-4 lg:gap-x-12">
-            <div class="mb-12 lg:mb-0">
-              <div class="mb-6 inline-block rounded-full bg-primary-100 p-4 text-primary shadow-sm">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                  stroke="currentColor" class="h-6 w-6">
-                  <path stroke-linecap="round" stroke-linejoin="round"
-                    d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 11-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 004.486-6.336l-3.276 3.277a3.004 3.004 0 01-2.25-2.25l3.276-3.276a4.5 4.5 0 00-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085m-1.745 1.437L5.909 7.5H4.5L2.25 3.75l1.5-1.5L7.5 4.5v1.409l4.26 4.26m-1.745 1.437l1.745-1.437m6.615 8.206L15.75 15.75M4.867 19.125h.008v.008h-.008v-.008z" />
+      <>
+        <section className="flex items-center justify-center h-128 bg-bgWhiteUI-0 text-bgBlackUI-0">
+          <div className="container px-6 py-12 flex">
+            <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+              <div>
+                <svg className="w-8 h-8" viewBox="0 0 30 30" fill="none">
+                  <path d="M29.6931 14.2283L22.7556 6.87823C22.3292 6.426 21.6175 6.40538 21.1652 6.83212C20.7137 7.25851 20.6927 7.9706 21.1195 8.42248L27.3284 15L21.1195 21.5783C20.6927 22.0302 20.7137 22.7419 21.1652 23.1687C21.3827 23.3738 21.6606 23.4754 21.9374 23.4754C22.2363 23.4754 22.5348 23.3569 22.7557 23.1233L29.6932 15.7729C30.1022 15.339 30.1023 14.6618 29.6931 14.2283Z" fill="#2D3748" /><path d="M8.88087 21.578L2.67236 15L8.88087 8.42215C9.30726 7.97028 9.28664 7.25812 8.83476 6.83179C8.38323 6.4054 7.67073 6.42603 7.2444 6.87791L0.306858 14.2279C-0.102245 14.6614 -0.102245 15.3391 0.306858 15.7726L7.24475 23.123C7.466 23.3574 7.76413 23.4755 8.06302 23.4755C8.33976 23.4755 8.61767 23.3735 8.83476 23.1684C9.28705 22.742 9.30726 22.0299 8.88087 21.578Z" fill="#2D3748" /><path d="M16.8201 3.08774C16.2062 2.99476 15.6317 3.41622 15.5379 4.03011L12.2379 25.6302C12.1441 26.2445 12.566 26.8186 13.1803 26.9124C13.238 26.921 13.295 26.9252 13.3516 26.9252C13.898 26.9252 14.3773 26.5266 14.4624 25.97L17.7624 4.3699C17.8562 3.7556 17.4343 3.1815 16.8201 3.08774Z" fill="#4299E1" />
                 </svg>
-              </div>
-              <h5 class="mb-4 text-lg font-bold">Support 24/7</h5>
-              <p class="text-neutral-500 dark:text-primary-4000">
-                Laudantium totam quas cumque pariatur at doloremque hic quos quia
-                eius. Reiciendis optio minus mollitia rerum labore
-              </p>
-            </div>
 
-            <div class="mb-12 lg:mb-0">
-              <div class="mb-6 inline-block rounded-full bg-primary-100 p-4 text-primary shadow-sm">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                  stroke="currentColor" class="h-6 w-6">
-                  <path stroke-linecap="round" stroke-linejoin="round"
-                    d="M15.75 5.25a3 3 0 013 3m3 0a6 6 0 01-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1121.75 8.25z" />
-                </svg>
-              </div>
-              <h5 class="mb-4 text-lg font-bold">Safe and solid</h5>
-              <p class="text-neutral-500 dark:text-primary-4000">
-                Eum nostrum fugit numquam, voluptates veniam neque quibusdam ullam
-                aspernatur odio soluta, quisquam dolore animi
-              </p>
-            </div>
+                <h1 className="mt-4 text-xl font-semibold ">Default Taiwindcss Config</h1>
 
-            <div class="mb-12 md:mb-0">
-              <div class="mb-6 inline-block rounded-full bg-primary-100 p-4 text-primary shadow-sm">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                  stroke="currentColor" class="h-6 w-6">
-                  <path stroke-linecap="round" stroke-linejoin="round"
-                    d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 00-10.026 0 1.106 1.106 0 00-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12" />
-                </svg>
+                <p className="mt-2 ">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dignissim fusce tortor, ac sed malesuada blandit. Et mi gravida sem feugiat.</p>
               </div>
-              <h5 class="mb-4 text-lg font-bold">Extremely fast</h5>
-              <p class="text-neutral-500 dark:text-primary-400">
-                Enim cupiditate, minus nulla dolor cumque iure eveniet facere
-                ullam beatae hic voluptatibus dolores exercitationem
-              </p>
-            </div>
 
-            <div class="mb-12 md:mb-0">
-              <div class="mb-6 inline-block rounded-full bg-primary-100 p-4 text-primary shadow-sm">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                  stroke="currentColor" class="h-6 w-6">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6a7.5 7.5 0 107.5 7.5h-7.5V6z" />
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 10.5H21A7.5 7.5 0 0013.5 3v7.5z" />
+              <div>
+                <svg className="w-8 h-8" viewBox="0 0 30 30" fill="none">
+                  <path d="M27.3633 7.08984H26.4844V6.21094C26.4844 4.75705 25.3015 3.57422 23.8477 3.57422H4.39453C2.94064 3.57422 1.75781 4.75705 1.75781 6.21094V21.1523H0.878906C0.393516 21.1523 0 21.5459 0 22.0312V23.7891C0 25.2429 1.18283 26.4258 2.63672 26.4258H27.3633C28.8172 26.4258 30 25.2429 30 23.7891V9.72656C30 8.27268 28.8172 7.08984 27.3633 7.08984ZM3.51562 6.21094C3.51562 5.72631 3.9099 5.33203 4.39453 5.33203H23.8477C24.3323 5.33203 24.7266 5.72631 24.7266 6.21094V7.08984H20.332C18.8781 7.08984 17.6953 8.27268 17.6953 9.72656V21.1523H3.51562V6.21094ZM1.75781 23.7891V22.9102H17.6953V23.7891C17.6953 24.0971 17.7489 24.3929 17.8465 24.668H2.63672C2.15209 24.668 1.75781 24.2737 1.75781 23.7891ZM28.2422 23.7891C28.2422 24.2737 27.8479 24.668 27.3633 24.668H20.332C19.8474 24.668 19.4531 24.2737 19.4531 23.7891V9.72656C19.4531 9.24193 19.8474 8.84766 20.332 8.84766H27.3633C27.8479 8.84766 28.2422 9.24193 28.2422 9.72656V23.7891Z" fill="#2D3748" /><path d="M24.7266 21.1523H22.9688C22.4834 21.1523 22.0898 21.5459 22.0898 22.0312C22.0898 22.5166 22.4834 22.9102 22.9688 22.9102H24.7266C25.212 22.9102 25.6055 22.5166 25.6055 22.0312C25.6055 21.5459 25.212 21.1523 24.7266 21.1523Z" fill="#4299E1" /><path d="M23.8477 12.3633C24.3331 12.3633 24.7266 11.9698 24.7266 11.4844C24.7266 10.999 24.3331 10.6055 23.8477 10.6055C23.3622 10.6055 22.9688 10.999 22.9688 11.4844C22.9688 11.9698 23.3622 12.3633 23.8477 12.3633Z" fill="#4299E1" />
                 </svg>
+
+                <h1 className="mt-4 text-xl font-semibold">Fully Responsive Components</h1>
+
+                <p className="mt-2 ">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dignissim fusce tortor, ac sed malesuada blandit. Et mi gravida sem feugiat.</p>
               </div>
-              <h5 class="mb-4 text-lg font-bold">Live analytics</h5>
-              <p class="text-neutral-500 dark:text-primary-400">
-                Illum doloremque ea, blanditiis sed dolor laborum praesentium
-                maxime sint, consectetur atque ipsum ab adipisci
-              </p>
+
+              <div>
+                <svg className="w-8 h-8" viewBox="0 0 30 30" fill="none">
+                  <g clip-path="url(#clip0)"><path d="M26.599 4.339a1.875 1.875 0 11-3.75 0 1.875 1.875 0 013.75 0zM7.151 25.661a1.875 1.875 0 11-3.75 0 1.875 1.875 0 013.75 0zM23.486 13.163a8.636 8.636 0 00-1.19-2.873l1.123-1.123-2.592-2.59L19.705 7.7a8.636 8.636 0 00-2.873-1.19V4.921h-3.664v1.586a8.634 8.634 0 00-2.873 1.19l-1.122-1.12-2.592 2.589 1.123 1.123a8.636 8.636 0 00-1.19 2.873H4.922l-.002 3.663h1.592A8.626 8.626 0 007.704 19.7l-1.127 1.127 2.59 2.591 1.128-1.127a8.623 8.623 0 002.873 1.19v1.597h3.664v-1.597a8.628 8.628 0 002.873-1.19l1.128 1.128 2.59-2.592-1.127-1.127a8.627 8.627 0 001.19-2.873h1.593v-3.664h-1.593zM15 19.256a4.255 4.255 0 110-8.511 4.255 4.255 0 010 8.51z" fill="#4299E1" /><path d="M5.276 23.2c-.42 0-.823.105-1.182.302A13.853 13.853 0 011.172 15C1.172 7.375 7.375 1.172 15 1.172c.927 0 1.854.092 2.754.274a.586.586 0 00.232-1.149A15.111 15.111 0 0015 0C10.993 0 7.226 1.56 4.393 4.393A14.902 14.902 0 000 15c0 3.37 1.144 6.66 3.228 9.296-.268.4-.413.872-.413 1.365 0 .657.257 1.275.721 1.74a2.444 2.444 0 001.74.721c.658 0 1.276-.256 1.74-.721.465-.465.721-1.083.721-1.74s-.256-1.276-.72-1.74a2.445 2.445 0 00-1.74-.72zm.912 3.373a1.28 1.28 0 01-.912.377 1.28 1.28 0 01-.911-.377 1.28 1.28 0 01-.378-.912c0-.344.134-.668.378-.912a1.28 1.28 0 01.911-.377c.345 0 .668.134.912.378.243.243.377.567.377.911 0 .344-.134.668-.377.912zM26.772 5.703a2.465 2.465 0 00-.308-3.104 2.446 2.446 0 00-1.74-.721c-.658 0-1.276.256-1.74.72a2.445 2.445 0 00-.721 1.74c0 .658.256 1.276.72 1.741.465.465 1.083.72 1.74.72.42 0 .824-.104 1.183-.3A13.854 13.854 0 0128.828 15c0 7.625-6.203 13.828-13.828 13.828-.918 0-1.836-.09-2.728-.269a.586.586 0 00-.23 1.15c.968.193 1.963.291 2.958.291 4.007 0 7.773-1.56 10.607-4.393A14.902 14.902 0 0030 15c0-3.37-1.145-6.66-3.228-9.297zm-2.96-.452a1.28 1.28 0 01-.377-.912c0-.344.134-.668.377-.911a1.28 1.28 0 01.912-.378 1.29 1.29 0 010 2.578 1.28 1.28 0 01-.912-.377z" fill="#2D3748" /><path d="M12.582 25.078c0 .324.263.586.586.586h3.664a.586.586 0 00.586-.586v-1.136a9.179 9.179 0 002.199-.911l.802.802a.586.586 0 00.829 0l2.59-2.592a.586.586 0 000-.828l-.802-.802a9.169 9.169 0 00.911-2.199h1.132a.586.586 0 00.586-.585v-3.664a.586.586 0 00-.586-.586h-1.132a9.17 9.17 0 00-.911-2.199l.797-.797a.587.587 0 000-.829l-2.592-2.59a.586.586 0 00-.829 0l-.795.797a9.177 9.177 0 00-2.2-.912V4.922a.586.586 0 00-.585-.586h-3.664a.586.586 0 00-.586.586v1.126a9.169 9.169 0 00-2.199.91l-.796-.795a.586.586 0 00-.828 0l-2.592 2.59a.585.585 0 000 .828l.797.797a9.173 9.173 0 00-.911 2.199h-1.13a.586.586 0 00-.586.585l-.002 3.664a.585.585 0 00.586.586h1.132c.207.77.512 1.507.911 2.2l-.801.8a.586.586 0 000 .83l2.59 2.59a.586.586 0 00.829 0l.801-.801a9.185 9.185 0 002.2.911v1.136zm-1.97-3.28a.586.586 0 00-.732.078l-.713.714-1.761-1.763.712-.713a.586.586 0 00.078-.732 8.02 8.02 0 01-1.11-2.679.586.586 0 00-.572-.462H5.507l.002-2.492h1.005a.586.586 0 00.572-.463 8.022 8.022 0 011.11-2.678.586.586 0 00-.078-.733l-.708-.708 1.763-1.761.707.707c.196.196.5.228.733.078a8.016 8.016 0 012.678-1.11.586.586 0 00.463-.573v-1h2.492v1c0 .277.193.515.463.573a8.024 8.024 0 012.678 1.11c.232.15.537.118.732-.078l.708-.707 1.762 1.761-.708.708a.586.586 0 00-.078.732 8.027 8.027 0 011.11 2.679c.058.27.297.463.573.463h1.007v2.492h-1.007a.586.586 0 00-.573.462 8.02 8.02 0 01-1.11 2.679.586.586 0 00.078.732l.713.713-1.761 1.762-.714-.713a.586.586 0 00-.732-.078 8.027 8.027 0 01-2.678 1.11.586.586 0 00-.463.573v1.011h-2.492v-1.01a.586.586 0 00-.463-.574 8.021 8.021 0 01-2.678-1.11z" fill="#2D3748" /><path d="M19.841 15A4.847 4.847 0 0015 10.158 4.847 4.847 0 0010.158 15 4.847 4.847 0 0015 19.841 4.847 4.847 0 0019.841 15zm-8.51 0A3.674 3.674 0 0115 11.33 3.674 3.674 0 0118.67 15 3.674 3.674 0 0115 18.67 3.674 3.674 0 0111.33 15z" fill="#2D3748" /><path d="M20.395 2.216a.59.59 0 00.415-.172.593.593 0 00.171-.415.59.59 0 00-.586-.586.589.589 0 00-.586.586.589.589 0 00.586.587zM9.63 27.794a.59.59 0 00-.586.586.59.59 0 00.586.586.59.59 0 00.586-.586.59.59 0 00-.586-.585z" fill="#4299E1" /></g><defs><clipPath id="clip0"><path fill="#fff" d="M0 0h30v30H0z" /></clipPath></defs>
+                </svg>
+
+                <h1 className="mt-4 text-xl font-semibold ">RTL Languages Support</h1>
+
+                <p className="mt-2 ">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dignissim fusce tortor, ac sed malesuada blandit. Et mi gravida sem feugiat.</p>
+              </div>
             </div>
           </div>
         </section>
-      </div>
+      </>
     )
   }
 
-  return (
-    <>
-      <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
-        {Welcome()}
-        <header className="flex flex-col items-center justify-center w-full mb-12">
-
-          <h1 className="text-4xl font-bold text-gray-800 text-center">
-            Welcome to My Educational Site
+  const Testimonials = () => {
+    return (
+      <section className="bg-bgWhiteUI-0 text-bgBlackUI-0 w-full flex justify-center">
+        <div className="container px-6 py-10 ">
+          <h1 className="text-2xl font-semibold text-center capitalize lg:text-3xl ">
+            What our <span className="text-pinkUI-0">clients</span> say
           </h1>
-          {statistics && (
-            <p className="text-lg text-gray-600 mt-4 text-center">
-              So far, we've educated over {statistics.usersCount} people with {statistics.resourcesCount} resources available on the platform.
-            </p>
-          )}
-        </header>
-        <main className="flex flex-col items-center justify-center w-full">
-          <article>
 
-            <p className="text-2xl font-bold text-gray-800 mb-8 text-center">
-              Explore our courses and resources
-            </p>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <Link
-                to="/course/all/1"
-                className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-4 px-8 rounded transition duration-200 ease-in-out transform hover:-translate-y-1 hover:scale-110"
-              >
-                View Courses
-              </Link>
-              <Link
-                to="/resources/1"
-                className="bg-green-500 hover:bg-green-600 text-white font-bold py-4 px-8 rounded transition duration-200 ease-in-out transform hover:-translate-y-1 hover:scale-110"
-              >
-                View Resources
-              </Link>
-            </div>
-          </article>
-          <div className="container mx-auto py-10 px-4 lg:px-0">
-            <article className="mb-10">
-              <h2 className="text-3xl font-bold mb-4">About Us</h2>
-              <p className="text-lg leading-7">
-                At Cheat Sheet Project, we believe that software development should be accessible to everyone. Our mission is to provide high-quality educational resources to individuals of all skill levels who are interested in learning how to code.
-              </p>
-              <p className="text-lg leading-7 mt-4">
-                We understand that the world of software development can be overwhelming, especially for beginners. That's why we've created a comprehensive library of cheat sheets, tutorials, and courses that break down complex coding concepts into easy-to-understand chunks.
-              </p>
-              <p className="text-lg leading-7 mt-4">
-                Our team of experienced software developers and educators is committed to providing the most up-to-date information and best practices in the industry. We cover a wide range of topics, from programming languages and frameworks to development tools and techniques.
-              </p>
-              <p className="text-lg leading-7 mt-4">
-                Whether you're a complete beginner or an experienced developer looking to sharpen your skills, Cheat Sheet Project has something for you. Our courses are designed to be flexible, so you can learn at your own pace and on your own schedule.
-              </p>
-              <p className="text-lg leading-7 mt-4">
-                At Cheat Sheet Project, we're passionate about empowering people to learn how to code. We believe that anyone can become a successful software developer with the right resources and support. Join us on this exciting journey and discover the possibilities of software development.
-              </p>
-            </article>
-            <article>
-              <h2 className="text-3xl font-bold mb-4">Our History</h2>
-              <p className="text-lg leading-7">
-                Cheat Sheet Project was founded in 2015 by a group of software developers who wanted to make learning how to code easier and more accessible for everyone. They recognized that traditional programming textbooks and courses could be overwhelming and confusing, especially for beginners.
-              </p>
-              <p className="text-lg leading-7 mt-4">
-                The team started by creating a series of cheat sheets that condensed complex coding concepts into simple, easy-to-understand reference guides. These cheat sheets quickly gained popularity among developers of all skill levels and became the foundation for Cheat Sheet Project's educational resources.
-              </p>
-              <p className="text-lg leading-7 mt-4">
-                As the demand for more comprehensive learning materials grew, Cheat Sheet Project began creating tutorials and courses that covered a wide range of programming languages, frameworks, and development tools. The company's mission was to provide the most up-to-date and relevant information in the industry, while still making it accessible and easy to understand.
-              </p>
-              <p className="text-lg leading-7 mt-4">
-                Today, Cheat Sheet Project has become a leading provider of online educational resources for software development. With a team of experienced developers and educators, we continue to create high-quality content that empowers individuals to learn how to code and pursue careers in tech.
-              </p>
-              <p className="text-lg leading-7 mt-4">
-                We're proud of how far we've come and remain committed to our founding mission of making software development accessible to everyone. Whether you're a complete beginner or an experienced developer, we believe that anyone can learn how to code with the right resources and support. Join us on this exciting journey and discover the possibilities
-              </p>
-            </article>
+          <div className="mt-4 text-center flex justify-center items-center"> {/* Modified this div */}
+            {statistics && (
+              <div>
+                <p className="text-lg mt-4 text-center">
+                  So far, we've educated over {statistics.usersCount} people with {statistics.resourcesCount} resources available on the platform.
+                </p>
+                <p>Look what some have to say</p>
+              </div>
+            )}
           </div>
 
+          <section className="grid grid-cols-1 gap-8 mt-8 xl:mt-12 lg:grid-cols-2 xl:grid-cols-3">
+            <div className="p-8 border rounded-lg dark:border-gray-700">
+              <p className="leading-loose text-gray-500 dark:text-gray-400">
+                “Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore quibusdam ducimus libero ad
+                tempora doloribus expedita laborum saepe voluptas perferendis delectus assumenda rerum, culpa
+                aperiam dolorum, obcaecati corrupti aspernatur a.”.
+              </p>
+
+              <div className="flex items-center mt-8 -mx-2">
+                <img className="object-cover mx-2 rounded-full w-14 shrink-0 h-14 ring-4 ring-gray-300 dark:ring-gray-700" src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80" alt="" />
+
+                <div className="mx-2">
+                  <h1 className="font-semibold text-gray-800 dark:text-white">Robert</h1>
+                  <span className="text-sm text-gray-500">CTO, Robert Consultency</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="p-8 border rounded-lg dark:border-gray-700">
+              <p className="leading-loose text-gray-500 dark:text-gray-400">
+                “Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore quibusdam ducimus libero ad
+                tempora doloribus expedita laborum saepe voluptas perferendis delectus assumenda rerum, culpa
+                aperiam dolorum, obcaecati corrupti aspernatur a.”.
+              </p>
+
+              <div className="flex items-center mt-8 -mx-2">
+                <img className="object-cover mx-2 rounded-full w-14 shrink-0 h-14 ring-4 ring-gray-300 dark:ring-gray-700" src="https://images.unsplash.com/photo-1531590878845-12627191e687?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80" alt="" />
+
+                <div className="mx-2">
+                  <h1 className="font-semibold text-gray-800 dark:text-white">Jeny Doe</h1>
+                  <span className="text-sm text-gray-500">CEO, Jeny Consultency</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="p-8 border rounded-lg dark:border-gray-700">
+              <p className="leading-loose text-gray-500 dark:text-gray-400">
+                “Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore quibusdam ducimus libero ad
+                tempora doloribus expedita laborum saepe voluptas perferendis delectus assumenda rerum, culpa
+                aperiam dolorum, obcaecati corrupti aspernatur a.”.
+              </p>
+
+              <div className="flex items-center mt-8 -mx-2">
+                <img className="object-cover mx-2 rounded-full w-14 shrink-0 h-14 ring-4 ring-gray-300 dark:ring-gray-700" src="https://images.unsplash.com/photo-1488508872907-592763824245?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80" alt="" />
+
+                <div className="mx-2">
+                  <h1 className="font-semibold text-gray-800 dark:text-white">Ema Watson </h1>
+                  <span className="text-sm text-gray-500">Marketing Manager at Stech</span>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </section>
+    )
+  }
+
+
+  return (
+    <>
+      <div className="flex flex-col items-center justify-center min-h-screen divide-y">
+        <header className="flex flex-col items-center justify-center w-full mb-12 divide-y">
+        <Hero />
+        </header>
+        <main className="flex flex-col items-center justify-center w-full divide-y">
+        <Features />
+        <Testimonials />
         </main>
       </div>
     </>

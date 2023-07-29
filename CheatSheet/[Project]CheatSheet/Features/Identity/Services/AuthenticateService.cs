@@ -1,9 +1,8 @@
 ﻿namespace _Project_CheatSheet.Features.Identity.Services;
 
 using _Project_CheatSheet.Common.Exceptions;
-using _Project_CheatSheet.Common.GlobalConstants.Authentication;
-using _Project_CheatSheet.Common.UserService.Interfaces;
 using AutoMapper;
+using Constants.GlobalConstants.Authentication;
 using Infrastructure.Data.Models;
 using Infrastructure.Data.Models.Enums;
 using Interfaces;

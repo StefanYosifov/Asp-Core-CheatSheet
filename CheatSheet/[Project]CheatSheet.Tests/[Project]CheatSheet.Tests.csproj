@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -16,7 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\[Project]CheatSheet.Constants\[Project]CheatSheet.Constants.csproj" />
-    <ProjectReference Include="..\[Project]CheatSheet.Infrastructure\[Project]CheatSheet.Infrastructure.csproj" />
+    <ProjectReference Include="..\[Project]CheatSheet.Infrastructure\[Project]CheatSheet.Data.csproj" />
     <ProjectReference Include="..\[Project]CheatSheet\[Project]CheatSheet.csproj" />
   </ItemGroup>
 

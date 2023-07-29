@@ -1,28 +1,35 @@
-﻿using _Project_CheatSheet.Common.Exceptions;
-using _Project_CheatSheet.Common.UserService.Interfaces;
-using _Project_CheatSheet.Constants.GlobalConstants.Comment;
-using _Project_CheatSheet.Features.Comment.Models;
-using _Project_CheatSheet.Features.Comment.Services;
-using _Project_CheatSheet.Infrastructure.Data;
-using _Project_CheatSheet.Infrastructure.Data.Models;
-using AutoMapper;
-using Microsoft.EntityFrameworkCore;
-using Moq;
-using Xunit;
-
-namespace _Project_CheatSheet.Tests.Features.Comment.Services
+﻿namespace _Project_CheatSheet.Tests.Comments
 {
+    using _Project_CheatSheet.Common.Exceptions;
+    using _Project_CheatSheet.Common.UserService.Interfaces;
+    using _Project_CheatSheet.Constants.GlobalConstants.Comment;
+    using _Project_CheatSheet.Features.Comment.Models;
+    using _Project_CheatSheet.Features.Comment.Services;
+    using _Project_CheatSheet.Infrastructure.Data;
+    using _Project_CheatSheet.Infrastructure.Data.Models;
+
+    using AutoMapper;
+
+    using Features.Comment.Interfaces;
+
     using Microsoft.AspNetCore.Http;
+    using Microsoft.EntityFrameworkCore;
+
+    using Moq;
+
+    using Xunit;
+
+    using Comment = Infrastructure.Data.Models.Comment;
 
     public class CommentServiceTests
     {
-        private CommentService _commentService;
+        private ICommentService _commentService;
         private CheatSheetDbContext _dbContext;
         private Mock<ICurrentUser> _currentUserServiceMock;
         private Mock<IMapper> _mapperMock;
 
 
-        Resource resource=new Resource()
+        Resource globalResource=new Resource()
         {
             UserId = "pesho",
             Content = "This is a very nice comment isn't it?",
@@ -50,9 +57,6 @@ namespace _Project_CheatSheet.Tests.Features.Comment.Services
             
             _dbContext = new CheatSheetDbContext(options, httpContextAccessorMock.Object);
 
-            var context = new DefaultHttpContext();
-
-
             _currentUserServiceMock = new Mock<ICurrentUser>();
             _mapperMock = new Mock<IMapper>();
             _commentService = new CommentService(
@@ -61,7 +65,7 @@ namespace _Project_CheatSheet.Tests.Features.Comment.Services
                 _mapperMock.Object);
 
 
-            _dbContext.Add(resource);
+            _dbContext.Add(globalResource);
             _dbContext.SaveChangesAsync();
         }
 
@@ -95,7 +99,7 @@ namespace _Project_CheatSheet.Tests.Features.Comment.Services
         public async Task CreateAComment_ShouldReturnSuccessMessage_WhenCommentIsCreated()
         {
             // Arrange
-            var validResourceId = this.resource.Id;
+            var validResourceId = this.globalResource.Id;
             var inputCommentModel = new InputCommentModel
             {
                 ResourceId = validResourceId.ToString(),
@@ -134,5 +138,79 @@ namespace _Project_CheatSheet.Tests.Features.Comment.Services
             Assert.Equal(validUser.Id, commentInDb.UserId);
             Assert.Equal(inputCommentModel.Content, commentInDb.Content);
         }
+
+        [Fact]
+        [InlineData()]
+        public async Task DeleteCommentShouldThrowExceptionIfCommentIsDeletedIsNullBelongsToDifferentUserOrDoesNotExist()
+        {
+            Comment dbComment = new Comment()
+            {
+                UserId = "pesho",
+                Content = "This is a very nice Content, isn't it?",
+                CreatedOn = DateTime.UtcNow,
+                CreatedBy = "pesho",
+                UpdatedOn = DateTime.UtcNow,
+                UpdatedBy = "pesho",
+                ResourceId = globalResource.Id,
+            };
+
+            Comment dbCommentDeleted = new Comment()
+            {
+                UserId = "peshoQdeRiba",
+                Content = "This is a very nice Content, isn't it?",
+                CreatedOn = DateTime.UtcNow,
+                CreatedBy = "pesho",
+                UpdatedOn = DateTime.UtcNow,
+                UpdatedBy = "pesho",
+                ResourceId = globalResource.Id,
+                IsDeleted = true
+            };
+
+
+            await _dbContext.Comments.AddAsync(dbComment);
+            await _dbContext.SaveChangesAsync();
+            await _dbContext.Comments.AddAsync(dbCommentDeleted);
+            await _dbContext.SaveChangesAsync();
+
+            _currentUserServiceMock.Setup(mock => mock.GetUserId())
+                .Returns("pesho123");
+
+            Assert.ThrowsAsync<ServiceException>(() => _commentService.DeleteComment($"Invalid{dbComment.Id}"));
+            Assert.ThrowsAsync<ServiceException>(() => _commentService.DeleteComment($"{dbCommentDeleted.Id}"));
+            Assert.ThrowsAsync<ServiceException>(() => _commentService.DeleteComment($"{dbComment.Id}"));
+        }
+
+        [Fact]
+        public async Task DeleteCommentShouldReturnMessageIfSuccessful()
+        {
+            Comment dbCommentDeleted = new Comment()
+            {
+                UserId = "123456",
+                Content = "This is a very nice Content, isn't it?",
+                CreatedOn = DateTime.UtcNow,
+                CreatedBy = "pesho",
+                UpdatedOn = DateTime.UtcNow,
+                UpdatedBy = "pesho",
+                ResourceId = globalResource.Id,
+                IsDeleted = false
+            };
+
+            await _dbContext.Comments.AddAsync(dbCommentDeleted);
+            await _dbContext.SaveChangesAsync();
+
+            var httpContextAccessorMock = new Mock<IHttpContextAccessor>();
+            httpContextAccessorMock.Setup(x => x.HttpContext!.User.Identity.Name).Returns(It.IsAny<string>());
+
+            _currentUserServiceMock.Setup(mock => mock.GetUserId())
+                .Returns("123456");
+
+           var result=_commentService.DeleteComment(dbCommentDeleted.Id.ToString());
+            
+
+            Assert.Equal(CommentMessages.OnSuccessfulDeleteComment,result.Result);
+         
+        }
+
+
     }
 }

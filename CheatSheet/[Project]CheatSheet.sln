@@ -5,13 +5,21 @@ VisualStudioVersion = 17.2.32630.192
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "[Project]CheatSheet", "[Project]CheatSheet\[Project]CheatSheet.csproj", "{AF24447F-1EFD-44EA-9F33-4C2ABBB902B9}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "[Project]CheatSheet.Infrastructure", "[Project]CheatSheet.Infrastructure\[Project]CheatSheet.Infrastructure.csproj", "{96A3F6BF-3B92-4100-839C-4613F96B1819}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "[Project]CheatSheet.Data", "[Project]CheatSheet.Infrastructure\[Project]CheatSheet.Data.csproj", "{96A3F6BF-3B92-4100-839C-4613F96B1819}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "[Project]CheatSheet.Common", "[Project]CheatSheet.Common\[Project]CheatSheet.Common.csproj", "{AA1B2E51-BC3B-4E72-863A-96703A5AE81C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "[Project]CheatSheet.Constants", "[Project]CheatSheet.Constants\[Project]CheatSheet.Constants.csproj", "{079014F0-67A3-4E66-85C1-94D3F70AF898}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "[Project]CheatSheet.Tests", "[Project]CheatSheet.Tests\[Project]CheatSheet.Tests.csproj", "{DFB23F79-0239-4A43-BA10-87297A326EEA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "[Project]CheatSheet.Tests", "[Project]CheatSheet.Tests\[Project]CheatSheet.Tests.csproj", "{DFB23F79-0239-4A43-BA10-87297A326EEA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{6DCB5154-AA93-43DD-A875-40E7CAD79A55}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{EC8AE0C4-3B46-46FA-B7C9-B8B9C95E08BD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{AA7574A3-FE42-4269-8B06-3056686AC215}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NewFolder1", "NewFolder1", "{B292FA4A-E8DF-4F07-AA2C-D790ECF43491}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,8 +1,7 @@
 ﻿namespace _Project_CheatSheet.Infrastructure.MongoDb.Services
 {
-    using _Project_CheatSheet.Infrastructure.MongoDb.Models;
-    using _Project_CheatSheet.Infrastructure.MongoDb.Store;
-    using MongoDB.Bson;
+    using Models;
+    using Store;
     using MongoDB.Driver;
     using System;
     using System.Collections.Generic;

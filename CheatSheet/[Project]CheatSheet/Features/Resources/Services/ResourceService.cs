@@ -11,6 +11,7 @@
     using Common.Pagination;
     using Common.UserService.Interfaces;
 
+    using Constants.GlobalConstants.Category;
     using Constants.GlobalConstants.Resource;
 
     using Enums;
@@ -74,6 +75,11 @@
                 .Where(c => resourceModel.CategoryIds.Contains(c.Id))
                 .ToArrayAsync();
 
+            if (categories.Length == 0)
+            {
+                throw new ServiceException(CategoryMessages.NoCategoriesSelected);
+            }
+
             await context.Resources.AddRangeAsync(resource);
             await context.SaveChangesAsync();
             foreach (var category in categories)
@@ -93,6 +99,8 @@
         public async Task<IEnumerable<ResourceModel>> GetMyResources()
         {
             var userId = currentUserService.GetUserId();
+
+            var resources2 = await context.Resources.ToArrayAsync();
 
             IEnumerable<ResourceModel> resources = await context.Resources
                 .AsNoTracking()

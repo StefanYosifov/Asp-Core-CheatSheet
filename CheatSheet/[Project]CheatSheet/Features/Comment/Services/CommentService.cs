@@ -80,7 +80,7 @@
 
             if (comment == null || comment.UserId != userId || comment.IsDeleted)
             {
-                return CommentMessages.OnUnsuccessfulDeleteComment;
+                throw new ServiceException(CommentMessages.OnUnsuccessfulDeleteComment);
             }
 
             context.Remove(comment);

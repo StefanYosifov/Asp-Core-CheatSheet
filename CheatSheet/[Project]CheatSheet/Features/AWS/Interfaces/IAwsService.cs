@@ -4,7 +4,6 @@
 
     public interface IAwsService
     {
-
         Task<string> UploadFile(Guid id,IFormFile file);
 
         Task<string> GetFile(Guid id);

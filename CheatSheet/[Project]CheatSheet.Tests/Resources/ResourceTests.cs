@@ -30,11 +30,10 @@
                 CategoryIds = new List<int>() { 1, 2, 3 },
             };
 
-            var result = fixture.ResourceService.AddResources(resourceAddModel);
+            var result =await fixture.ResourceService.AddResources(resourceAddModel);
 
             Assert.NotNull(result);
-            Assert.Equal(ResourceMessages.OnSuccessfulResourceAdd, result.Result);
-
+            Assert.Equal(ResourceMessages.OnSuccessfulResourceAdd, result);
         }
 
         [Fact]

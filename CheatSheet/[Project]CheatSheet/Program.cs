@@ -2,12 +2,12 @@ using _Project_CheatSheet.Common.Caching;
 using _Project_CheatSheet.Common.UserService;
 using _Project_CheatSheet.Common.UserService.Interfaces;
 using _Project_CheatSheet.Features.Identity.Interfaces;
-using _Project_CheatSheet.Infrastructure.Data;
 using Microsoft.AspNetCore.Http.Json;
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json.Serialization;
 
 using _Project_CheatSheet.Extensions;
+using _Project_CheatSheet.Infrastructure.Data.SQL;
 
 var builder = WebApplication.CreateBuilder(args);
 

@@ -18,18 +18,18 @@
         }
 
         [HttpGet("all")]
-        [ActionFilter()]
+        [ActionHandlingFilter()]
         public async Task<ICollection<IssueRespondModel>> GetIssues([FromQuery] IssueQuery? query)
             => await service.GetIssues(query);
 
         [HttpPost("add")]
-        [ActionFilter()]
+        [ActionHandlingFilter()]
         [ExceptionHandlingActionFilter()]
         public async Task<string> AddIssue(IssueRequestModel createdIssue)
             => await service.CreateIssue(createdIssue);
 
         [HttpGet("categories")]
-        [ActionFilter()]
+        [ActionHandlingFilter()]
         public async Task<ICollection<IssueCategoryModel>> GetCategoryIssues()
             => await service.GetIssuesCategories();
     }

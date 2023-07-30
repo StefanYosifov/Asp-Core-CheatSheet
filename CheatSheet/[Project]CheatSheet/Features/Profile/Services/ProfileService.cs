@@ -1,5 +1,6 @@
 ﻿namespace _Project_CheatSheet.Features.Profile.Services
 {
+    using _Project_CheatSheet.Infrastructure.Data.SQL;
     using AutoMapper;
     using Common.UserService.Interfaces;
     using Infrastructure.Data;

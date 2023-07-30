@@ -1,19 +1,18 @@
 ﻿namespace _Project_CheatSheet.Features.Issue.Services;
 
+using _Project_CheatSheet.Infrastructure.Data.SQL;
+using _Project_CheatSheet.Infrastructure.Data.SQL.Models;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Common.Exceptions;
 using Common.Pagination;
 using Common.UserService.Interfaces;
+using Constants.GlobalConstants.Issue;
 using Enums;
-using Infrastructure.Data;
-using Infrastructure.Data.Models;
 using Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Models;
 using System.Linq;
-
-using Constants.GlobalConstants.Issue;
 
 public class IssueService : IIssueService
 {

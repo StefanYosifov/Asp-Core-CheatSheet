@@ -19,12 +19,12 @@
         }
 
         [HttpGet("all")]
-        [ActionFilter("", "", StatusCodes.Status403Forbidden)]
+        [ActionHandlingFilter("", "", StatusCodes.Status403Forbidden)]
         public StatisticsModel GetHomePageStatistics()
             => service.GetAllStatistics();
 
         [HttpGet("course")]
-        [ActionFilter("","",StatusCodes.Status403Forbidden)]
+        [ActionHandlingFilter("","",StatusCodes.Status403Forbidden)]
         public StatisticsCourseModel GetCoursePageStatistics()
             =>service.GetStatisticsCourse();
     }

@@ -24,7 +24,7 @@
         }
 
         [HttpGet("id/{videoId}")]
-        [ActionFilter("", VideoMessages.OnUnsuccessfulGetVideoId)]
+        [ActionHandlingFilter("", VideoMessages.OnUnsuccessfulGetVideoId)]
         [ExceptionHandlingActionFilter]
         public async Task<string?> GetVideoId(Guid videoId)
             => await service.GetVideoId(videoId);

@@ -1,24 +1,22 @@
 ﻿namespace _Project_CheatSheet.Features.Course.Services
 {
-    using Enums;
-    using _Project_CheatSheet.Infrastructure.MongoDb.Services;
+    using _Project_CheatSheet.Infrastructure.Data.SQL;
     using AutoMapper;
     using AutoMapper.QueryableExtensions;
     using Common.Caching;
     using Common.Pagination;
     using Common.UserService.Interfaces;
-
     using Constants.CachingConstants;
+    using Enums;
 
-    using Infrastructure.Data;
-    using Infrastructure.Data.Models;
+    using Infrastructure.Data.SQL.Models;
+
     using Interfaces;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Caching.Memory;
     using Models;
-
     using static Constants.CachingConstants.CachingConstants.Course;
-    using Course = Infrastructure.Data.Models.Course;
+    using Course = Infrastructure.Data.SQL.Models.Course;
 
     public class CourseService : ICourseService
     {

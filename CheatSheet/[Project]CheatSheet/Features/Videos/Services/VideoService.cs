@@ -1,5 +1,6 @@
 ﻿namespace _Project_CheatSheet.Features.Videos.Services
 {
+    using _Project_CheatSheet.Infrastructure.Data.SQL;
     using Common.Caching;
     using Common.Exceptions;
     using Common.UserService.Interfaces;

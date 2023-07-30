@@ -1,9 +1,10 @@
 ﻿namespace _Project_CheatSheet.Features.Course.Services
 {
     using Interfaces;
-    using _Project_CheatSheet.Infrastructure.MongoDb.Models;
-    using _Project_CheatSheet.Infrastructure.MongoDb.Services;
     using AutoMapper;
+    using _Project_CheatSheet.Infrastructure.Data.MongoDb.Models;
+
+    using Common.Repositories.MongoRepository;
 
     public class CourseMongoService : ICourseMongoService
     {

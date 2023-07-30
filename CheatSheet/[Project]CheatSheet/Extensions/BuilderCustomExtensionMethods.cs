@@ -5,11 +5,10 @@
 
     using _Project_CheatSheet.Common.Exceptions;
     using _Project_CheatSheet.Common.UserService.Interfaces;
-    using _Project_CheatSheet.Infrastructure.Data;
-    using _Project_CheatSheet.Infrastructure.Data.Models;
-    using _Project_CheatSheet.Infrastructure.Data.Models.Enums;
-    using _Project_CheatSheet.Infrastructure.MongoDb.Services;
-    using _Project_CheatSheet.Infrastructure.MongoDb.Store;
+    using _Project_CheatSheet.Infrastructure.Data.MongoDb.Store;
+    using _Project_CheatSheet.Infrastructure.Data.SQL;
+    using _Project_CheatSheet.Infrastructure.Data.SQL.Models;
+    using _Project_CheatSheet.Infrastructure.Data.SQL.Models.Enums;
 
     using Amazon;
     using Amazon.Extensions.NETCore.Setup;
@@ -18,7 +17,9 @@
 
     using AutoMapper;
 
+    using Common.Filters_and_Attributes.Attributes;
     using Common.Mapping;
+    using Common.Repositories.MongoRepository;
 
     using Microsoft.AspNetCore.Authentication.JwtBearer;
     using Microsoft.AspNetCore.Identity;
@@ -46,6 +47,10 @@
             {
                 var interfaceType = implementationType.GetInterface($"I{implementationType.Name}");
                 CustomException.ThrowIfNull(interfaceType);
+                if (interfaceType.CustomAttributes.Any(ca=>ca.AttributeType.Name==nameof(ServiceSingletonAttribute)))
+                {
+                    serviceCollection.AddSingleton(implementationType);
+                }
                 serviceCollection.AddScoped(interfaceType, implementationType);
             }
         }

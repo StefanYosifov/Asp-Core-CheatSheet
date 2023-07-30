@@ -1,6 +1,6 @@
 ﻿namespace _Project_CheatSheet.Features.Course
 {
-    using _Project_CheatSheet.Infrastructure.MongoDb.Models;
+    using _Project_CheatSheet.Infrastructure.Data.MongoDb.Models;
     using Common.Filters;
 
     using Constants.GlobalConstants.Course;
@@ -25,32 +25,32 @@
         }
 
         [HttpGet("{id}")]
-        [ActionFilter("", CourseMessages.OnUnsuccessfulCourseRetrieval, StatusCodes.Status404NotFound)]
+        [ActionHandlingFilter("", CourseMessages.OnUnsuccessfulCourseRetrieval, StatusCodes.Status404NotFound)]
         public async Task<CourseRespondModel> GetCourse(string id)
             => await service.GetCourseDetails(id);
 
         [HttpGet("payment/{id}")]
-        [ActionFilter("", CourseMessages.OnUnsuccessfulCourseRetrieval)]
+        [ActionHandlingFilter("", CourseMessages.OnUnsuccessfulCourseRetrieval)]
         public async Task<CourseRespondPaymentModel> GetCoursePaymentDetails(string id)
             => await service.GetPaymentDetails(id.ToLower());
 
         [HttpGet("all/{page}")]
-        [ActionFilter()]
+        [ActionHandlingFilter()]
         public async Task<CourseRespondAllPaginated> GetAllCourses([FromRoute]int page, [FromQuery] CourseRequestQueryModel query)
             => await service.GetAllCourses(page, query);
 
         [HttpGet("my/{page}")]
-        [ActionFilter()]
+        [ActionHandlingFilter()]
         public async Task<IEnumerable<CourseRespondAllModel>> GetMyCourses(int page, [FromQuery] string? toggle)
             => await service.GetMyCourses(page, toggle);
 
         [HttpGet("languages")]
-        [ActionFilter()]
+        [ActionHandlingFilter()]
         public async Task<CourseFilterModel> GetCoursesFilteringData()
             => await service.GetCoursesFilteringData();
 
         [HttpPost("payment/{id}")]
-        [ActionFilter(CourseMessages.OnSuccessfulPayment, CourseMessages.OnSuccessfulPayment, StatusCodes.Status403Forbidden)]
+        [ActionHandlingFilter(CourseMessages.OnSuccessfulPayment, CourseMessages.OnSuccessfulPayment, StatusCodes.Status403Forbidden)]
         public async Task<bool> JoinCourse(string id)
             => await service.JoinCourse(id);
 

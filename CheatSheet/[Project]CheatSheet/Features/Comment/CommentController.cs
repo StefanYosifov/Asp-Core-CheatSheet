@@ -18,24 +18,24 @@
         }
 
         [HttpPost("send")]
-        [ActionFilter]
+        [ActionHandlingFilter]
         [ExceptionHandlingActionFilter]
         public async Task<string> PostAComment(InputCommentModel comment)
             => await service.CreateAComment(comment);
 
         [HttpGet("get/{id}")]
-        [ActionFilter()]
+        [ActionHandlingFilter()]
         public async Task<IEnumerable<CommentModel>> GetComments(string id)
             => await service.GetCommentsFromResource(id);
 
         [HttpPatch("edit/{id}")]
-        [ActionFilter]
+        [ActionHandlingFilter]
         [ExceptionHandlingActionFilter]
         public async Task<string> EditComment(string id, EditCommentModel comment)
             => await service.EditComment(id, comment);
 
         [HttpDelete("delete/{id}")]
-        [ActionFilter]
+        [ActionHandlingFilter]
         [ExceptionHandlingActionFilter]
         public async Task<string> DeleteComment(string id)
             => await service.DeleteComment(id);

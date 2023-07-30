@@ -1,5 +1,7 @@
 ﻿namespace _Project_CheatSheet.Common.Mapping
 {
+    using _Project_CheatSheet.Infrastructure.Data.MongoDb.Models;
+    using _Project_CheatSheet.Infrastructure.Data.SQL.Models;
     using AutoMapper;
 
     using Constants.GlobalConstants;
@@ -13,9 +15,6 @@
     using Features.Profile.Models;
     using Features.Resources.Models;
     using Features.Topics.Models;
-
-    using Infrastructure.Data.Models;
-    using Infrastructure.MongoDb.Models;
     using UserService.Interfaces;
 
     public class MapperProfile : Profile

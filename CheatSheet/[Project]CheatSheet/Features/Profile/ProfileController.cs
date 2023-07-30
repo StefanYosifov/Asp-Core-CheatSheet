@@ -37,13 +37,13 @@
 
         [Authorize]
         [HttpGet("{id}")]
-        [ActionFilter()]
+        [ActionHandlingFilter()]
         public async Task<ProfileModel> GetProfileData(string id)
             => await service.GetProfileData(id);
 
         [Authorize]
         [HttpPatch("update")]
-        [ActionFilter("", ProfileMessages.OnUnsuccessfulUserChange)]
+        [ActionHandlingFilter("", ProfileMessages.OnUnsuccessfulUserChange)]
         public async Task<UserEditModel> UpdateProfileData(UserEditModel userModel)
             => await service.EditProfileData(userModel);
     }

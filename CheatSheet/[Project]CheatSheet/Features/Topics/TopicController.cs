@@ -22,7 +22,7 @@
         }
 
         [HttpGet("{id}")]
-        [ActionFilter("", TopicMessages.OnUnsuccessful)]
+        [ActionHandlingFilter("", TopicMessages.OnUnsuccessful)]
         public async Task<TopicRespondModel?> GetTopic(string id)
             => await service.GetTopic(id);
 

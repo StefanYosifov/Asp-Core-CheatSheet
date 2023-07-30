@@ -1,9 +1,8 @@
 ﻿namespace _Project_CheatSheet.Features.Resources.Models
 {
-    using Infrastructure.Data.Models;
-    using System.ComponentModel.DataAnnotations;
-
+    using _Project_CheatSheet.Infrastructure.Data.SQL.Models;
     using Constants.GlobalConstants.Resource;
+    using System.ComponentModel.DataAnnotations;
 
     public class DetailResources
     {

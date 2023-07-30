@@ -21,7 +21,7 @@
         }
 
         [HttpPost("login")]
-        [ActionFilter("", UserIdentityMessages.OnFailedLogin)]
+        [ActionHandlingFilter("", UserIdentityMessages.OnFailedLogin)]
         [ExceptionHandlingActionFilter()]
         public async Task<Response> Login(LoginModel loginModel)
             => await service.AuthenticateLogin(loginModel);

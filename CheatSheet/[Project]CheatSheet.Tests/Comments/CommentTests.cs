@@ -1,13 +1,13 @@
-﻿namespace _Project_CheatSheet.Tests.Comments
+﻿using _Project_CheatSheet.Infrastructure.Data.SQL.Models;
+
+namespace _Project_CheatSheet.Tests.Comments
 {
     using _Project_CheatSheet.Common.Exceptions;
     using _Project_CheatSheet.Common.UserService.Interfaces;
     using _Project_CheatSheet.Constants.GlobalConstants.Comment;
     using _Project_CheatSheet.Features.Comment.Models;
     using _Project_CheatSheet.Features.Comment.Services;
-    using _Project_CheatSheet.Infrastructure.Data;
-    using _Project_CheatSheet.Infrastructure.Data.Models;
-
+    using _Project_CheatSheet.Infrastructure.Data.SQL;
     using AutoMapper;
 
     using Features.Comment.Interfaces;
@@ -19,7 +19,7 @@
 
     using Xunit;
 
-    using Comment = Infrastructure.Data.Models.Comment;
+    using Comment = Comment;
 
     public class CommentServiceTests
     {

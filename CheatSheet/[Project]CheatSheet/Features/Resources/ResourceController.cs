@@ -26,7 +26,7 @@
             => Ok(resourceService.GetTotalPage());
 
         [HttpGet("{id}")]
-        [ActionFilter]
+        [ActionHandlingFilter]
         public async Task<ResourceCollectionModel> GetAllResources(int id, [FromQuery] ResourceQueryModel query)
             => await resourceService.GetPublicResources(id, query);
 
@@ -35,25 +35,25 @@
             => await resourceService.GetMyResources();
 
         [HttpGet("details/{id}")]
-        [ActionFilter("", ResourceMessages.SuchModelDoesNotExist, StatusCodes.Status404NotFound)]
+        [ActionHandlingFilter("", ResourceMessages.SuchModelDoesNotExist, StatusCodes.Status404NotFound)]
         [ExceptionHandlingActionFilter]
         public async Task<DetailResources> GetResourceDetails(string id)
             => await resourceService.GetResourceById(id);
 
         [HttpPost("add")]
-        [ActionFilter]
+        [ActionHandlingFilter]
         [ExceptionHandlingActionFilter]
         public async Task<string> AddResource([FromBody] ResourceAddModel resourceAdd)
             => await resourceService.AddResources(resourceAdd);
 
         [HttpGet("get/edit/{id}")]
-        [ActionFilter]
+        [ActionHandlingFilter]
         [ExceptionHandlingActionFilter]
         public async Task<EditResources> GetResourceToEdit(Guid id) 
             => await resourceService.GetMyResourceToEdit(id);
 
         [HttpPatch("patch/edit/{id}")]
-        [ActionFilter]
+        [ActionHandlingFilter]
         [ExceptionHandlingActionFilter]
         public async Task<IActionResult> EditResource(string id, [FromBody] ResourceEditModel resourceEdit)
         {
@@ -66,13 +66,13 @@
         }
 
         [HttpDelete("delete/{id}")]
-        [ActionFilter]
+        [ActionHandlingFilter]
         [ExceptionHandlingActionFilter]
         public async Task<string> RemoveResource(string id)
             => await resourceService.RemoveResource(id);
 
         [HttpPatch("visibility/{id}")]
-        [ActionFilter]
+        [ActionHandlingFilter]
         [ExceptionHandlingActionFilter]
         public async Task<string> ChangeVisibility(string id)
             => await resourceService.ChangeVisibility(id);

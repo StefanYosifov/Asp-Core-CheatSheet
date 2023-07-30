@@ -1,29 +1,20 @@
 ﻿namespace _Project_CheatSheet.Features.Resources.Services
 {
-    using System.Net;
-
+    using _Project_CheatSheet.Infrastructure.Data.SQL;
     using AutoMapper;
     using AutoMapper.QueryableExtensions;
-
     using Category.Models;
-
     using Common.Exceptions;
     using Common.Pagination;
     using Common.UserService.Interfaces;
-
     using Constants.GlobalConstants.Category;
     using Constants.GlobalConstants.Resource;
-
     using Enums;
-
-    using Infrastructure.Data;
-    using Infrastructure.Data.Models;
-
+    using Infrastructure.Data.SQL.Models;
     using Interfaces;
-
     using Microsoft.EntityFrameworkCore;
-
     using Models;
+    using System.Net;
 
     public class ResourceService : IResourceService
     {

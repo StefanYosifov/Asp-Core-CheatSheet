@@ -1,23 +1,19 @@
 ﻿namespace _Project_CheatSheet.Tests
 {
+    using _Project_CheatSheet.Infrastructure.Data.SQL;
+    using _Project_CheatSheet.Infrastructure.Data.SQL.Models;
     using AutoMapper;
+    using Common.Mapping;
     using Common.UserService.Interfaces;
     using Features.Comment.Interfaces;
     using Features.Comment.Services;
+    using Features.Resources.Models;
     using Features.Resources.Services;
-    using Infrastructure.Data;
-    using Infrastructure.Data.Models;
     using Microsoft.AspNetCore.Http;
     using Microsoft.EntityFrameworkCore;
     using Moq;
     using System;
     using System.Collections.Generic;
-
-    using Common.Mapping;
-    using Common.UserService;
-
-    using Features.Resources.Models;
-
     using IResourceService = Features.Resources.Interfaces.IResourceService;
 
     public class ResourcesTestFixture : IDisposable

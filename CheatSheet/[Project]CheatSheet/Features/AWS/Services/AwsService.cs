@@ -1,5 +1,6 @@
 ﻿namespace _Project_CheatSheet.Features.AWS.Services
 {
+    using _Project_CheatSheet.Infrastructure.Data.SQL;
     using Amazon.S3;
     using Amazon.S3.Model;
 
@@ -10,8 +11,6 @@
     using Constants.CachingConstants;
     using Constants.GlobalConstants.AWS;
     using Constants.GlobalConstants.Course;
-
-    using Infrastructure.Data;
 
     using Interfaces;
 

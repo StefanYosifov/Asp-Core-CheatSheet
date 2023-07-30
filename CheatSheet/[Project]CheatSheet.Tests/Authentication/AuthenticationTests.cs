@@ -3,10 +3,8 @@
     using _Project_CheatSheet.Features;
     using _Project_CheatSheet.Features.Identity.Interfaces;
     using _Project_CheatSheet.Features.Identity.Models;
-
+    using _Project_CheatSheet.Infrastructure.Data.SQL.Models;
     using AutoMapper;
-
-    using Infrastructure.Data.Models;
 
     using Microsoft.AspNetCore.Identity;
     using Microsoft.Extensions.Configuration;

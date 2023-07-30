@@ -1,13 +1,12 @@
 ﻿namespace _Project_CheatSheet.Features.Likes.Services
 {
+    using _Project_CheatSheet.Infrastructure.Data.SQL;
+    using _Project_CheatSheet.Infrastructure.Data.SQL.Models;
     using AutoMapper;
     using Common.Exceptions;
     using Common.UserService.Interfaces;
 
     using Constants.GlobalConstants.Likes;
-
-    using Infrastructure.Data;
-    using Infrastructure.Data.Models;
     using Interfaces;
     using Microsoft.EntityFrameworkCore;
     using Models;

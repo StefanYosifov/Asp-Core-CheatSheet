@@ -1,5 +1,6 @@
 ﻿namespace _Project_CheatSheet.Features.Topics.Services
 {
+    using _Project_CheatSheet.Infrastructure.Data.SQL;
     using Amazon.S3;
     using AutoMapper;
     using AutoMapper.QueryableExtensions;

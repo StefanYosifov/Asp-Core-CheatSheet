@@ -18,12 +18,12 @@
         }
 
         [HttpPost("upload/{id}")]
-        [ActionFilter]
+        [ActionHandlingFilter]
         public async Task<string> Upload(Guid id, [FromForm(Name = "Data")] IFormFile file)
             => await service.UploadFile(id, file);
 
         [HttpGet("{id}")]
-        [ActionFilter]
+        [ActionHandlingFilter]
         [ExceptionHandlingActionFilter]
         public async Task<string> GetFile(Guid id) 
             => await service.GetFile(id);

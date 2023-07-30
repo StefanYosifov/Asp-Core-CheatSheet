@@ -5,9 +5,11 @@ module.exports = {
     extend: {
       colors: {
         pinkUI: { 0: '#754FFE' },
-        bgGray: { 0: '#bdc3c7' },
-        bgWhiteUI:{0:'#FFFFFF'},
-        bgBlackUI:{0:'#252525'}
+        bgGray: { 0: '#383A38' },
+        bgWhiteUI:{0:'#FCFCFC'},
+        bgBlackUI:{0:'#252525'},
+        bgNearBlackUI:{0:'#1B1B1B'},
+        bgGreyishBlack:{0:'#282928'},
       },
       width: {
         '1/7': '14.2857143%',

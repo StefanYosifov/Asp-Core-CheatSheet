@@ -17,7 +17,6 @@ import { TermsAndConditions } from './components/Static pages/Terms and conditio
 import { UserDataProvider } from './context/UserDataProvider';
 import './index.css';
 
-import { Private } from './components/Administrator/Private';
 import { CourseList2 } from './components/Courses/CourseList2';
 import { CourseOverView } from './components/Courses/CourseOverview';
 import { ResourceList2 } from './components/Resources/MainPage/ResourceList2';
@@ -26,8 +25,9 @@ import { APP_URLS } from './constants/URLConstants';
 import { Edit } from './components/Resources/Edit/Edit';
 import { Details2 } from './components/Resources/Detail/Details2';
 import { Logout } from './components/Authentication/Logout/Logout';
-import {Login} from './components/Authentication/Login/Login';
+import { Login } from './components/Authentication/Login/Login';
 import RegisterPage from './components/Authentication/Register/Register';
+import { Private } from './components/Administrator/Main/Private';
 
 function App() {
   return (
@@ -61,7 +61,7 @@ function App() {
             </Route>
           </Route>
         </Routes>
-        <Footer />
+        <Footer/>
         <ToastContainer
           position="top-right"
           autoClose={2499}

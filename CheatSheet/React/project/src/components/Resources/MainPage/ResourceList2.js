@@ -7,6 +7,7 @@ import { DropDown } from "../../Helper components/DropDown";
 import SearchBar from "../../Helper components/SearchBar";
 import useDropDownStore from "../../../stores/useDropDownStore";
 import { URLS } from "../../../constants/URLConstants";
+import { MainPageHero } from "../Static/MainPageHero";
 
 
 const URL_CHANGE = {
@@ -73,21 +74,7 @@ export const ResourceList2 = () => {
 
             {!isLoading && resources && setSelectedCategory &&
                 <>
-                    <div className="flex flex-col w-full p-10 bg-gray-100">
-                        <div className="text-center my-2">
-                            <h2 className="text-4xl font-bold text-gray-800">Enjoying reading our resources?</h2>
-                        </div>
-                        <div className="text-center my-2">
-                            <h2 className="text-3xl font-bold text-gray-800">Why don't you create one?</h2>
-                        </div>
-                        <div className="text-center my-2">
-                            <Link to={URLS.RESOURCES_ADD}>
-                                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg shadow-lg">
-                                    Add a Resource
-                                </button>
-                            </Link>
-                        </div>
-                    </div>
+                    <MainPageHero/>
                     <Pagination
                         currentPage={Number(id)}
                         totalPages={Number(resourcesCouint)}
@@ -117,7 +104,7 @@ export const ResourceList2 = () => {
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 m-10">
-                        <ResourceItem></ResourceItem>
+                        <ResourceItem/>
                     </div>
 
                     <Pagination

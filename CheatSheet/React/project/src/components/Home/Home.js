@@ -22,17 +22,17 @@ const HomePage = () => {
 
   const Hero = () => {
     return (
-      <div className='hero h-128 bg-gradient-to-r from-bgBlackUI-0 to to-black w-full'>
+      <div className='hero h-128 bg-gradient-to-r from-bgBlackUI-0 to to-bgNearBlackUI-0 w-full'>
         <div className='flex flex-wrap mx-14 content-center justify-center pt-8'>
           <div className='basis-12 items-start'>
-            <img src={image} className='max-w-xs border rounded-full border-bgBlackUI-0 shadow-sm' />
+            <img src={image} className='max-w-xs border rounded-full border-bgBlackUI-0 shadow-sm mix-blend-screen' />
           </div>
-          <div className='flex items-start flex-col h-full ml-16'>
+          <div className='flex items-start flex-col h-full ml-24'>
             <div className='text-bgWhiteUI-0'>
               <div className='flex justify-end h-20'>
                 <ul className='flex justify-end'>
-                  <li className='ml-2 py-2'><BsGithub /></li>
-                  <li className='ml-2 py-2'><BsDiscord /></li>
+                  <li className='ml-2 py-2 hover:cursor-pointer'><BsGithub /></li>
+                  <li className='ml-2 py-2 hover:cursor-pointer'><BsDiscord /></li>
                 </ul>
               </div>
               <div className='p-4'>

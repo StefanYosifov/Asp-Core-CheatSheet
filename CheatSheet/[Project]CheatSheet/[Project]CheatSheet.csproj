@@ -27,9 +27,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Area\AdminServices\Models\" />
-    <Folder Include="Area\AdminServices\Interfaces\" />
-    <Folder Include="Area\AdminServices\Services\" />
     <Folder Include="Features\Videos\Models\" />
     <Folder Include="Features\Videos\Services\" />
   </ItemGroup>

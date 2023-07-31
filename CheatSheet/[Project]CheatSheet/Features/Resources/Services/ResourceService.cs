@@ -91,8 +91,6 @@
         {
             var userId = currentUserService.GetUserId();
 
-            var resources2 = await context.Resources.ToArrayAsync();
-
             IEnumerable<ResourceModel> resources = await context.Resources
                 .AsNoTracking()
                 .Include(res => res.CategoryResources)

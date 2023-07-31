@@ -2,6 +2,9 @@
 {
     using _Project_CheatSheet.Infrastructure.Data.MongoDb.Models;
     using _Project_CheatSheet.Infrastructure.Data.SQL.Models;
+
+    using Area.AdminServices.Models;
+
     using AutoMapper;
 
     using Constants.GlobalConstants;
@@ -189,6 +192,11 @@
                 .ForMember(dest => dest.CategoryIssueId, opt => opt.MapFrom(src => src.IssueCategoryId));
 
             CreateMap<CategoryIssue, IssueCategoryModel>();
+
+
+            //Administrator area
+            CreateMap<Course, ResourceAdminModel>()
+                .ForMember(dest=>dest.Name,opt=>opt.MapFrom(src=>src.Title));
         }
     }
 }

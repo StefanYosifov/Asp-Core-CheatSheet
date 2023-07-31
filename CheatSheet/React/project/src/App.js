@@ -27,7 +27,7 @@ import { Details2 } from './components/Resources/Detail/Details2';
 import { Logout } from './components/Authentication/Logout/Logout';
 import { Login } from './components/Authentication/Login/Login';
 import RegisterPage from './components/Authentication/Register/Register';
-import { Private } from './components/Administrator/Main/Private';
+import { PrivateNavigation } from './components/Administrator/Main/PrivateNavigation';
 
 function App() {
   return (
@@ -56,7 +56,7 @@ function App() {
               <Route path={APP_URLS.COURSES_LESSON} Component={CourseVideo} />
               <Route path={APP_URLS.COURSES_JOIN} Component={CourseJoin} />
               <Route path={APP_URLS.COURSES_MINE} Component={CourseMy} />
-              <Route path={APP_URLS.PRIVATE} Component={Private} />
+              <Route path={APP_URLS.PRIVATE} Component={PrivateNavigation} />
               <Route path={APP_URLS.COURSES_OVERVIEW} Component={CourseOverView} />
             </Route>
           </Route>

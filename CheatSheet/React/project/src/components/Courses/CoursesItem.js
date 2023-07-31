@@ -1,5 +1,4 @@
-import { FaCalendar, FaGrav } from "react-icons/fa";
-import { Link, Location,useLocation,useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 
 export const CoursesItem = ({ course }) => {

@@ -1,5 +1,7 @@
 export const DropDown = ({ categories, selectedCategory, setState }) => {
 
+    console.log(categories);
+
     return (
         <div className="w-72 m-2">
             {categories &&
@@ -11,16 +13,30 @@ export const DropDown = ({ categories, selectedCategory, setState }) => {
                         unmount: { y: 25 },
                     }}
                     value={selectedCategory}
-                    onChange={(event) => setState(event.target.value)}
+                    onChange={(event) => { setState(event.target.value) }}
                 >
-                    {Object.values(categories).map((ctg) => (
-                        <option
-                            key={ctg.id}
-                            value={ctg.name}
-                        >
-                            {ctg.name}
-                        </option>
-                    ))}
+                    {Object.values(categories).map((ctg, index) => {
+                        if (typeof ctg === "string") {
+                            return (
+                                <option
+                                    key={index}
+                                    value={ctg}
+                                >
+                                    {ctg}
+                                </option>
+                            );
+                        } else {
+                            return (
+                                <option
+                                    key={ctg.id}
+                                    value={ctg.name}
+                                >
+                                    {ctg.name}
+                                </option>
+                            );
+                        }
+                    })}
+
                 </select>
             }
         </div>

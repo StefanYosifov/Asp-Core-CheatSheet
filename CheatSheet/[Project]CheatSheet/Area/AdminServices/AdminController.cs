@@ -24,10 +24,34 @@
 
         [HttpGet("resources")]
         [ActionHandlingFilter]
-        [ExceptionHandlingActionFilter()]
-        public async Task<ICollection<ResourceAdminModel>> GetResources([FromQuery]ResourceAdminQueryModel query)
-            => await service.GetListOfCourses(query);
+        [ExceptionHandlingActionFilter]
+        public async Task<ICollection<ResourceAdminModel>> GetResources([FromQuery] ResourceAdminQueryModel query)
+        {
+            return await service.GetListOfCourses(query);
+        }
 
+        [HttpGet("resource/{courseId}")]
+        [ActionHandlingFilter]
+        [ExceptionHandlingActionFilter]
+        public async Task<ICollection<CoursePrimaryDetailsAdminModel>> GetCoursePrimaryDetails(string courseId) 
+            => await service.GetCourseTopicAndVideo(courseId);
 
+        [HttpGet("resource/secondary/{topicId}")]
+        [ActionHandlingFilter]
+        [ExceptionHandlingActionFilter]
+        public async Task<CourseSecondaryDetailsEditAdminModel> GetCourseSecondaryDetails(string topicId) 
+            => await service.GetCourseSecondaryDetails(topicId);
+
+        [HttpPatch("resource/secondary/edit/{topicId}")]
+        [ActionHandlingFilter]
+        [ExceptionHandlingActionFilter]
+        public async Task<string> EditTopicDetails(string topicId, CourseSecondaryDetailsEditAdminModel editTopicModel) 
+            => await service.UpdateCourseSecondaryDetails(topicId, editTopicModel);
+
+        [HttpPost("course/create")]
+        [ActionHandlingFilter]
+        [ExceptionHandlingActionFilter]
+        public async Task<string> CreatedCourse([FromBody]CreateCourseAdminModel createdCourse) 
+            => await service.CreateCourse(createdCourse);
     }
 }

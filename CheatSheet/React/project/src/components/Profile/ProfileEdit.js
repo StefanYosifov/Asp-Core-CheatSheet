@@ -30,7 +30,7 @@ export const ProfileEdit = ({ profileData }) => {
 
     return (
         <>
-            <div className="mx-auto  border shadow-md">
+            <div className="mx-auto border shadow-md">
                 <div className="mt-5">
                     <form onSubmit={handleSubmit}>
                         <div className="container p-4 divide-y-0">
@@ -52,16 +52,16 @@ export const ProfileEdit = ({ profileData }) => {
                                 <h3>Edit your personal information</h3>
                                 <div className="grid grid-cols-2 gap-4">
                                     <div>
-                                        <label for="input-label" className="block text-sm font-medium mb-2 dark:text-slate-100">
+                                        <label for="input-label" className="block text-sm font-medium mb-2 text-bgWhiteUI-0">
                                             Username
                                         </label>
-                                        <input type="text" className="py-3 px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:border-gray-700 dark:text-gray-400" placeholder="Here's your username"
+                                        <input type="text" className="py-3 px-4 block w-full border-gray-200 rounded-md text-sm " placeholder="Here's your username"
                                             id="username"
                                             disabled={true}
                                             defaultValue={profileData.userName} />
                                     </div>
                                     <div className="">
-                                        <label for="input-label" className="block text-sm font-medium mb-2 dark:text-slate-100">
+                                        <label for="input-label" className="block text-sm font-medium mb-2 tracking-wide">
                                             Profile picture
                                         </label>
                                         <input type="text" className="py-3 px-4 w-full border-gray-200 rounded-md text-sm focus:border-pinkUI-0 focus:ring-pinkUI-0 dark:border-pinkUI-0 dark:text-gray-700" placeholder="This is placeholder"
@@ -71,7 +71,7 @@ export const ProfileEdit = ({ profileData }) => {
                                             onChange={handleInputChange} />
                                     </div>
                                     <div>
-                                        <label for="input-label" className="block text-sm font-medium mb-2 dark:text-slate-100">
+                                        <label for="input-label" className="block text-sm font-medium mb-2 tracking-wide">
                                             Profile description
                                         </label>
                                         <input type="text" className="py-3 px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:border-gray-700 dark:text-gray-400" placeholder="This is placeholder"
@@ -80,7 +80,7 @@ export const ProfileEdit = ({ profileData }) => {
                                             value={formData.profileDescription || ''}
                                             onChange={handleInputChange} />
                                     </div>  <div>
-                                        <label for="input-label" className="block text-sm font-medium mb-2 dark:text-slate-100">
+                                        <label for="input-label" className="block text-sm font-medium mb-2 tracking-wide">
                                             Background Url
                                         </label>
                                         <input type="text" className="py-3 px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:border-gray-700 dark:text-gray-400" placeholder="This is placeholder"
@@ -89,7 +89,7 @@ export const ProfileEdit = ({ profileData }) => {
                                             value={formData.profileBackground || ''}
                                             onChange={handleInputChange} />
                                     </div>  <div>
-                                        <label for="input-label" className="block text-sm font-medium mb-2 dark:text-slate-100">
+                                        <label for="input-label" className="block text-sm font-medium mb-2 tracking-wide">
                                             Job
                                         </label>
                                         <input type="text" className="py-3 px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:border-gray-700 dark:text-gray-400" placeholder="This is placeholder"
@@ -99,7 +99,7 @@ export const ProfileEdit = ({ profileData }) => {
                                             onChange={handleInputChange} />
                                     </div>
                                     <div>
-                                        <label for="input-label" className="block text-sm font-medium mb-2 dark:text-slate-100">
+                                        <label for="input-label" className="block text-sm font-medium mb-2 tracking-wide">
                                             Education
                                         </label>
                                         <input type="text" className="py-3 px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:border-gray-700 dark:text-gray-400" placeholder="This is placeholder"

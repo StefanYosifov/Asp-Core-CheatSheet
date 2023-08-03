@@ -8,7 +8,7 @@ export const Modal = ({ topicId }) => {
     const data = useModalStore((state) => state.data);
     const setData = useModalStore((state) => state.setData);
     const updateData = useModalStore((state) => state.updateData);
-    const sendUpdateRequest=useModalStore((state)=>state.sendUpdateRequest);
+    const sendUpdateRequest = useModalStore((state) => state.sendUpdateRequest);
 
     console.log(topicId);
 
@@ -31,9 +31,9 @@ export const Modal = ({ topicId }) => {
                 <div className="flex items-end justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
                     <span className="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
 
-                    <div className="relative inline-block p-4 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl sm:max-w-sm rounded-xl dark:bg-gray-900 sm:my-8 sm:w-full sm:p-6">
-                        <div className="flex items-center justify-center mx-auto">
-                            <img className="h-full rounded-lg" src="https://images.unsplash.com/photo-1488190211105-8b0e65b80b4e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80" alt="" />
+                    <div class="relative inline-block p-4 overflow-hidden text-left align-middle transition-all transform bg-black shadow-xl sm:max-w-2xl rounded-xl sm:my-8 sm:w-full sm:p-6">
+                        <div class="flex items-center justify-center mx-auto">
+                            <img class="h-64 rounded-lg" src="https://images.unsplash.com/photo-1488190211105-8b0e65b80b4e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80" alt="" />
                         </div>
 
                         <div className="mt-5 text-center">
@@ -48,11 +48,12 @@ export const Modal = ({ topicId }) => {
                         </div>
 
                         <div className="flex items-center justify-between w-full mt-5 gap-x-2">
-                            <section className="max-w-4xl p-6 mx-auto bg-white rounded-md shadow-md dark:bg-gray-800">
+                            <section className="max-w-6xl p-6 mx-auto bg-white rounded-md shadow-md dark:bg-gray-800">
                                 <h2 className="text-lg font-semibold text-gray-700 capitalize dark:text-white">Account settings</h2>
 
-                                <form onSubmit={sendUpdateRequest(topicId,data)}>
-                                    {data &&
+                                {data &&
+                                    <form 
+                                    onSubmit={() => sendUpdateRequest(topicId, data)}>
                                         <>
                                             <div className="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
                                                 <div>
@@ -63,8 +64,9 @@ export const Modal = ({ topicId }) => {
                                                         id="topicName"
                                                         name="topicName"
                                                         type="text"
-                                                        className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
+                                                        className="block w-full px-4 py-2 mt-2 text-bgGreyishBlack-0 bg-bgWhiteUI-0 border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
                                                         value={data.topicName}
+                                                        onChange={(e) => updateData({ [e.target.name]: e.target.value })}
                                                     />
                                                 </div>
 
@@ -81,7 +83,6 @@ export const Modal = ({ topicId }) => {
                                                         onChange={(e) => updateData({ [e.target.name]: e.target.value })}
                                                     />
                                                 </div>
-
                                                 <div>
                                                     <label className="text-gray-700 dark:text-gray-200" htmlFor="startTime">
                                                         startTime
@@ -147,9 +148,10 @@ export const Modal = ({ topicId }) => {
                                             <div className="flex justify-end mt-6">
                                                 <button className="px-8 py-2.5 leading-5 text-white transition-colors duration-300 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600">Save</button>
                                             </div>
-                                        </>}
-                                </form>
+                                        </>
+                                    </form>}
                             </section>
+
 
                         </div>
 

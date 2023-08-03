@@ -14,8 +14,8 @@ export const ProfileResouces = () => {
 
     console.log(resources);
     return (
-        <table className="w-11/12 text-sm text-left text-gray-500 bg-slate-200 mx-auto">
-            <thead className="text-xs  uppercase  text-gray-500 bg-slate-200">
+        <table className="w-full text-sm text-left bg-bgWhiteUI-0 text-bgGray-0">
+            <thead className="">
                 <tr>
                     <th scope="col" className="px-6 py-3">
                         Name

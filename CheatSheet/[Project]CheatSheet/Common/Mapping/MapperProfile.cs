@@ -197,6 +197,35 @@
             //Administrator area
             CreateMap<Course, ResourceAdminModel>()
                 .ForMember(dest=>dest.Name,opt=>opt.MapFrom(src=>src.Title));
+
+            CreateMap<Topic, CoursePrimaryDetailsAdminModel>()
+                .ForMember(dest => dest.TopicId, opt => opt.MapFrom(src => src.Id.ToString()))
+                .ForMember(dest => dest.VideoUrl, opt => opt.MapFrom(src => src.Video.VideoUrl))
+                .ForMember(dest => dest.TopicName, opt => opt.MapFrom(src => src.Name))
+                .ForMember(dest=>dest.VideoName,opt=>opt.MapFrom(src=>src.Video.Name));
+
+            CreateMap<Topic, CourseSecondaryDetailsEditAdminModel>()
+                .ForMember(dest => dest.TopicName, opt => opt.MapFrom(src => src.Name))
+                .ForMember(dest => dest.TopicContent, opt => opt.MapFrom(src => src.Content))
+                .ForMember(dest => dest.StartTime,
+                    opt => opt.MapFrom(src => src.StartTime.ToString(Formatter.DateOnlyFormatter)))
+                .ForMember(dest => dest.EndTime,
+                    opt => opt.MapFrom(src => src.EndTime.ToString(Formatter.DateOnlyFormatter)))
+                .ForMember(dest => dest.VideoName, opt => opt.MapFrom(src => src.Video.Name))
+                .ForMember(dest => dest.VideoUrl, opt => opt.MapFrom(src => src.Video.VideoUrl));
+
+            CreateMap<CreateCourseAdminModel, Course>()
+                .ForMember(dest => dest.Title, opt => opt.MapFrom(src => src.CourseName))
+                .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.CourseDescription))
+                .ForMember(dest => dest.Price, opt => opt.MapFrom(src => src.CoursePrice))
+                .ForMember(dest=>dest.ImageUrl,opt=>opt.MapFrom(src=>src.CourseImageUrl))
+                .ForMember(dest => dest.StartDate, opt => opt.MapFrom(src =>DateTime.Parse(src.StartDate)))
+                .ForMember(dest => dest.EndDate, opt => opt.MapFrom(src => DateTime.Parse(src.EndDate)));
+
+            CreateMap<CreateCourseAdminModel, CourseDetails>()
+                .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.CourseDescription))
+                .ForMember(dest => dest.Summary, opt => opt.MapFrom(src => src.Summary));
+
         }
     }
 }

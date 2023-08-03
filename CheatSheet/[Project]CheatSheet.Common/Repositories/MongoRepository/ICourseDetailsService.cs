@@ -11,7 +11,7 @@
         Task<CourseDetails> Get(string id);
 
         Task<CourseDetails> GetByCourseId(string courseId);
-        Task<CourseDetails> Create();
+        Task<bool> Create(CourseDetails createdCourseDetails);
         void Update();
         void Delete();
     }

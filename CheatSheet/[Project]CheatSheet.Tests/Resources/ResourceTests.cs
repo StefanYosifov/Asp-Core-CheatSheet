@@ -105,10 +105,10 @@
         }
 
         [Fact]
-        public async Task GetMyResourceShouldReturnCorrectCount()
+        public async Task GetMyResourceShouldReturnCorrectCountForTheUser()
         {
             var result = fixture.ResourceService.GetMyResources();
-            Assert.NotNull(result);
+            
             Assert.Equal(1,result.Result.Count());
         }
 

@@ -2,12 +2,12 @@
 {
     public class TopicRespondModel
     {
-        public string Id { get; set; }
-        public string Name { get; set; }
+        public string Id { get; set; } = null!;
+        public string Name { get; set; } = null!;            
 
-        public IFormFile File{get;set; }
+        public IFormFile File { get; set; } = null!;
 
-        public string VideoId { get; set; }
-        public string VideoName { get; set; }
+        public string VideoId { get; set; } = null!;
+        public string VideoName { get; set; } = null!;
     }
 }

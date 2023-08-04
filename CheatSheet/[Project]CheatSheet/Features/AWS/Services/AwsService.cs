@@ -60,11 +60,11 @@
                 await s3.PutObjectAsync(putObjectRequest);
                 return string.Format(AwsMessages.SuccessfulUpload, putObjectRequest.ContentType, putObjectRequest.Key);
             }
-            catch (AmazonS3Exception ex)
+            catch (AmazonS3Exception)
             {
                 return AwsMessages.FailedToUpload;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return AwsMessages.FailedToUpload;
             }

@@ -145,5 +145,29 @@
             }
             return CourseMessages.SuccessfullyCreatedCourse;
         }
+
+        public async Task<string> AddTopicToCourse(string courseName, TopicCreateDetailsAdminModel createdTopic)
+        {
+            var findCourse = await context.Courses.Select(c=>new
+            {
+                c.Id,
+                c.Title
+            }).FirstOrDefaultAsync(c => c.Title.ToLower() == courseName.ToLower());
+            
+            ServiceException.ThrowIfNull(findCourse,CourseMessages.CourseNotFound);
+
+            var videoToAdd = mapper.Map<Video>(createdTopic);
+            await context.AddAsync(videoToAdd);
+            await context.SaveChangesAsync();
+
+            var createTopic = mapper.Map<Topic>(createdTopic);
+
+            createTopic.VideoId = videoToAdd.Id;
+            createTopic.CourseId = findCourse.Id;
+            await context.AddAsync(createTopic);
+            await context.SaveChangesAsync();
+
+            return TopicMessages.SuccessfullyAddedATopic;
+        }
     }
 }

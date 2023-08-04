@@ -6,20 +6,19 @@ export const CategoryItem = ({ categories, updateState = null, selectedCategorie
                     updateState === null ? (
                         <span
                             key={index}
-                            className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2"
+                            className="inline-block bg-bgWhiteUI-0 rounded-full px-3 py-1 text-sm font-semibold text-bgBlackUI-0 mr-2"
                         >
                             {category}
                         </span>
                     ) : (
-
                         <button
                             onClick={(event) => {
                                 event.preventDefault();
                                 updateState && updateState(selectedCategories,category);
                             }}
-                            className="text-white font-semibold rounded-full shadow-md text-center"
+                            className="font-semibold  text-center mr-1 mb-2 w-18"
                             key={index}>
-                            <span className="bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
+                            <span className="bg-bgWhiteUI-0 px-3 py-1 rounded-2xl text-sm font-semibold text-bgBlackUI-0 mr-2 border border-pinkUI-0 ml-2">
                                 {category}
                             </span>
                         </button>

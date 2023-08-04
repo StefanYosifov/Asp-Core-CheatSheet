@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import useResourceListStore from "../../../stores/useResourceListStore";
-import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { Pagination } from "../../Helper components/Pagination";
 import ResourceItem from "./ResourceItem";
 import { DropDown } from "../../Helper components/DropDown";
@@ -74,7 +74,7 @@ export const ResourceList2 = () => {
 
             {!isLoading && resources && setSelectedCategory &&
                 <>
-                    <MainPageHero/>
+                    <MainPageHero />
                     <Pagination
                         currentPage={Number(id)}
                         totalPages={Number(resourcesCouint)}
@@ -104,14 +104,16 @@ export const ResourceList2 = () => {
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 m-10">
-                        <ResourceItem/>
+                        <ResourceItem />
                     </div>
 
-                    <Pagination
-                        currentPage={Number(id)}
-                        totalPages={Number(resourcesCouint)}
-                        onPageChange={(pageNumber) => navigate(`${URLS.RESOURCES}${pageNumber}`)}
-                    />
+                    <section className="mb-4">
+                        <Pagination
+                            currentPage={Number(id)}
+                            totalPages={Number(resourcesCouint)}
+                            onPageChange={(pageNumber) => navigate(`${URLS.RESOURCES}${pageNumber}`)}
+                        />
+                    </section>
                 </>
             }
 

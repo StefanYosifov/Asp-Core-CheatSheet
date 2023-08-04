@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import useCourseStore from "../../stores/useCourseStore"
+import useCourseStore from "../../stores/useCourseStore";
 import { CourseFeaturedItem } from "./CourseFeaturedItem";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
@@ -8,8 +8,7 @@ import { CategoryItem } from "../Helper components/CategoryItem";
 import SearchBar from "../Helper components/SearchBar";
 import { RadioButtonList } from "../Helper components/RadioButtonList";
 import { URLS } from "../../constants/URLConstants";
-import { AiOutlinePlayCircle } from "react-icons/ai"
-import { CgSearch } from "react-icons/cg"
+import { AiOutlinePlayCircle } from "react-icons/ai";
 import { Pagination } from "../Helper components/Pagination";
 
 
@@ -121,15 +120,17 @@ const ALLCourses = () => {
 
 
     return (
-        <div className="mx-28 bg-slate-50 p-1 my-8 shadow-sm">
-            <section>
-            <button onClick={(event) => { event.preventDefault(); setQueryParameters(queryParameters) }}>
-            <CgSearch/> Search
+        <div className="mx-28 bg-bgWhiteUI-0 p-1 my-8 shadow-sm">
+            <section className="ml-2">
+            <button
+             onClick={(event) => { event.preventDefault(); setQueryParameters(queryParameters) }}
+             className="px-8 text-sm py-2.5 overflow-hidden text-pinkUI-0 transition-colors duration-300 bg-bgBlackUI-0 rounded-lg shadow sm:w-auto sm:mx-2 hover:bg-gray-700 focus:ring focus:ring-gray-300 focus:ring-opacity-80">
+                Search
             </button>
             </section>
             <div className="flex">
-                <article className="w-1/5 bg-slate-100 h-screen">
-                    <section className="p">
+                <article className="w-1/5 h-screen">
+                    <section className="p-4">
                         <form>
                             <div>
                                 <SearchBar
@@ -149,7 +150,7 @@ const ALLCourses = () => {
                 <article className="w-4/5 ">
                     <div className="p-8 w-full flex flex-col">
                         {courses.map((course) =>
-                            <div className="flex-row flex my-2 divide-y divide-y-reverse " key={course.id}>
+                            <div className="flex-row flex my-2 divide-y divide-y-reverse" key={course.id}>
                                 <section className="w-1/4">
                                     <div className="m-2 w-64 transform overflow-hidden rounded-lg bg-white dark:bg-slate-800 shadow-md duration-300 hover:shadow-lg">
                                         <img className="h-full w-full object-scale-down object-center max-h-40" src={course.imageUrl} alt="Course Thumbnail" />

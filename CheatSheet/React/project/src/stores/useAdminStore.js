@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { getCategories } from "../api/Requests/categories";
-import { getAdminCourses } from "../api/Requests/admin";
+import { getAdminCourses, getAdminTopicsByCourseName } from "../api/Requests/admin";
 import { getCoursesCategories } from "../api/Requests/courses";
 
 
@@ -15,6 +15,10 @@ const useAdminStore = create((set) => ({
     courseNameDropDownList: null,
     selectedCourseName:null,
     searchInput:'',
+
+    topics:null,
+
+    details:null,
 
     setCategories: async () => {
         try {
@@ -31,9 +35,9 @@ const useAdminStore = create((set) => ({
     setDropDownListOfCourses: async (search) => {
         try {
             const response = await getAdminCourses(search);
-            console.log(response.data);
 
             if (response.status === 200) {
+                console.log(response.data);
                 set({ courseNameDropDownList: response.data });
             }
         } catch (error) {
@@ -51,6 +55,7 @@ const useAdminStore = create((set) => ({
         }
     },
     setSelectedCourseName:(value)=>{
+        console.log(value);
         if(value){
             set({selectedCourseName:value})
         }
@@ -59,6 +64,34 @@ const useAdminStore = create((set) => ({
         if (value !== null) {
             set({ searchInput: value })
         }
+    },
+    setTopics: async (courseName,courseCollection)=>{
+        try {
+            const getCourse = courseCollection.find((course) => course.name === courseName);
+            if (!getCourse) {
+              console.log(`Course with name '${courseName}' not found.`);
+              return;
+            }
+
+
+            console.log(getCourse.id);
+            const response=await getAdminTopicsByCourseName(getCourse.id);
+            if(response.status===200){
+                set({topics:response.data});
+                console.log(response.data);
+                console.log(response.data);
+                console.log(response.data);
+                console.log(response.data);
+                console.log(response.data);
+                console.log(response.data);
+
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    },
+    setDetails:async(id)=>{
+        
     }
 
 }))

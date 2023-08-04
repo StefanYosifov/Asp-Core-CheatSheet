@@ -1,16 +1,25 @@
 ﻿namespace _Project_CheatSheet.Features.Topics.Models
 {
+    using System.ComponentModel.DataAnnotations;
+
     public class TopicDetailRespondModel
     {
-        public string Id { get; set; }
-        public string Name { get; set; }
-        public string Content { get; set; }
-        public string CourseName { get; set; }
+        [Required]
+        public string Id { get; set; } = null!;
+        [Required]
+        public string Name { get; set; }= null!;
+        [Required]
+        public string Content { get; set; }= null!;
+        [Required]
+        public string CourseName { get; set; }= null!;
 
-        public string VideoId { get; set; }
+        [Required]
+        public string VideoId { get; set; }= null!;
 
-        public string VideoName { get; set; }
+        [Required]
+        public string VideoName { get; set; }= null!;
 
-        public string VideoUrl { get; set; }
+        [Required]
+        public string VideoUrl { get; set; }= null!;
     }
 }

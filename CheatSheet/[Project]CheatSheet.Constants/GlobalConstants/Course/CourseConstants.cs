@@ -10,5 +10,11 @@
 
         public const double PriceMinRange = 0;
         public const double PriceMaxRange = 499;
+
+        public const int SummaryMinLength = 10;
+        public const int SummaryMaxLength = 5000;
+
+        public const int CoverageMinLength = 30;
+        public const int CoverageMaxLength = 20000;
     }
 }

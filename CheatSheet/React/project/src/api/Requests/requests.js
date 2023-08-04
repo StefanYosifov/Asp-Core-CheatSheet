@@ -12,7 +12,7 @@ const headers={
 };
 
 export const get=(endPoint)=>{
-  return axios.get(`${baseUrl}/${endPoint}`,{headers});
+  return axios.get(`${baseUrl}/${endPoint}`, { headers });
 }
 
 export const postWithoutNotification=(endPoint,data)=>{

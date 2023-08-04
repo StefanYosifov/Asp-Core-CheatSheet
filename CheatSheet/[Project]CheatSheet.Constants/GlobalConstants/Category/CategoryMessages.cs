@@ -2,7 +2,6 @@
 {
     public class CategoryMessages
     {
-
         public const string NoCategoriesSelected = "You must select valid categories";
     }
 }

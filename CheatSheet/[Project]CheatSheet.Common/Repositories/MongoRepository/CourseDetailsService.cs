@@ -30,9 +30,10 @@
             throw new NotImplementedException();
         }
 
-        public Task<CourseDetails> Create()
+        public async Task<bool> Create(CourseDetails createData)
         {
-            throw new NotImplementedException();
+            await context.InsertOneAsync(createData);
+            return true;
         }
 
         public async Task<ICollection<CourseDetails>> Get()

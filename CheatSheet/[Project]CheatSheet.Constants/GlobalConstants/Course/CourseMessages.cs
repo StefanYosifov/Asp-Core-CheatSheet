@@ -12,5 +12,11 @@
         public const string CourseNotFound = "Couldn't find course";
 
         public const string UserNotInCourse = "You are not authorized to view this resource";
+
+        public const string EndDateBeforeStartDate =
+            "End date is before the start date, make sure the hours are correctly selected too";
+
+        public const string UnSuccessfullyCreatedCourse = "You haven't been able to created a course";
+        public const string SuccessfullyCreatedCourse = "You have successfully created a course";
     }
 }

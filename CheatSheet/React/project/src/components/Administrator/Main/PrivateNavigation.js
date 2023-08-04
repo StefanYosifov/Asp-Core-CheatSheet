@@ -7,14 +7,14 @@ export const PrivateNavigation = () => {
 
     const RenderContent = () => {
         switch (activeItem) {
-          case ACTIVE_ELEMENTS.Course:
-         return <PrivateCourses />
-          default:
-            return <PrivateCourses />
+            case ACTIVE_ELEMENTS.Course:
+                return <PrivateCourses />
+            default:
+                return <PrivateCourses />
         }
-      }; 
+    };
 
-      const ACTIVE_ELEMENTS = {
+    const ACTIVE_ELEMENTS = {
         Resource: "resources",
         Course: "courses",
         Issues: "issues",
@@ -22,7 +22,6 @@ export const PrivateNavigation = () => {
 
     return (
         <>
-            return (
             <div>
                 <div className="grid grid-cols-3 gap-5">
                     <button
@@ -84,16 +83,12 @@ export const PrivateNavigation = () => {
                     </button>
                 </div>
                 <div
-                    className="shadow-xl border border-gray-100 font-light p-8 rounded text-gray-500 bg-bgWhiteUI-0 mt-6"
+                    className="shadow-xl border font-light p-8 rounded  bg-bgWhiteUI-0 mt-20"
                 >
-                    Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt
-                    tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor,
-                    williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh
-                    dreamcatcher synth.
+                    <RenderContent />
                 </div>
             </div>
-            )
-                <RenderContent/>
+
         </>
     )
 }

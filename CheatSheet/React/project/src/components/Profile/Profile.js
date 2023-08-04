@@ -22,11 +22,11 @@ export const Profile = () => {
     getUserId().then((res) => setCurrentUserId(() => res.data));
   }, [])
 
-const ACTIVE_ELEMENTS={
-    PROFILE:"profile",
-    POSTS:"posts",
-    EDIT:"edit",
-}
+  const ACTIVE_ELEMENTS = {
+    PROFILE: "profile",
+    POSTS: "posts",
+    EDIT: "edit",
+  }
 
   const renderContent = () => {
     switch (activeItem) {
@@ -46,42 +46,26 @@ const ACTIVE_ELEMENTS={
   return (
     <>
       {profileData != undefined ? (
-        <div className="bg-gradient-to-b from-gray-500 to-gray-700 flex justify-center">
-          <div className="bg-slate-100 h-full my-48 w-3/4 rounded">
-            <section className="min-w-full items-start">
-              <nav className="px-4 py-2">
-                <ul className="flex flex-row justify-between">
-                  <li
-                    className={`text-lg font-semibold cursor-pointer ${activeItem === "profile" && "text-red-600"
-                      }`}
-                    onClick={() => setActiveItem("profile")}
-                  >
-                    My profile
-                  </li>
-                  <li
-                    className={`text-lg font-semibold cursor-pointer ${activeItem === "posts" && "text-red-600"
-                      }`}
-                    onClick={() => setActiveItem("posts")}
-                  >
-                    My posts
-                  </li>
-                  {
-                    (currentUserId === id) && (
-                      <li
-                        className={`text-lg font-semibold cursor-pointer ${activeItem === "edit" && "text-red-600"
-                          }`}
-                        onClick={() => setActiveItem("edit")}
-                      >
-                        Edit my profile
-                      </li>
-                    )
-                  }
-                </ul>
-              </nav>
-              <div className="p-6 text-gray-800 text-lg">
+        <div className="flex justify-center">
+          <div className="container">
+            <div className="min-h-screen w-full flex flex-row my-12">
+              <div className="w-1/4 h-full bg-bgBlackUI-0 rounded text-bgWhiteUI-0 font-semibold border border-pinkUI-0">
+                <h1 className="p-4 border-b-pinkUI-0">Section</h1>
+                <section className="mx-4 text-sm">
+                  <ul className="divide-y divide-pinkUI-0">
+                    <li className="p-2 mb-1 hover:cursor-pointer"
+                      onClick={() => setActiveItem(ACTIVE_ELEMENTS.PROFILE)}>My profile</li>
+                    <li className="p-2 mb-1 hover:cursor-pointer"
+                      onClick={() => setActiveItem(ACTIVE_ELEMENTS.POSTS)}>My posts</li>
+                    <li className="p-2 mb-1 hover:cursor-pointer"
+                      onClick={() => setActiveItem(ACTIVE_ELEMENTS.EDIT)}>Edit profile</li>
+                  </ul>
+                </section>
+              </div>
+              <div className="w-4/6 rounded border border-pinkUI-0 ml-4 shadow-lg">
                 {renderContent()}
               </div>
-            </section>
+            </div>
           </div>
         </div>
       ) : <div
@@ -93,36 +77,7 @@ const ACTIVE_ELEMENTS={
         >
       </div>}
 
-      <div className="flex justify-center">
-        <div className="container bg-red-700">
-          <div className="h-96">
-            <section className="bg-pinkUI-0 h-48">
 
-            </section>
-            <section className="h-48 bg-white">
-
-            </section>
-          </div>
-          <div className="min-h-screen bg-blue-400 w-full flex flex-row">
-            <div className="w-1/4 h-full bg-slate-800 rounded">
-              <h1>Section</h1>
-              <section className="mx-4 text-sm">
-                <ul className="divide-y divide-gray-400">
-                  <li className="p-2 hover:bg-slate-100 rounded"
-                  onClick={()=>setActiveItem(ACTIVE_ELEMENTS.PROFILE)}>My profile</li>
-                  <li className="p-2 hover:bg-slate-100 rounded"
-                  onClick={()=>setActiveItem(ACTIVE_ELEMENTS.POSTS)}>My posts</li>
-                  <li className="p-2 hover:bg-slate-100 rounded"
-                  onClick={()=>setActiveItem(ACTIVE_ELEMENTS.EDIT)}>Edit profile</li>
-                </ul>
-              </section>
-            </div>
-            <div className="w-4/6 rounded">
-               {renderContent()}
-            </div>
-          </div>
-        </div>
-      </div>
     </>
   )
 };

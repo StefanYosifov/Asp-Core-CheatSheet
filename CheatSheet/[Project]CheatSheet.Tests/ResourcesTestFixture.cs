@@ -14,6 +14,9 @@
     using Moq;
     using System;
     using System.Collections.Generic;
+
+    using Microsoft.AspNetCore.Identity;
+
     using IResourceService = Features.Resources.Interfaces.IResourceService;
 
     public class ResourcesTestFixture : IDisposable
@@ -41,6 +44,7 @@
 
             var httpContextAccessorMock = new Mock<IHttpContextAccessor>();
             httpContextAccessorMock.Setup(x => x.HttpContext.User.Identity.Name).Returns(It.IsAny<string>());
+
 
             DbContext = new CheatSheetDbContext(options, httpContextAccessorMock.Object);
 

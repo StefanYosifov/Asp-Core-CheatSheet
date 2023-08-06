@@ -21,6 +21,8 @@
     using Common.Mapping;
     using Common.Repositories.MongoRepository;
 
+    using Infrastructure.Data.SQL.Seed;
+
     using Microsoft.AspNetCore.Authentication.JwtBearer;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.Extensions.Configuration;
@@ -180,6 +182,25 @@
             {
                 s.SwaggerDoc("v1", new OpenApiInfo { Title = "Cheat sheet swagger API", Version = "v1" });
             });
+            return serviceCollection;
+        }
+
+        public static async Task<IApplicationBuilder> RegisterSeedData(this IApplicationBuilder serviceCollection)
+        {
+            ArgumentNullException.ThrowIfNull(serviceCollection, nameof(serviceCollection));
+
+            using var scope = serviceCollection.ApplicationServices.CreateScope();
+            var services = scope.ServiceProvider;
+            try
+            {
+                var context = services.GetRequiredService<CheatSheetDbContext>();
+                await DataSeeder.Initializer(context);
+            }
+            catch (Exception ex)
+            {
+
+            }
+
             return serviceCollection;
         }
     }

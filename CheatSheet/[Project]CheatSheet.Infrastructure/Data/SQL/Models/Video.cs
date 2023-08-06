@@ -7,6 +7,7 @@
     {
         public Video()
         {
+            Id=Guid.NewGuid();
             Topics = new HashSet<Topic>();
         }
 

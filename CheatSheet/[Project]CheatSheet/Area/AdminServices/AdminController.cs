@@ -53,5 +53,11 @@
         [ExceptionHandlingActionFilter]
         public async Task<string> CreatedCourse([FromBody]CreateCourseAdminModel createdCourse) 
             => await service.CreateCourse(createdCourse);
+
+        [HttpPost("topic/create/{courseName}")]
+        [ActionHandlingFilter]
+        [ExceptionHandlingActionFilter]
+        public async Task<string> CreateTopicToAdd(string courseName, [FromBody]TopicCreateDetailsAdminModel createdTopic)
+            => await service.AddTopicToCourse(courseName, createdTopic);
     }
 }

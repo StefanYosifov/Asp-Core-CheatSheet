@@ -4,11 +4,10 @@
     using _Project_CheatSheet.Infrastructure.Data.SQL.Models.Base.Interfaces;
     using _Project_CheatSheet.Infrastructure.Data.SQL.Seed;
     using Microsoft.AspNetCore.Http;
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
-    using Models;
-    using Models.Base.Interfaces;
-    using Seed;
+    using Microsoft.Extensions.Options;
 
     public class CheatSheetDbContext : IdentityDbContext<User>
     {
@@ -16,6 +15,7 @@
 
         public CheatSheetDbContext()
         {
+
         }
 
         public CheatSheetDbContext(
@@ -51,9 +51,11 @@
                 optionsBuilder.UseSqlServer(
                     "Server=(localdb)\\MSSQLLocalDB;Database=CheatSheet;Integrated Security=true");
             }
+                optionsBuilder.EnableSensitiveDataLogging();
         }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+
+        protected override async void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<ResourceLike>()
                 .HasKey(r => new { r.UserId, r.ResourceId });
@@ -155,7 +157,10 @@
                     k.CategoryCourseId
                 });
 
+            
+
             DataSeeder.SeedRoles(modelBuilder);
+            DataSeeder.SeedDatabase(modelBuilder);
             base.OnModelCreating(modelBuilder);
         }
 
@@ -176,7 +181,11 @@
         private void AuditSave()
         {
             var currentTime = DateTime.UtcNow;
-            var userName = httpContext!.HttpContext!.User!.Identity!.Name;
+            var userName = httpContext?.HttpContext?.User?.Identity?.Name;
+            if (string.IsNullOrWhiteSpace(userName))
+            {
+                userName = "admin";
+            }
 
             foreach (var item in ChangeTracker.Entries().Where(e => e.Entity is IEntity))
             {

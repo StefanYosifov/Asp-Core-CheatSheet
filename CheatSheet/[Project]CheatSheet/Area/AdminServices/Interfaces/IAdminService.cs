@@ -15,5 +15,6 @@
 
         Task<string> CreateCourse(CreateCourseAdminModel createdCourse);
 
+        Task<string> AddTopicToCourse(string courseName, TopicCreateDetailsAdminModel createdTopic);
     }
 }

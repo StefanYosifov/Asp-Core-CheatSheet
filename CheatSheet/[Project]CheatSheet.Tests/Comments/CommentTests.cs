@@ -108,7 +108,7 @@ namespace _Project_CheatSheet.Tests.Comments
 
             var validUser = new User
             {
-                Id = Guid.NewGuid().ToString(), // Assuming the current user has an ID
+                Id = Guid.NewGuid().ToString(), // Assuming the current user has an Id
                 UserName = "peshoBe"
             };
 

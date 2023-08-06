@@ -73,18 +73,10 @@ const useAdminStore = create((set) => ({
               return;
             }
 
-
             console.log(getCourse.id);
             const response=await getAdminTopicsByCourseName(getCourse.id);
             if(response.status===200){
                 set({topics:response.data});
-                console.log(response.data);
-                console.log(response.data);
-                console.log(response.data);
-                console.log(response.data);
-                console.log(response.data);
-                console.log(response.data);
-
             }
         } catch (error) {
             console.log(error);

@@ -11,6 +11,7 @@
     {
         public Course()
         {
+            Id=Guid.NewGuid();
             Topics = new HashSet<Topic>();
             UsersCourses = new HashSet<UserCourses>();
             CategoryCourseCourses = new HashSet<CategoryCourseCourses>();

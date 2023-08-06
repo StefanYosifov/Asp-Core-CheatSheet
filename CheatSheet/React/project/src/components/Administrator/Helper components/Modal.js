@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import useModalStore from "../../../stores/useModalStore"
 
 export const Modal = ({ topicId }) => {
@@ -9,14 +9,16 @@ export const Modal = ({ topicId }) => {
     const setData = useModalStore((state) => state.setData);
     const updateData = useModalStore((state) => state.updateData);
     const sendUpdateRequest = useModalStore((state) => state.sendUpdateRequest);
+    const prevTopicIdRef = useRef();
 
     console.log(topicId);
 
     useEffect(() => {
-        if (topicId) {
+        if (topicId && topicId !== prevTopicIdRef.current) {
             setData(topicId);
+            prevTopicIdRef.current = topicId;
         }
-    }, [])
+    }, [topicId]);
 
     return (
         <div className="relative flex justify-center">

@@ -1,4 +1,4 @@
-import { get, patch, post } from "./requests"
+import { get, patch, post, postWithoutNotification } from "./requests"
 
 
 
@@ -18,6 +18,14 @@ export const updateTopicSecondaryDetails=(topicId,updatedData)=>{
     return patch(`admin/resource/secondary/edit/${topicId}`,updatedData);
 }
 
-export const createdCourse=(data)=>{
-    return post(`admin/course/create`,data);
+export const createdCourse=(createdCourse)=>{
+    createdCourse.startDate=String(createdCourse.startDate).replace("T"," ");
+    createdCourse.endDate=String(createdCourse.endDate).replace("T"," ");
+    return post(`admin/course/create`,createdCourse);
+}
+
+export const createdTopic=(courseName,topicData)=>{
+    topicData.topicStartDate=String(topicData.topicStartDate).replace("T"," ");
+    topicData.topicEndDate=String(topicData.topicEndDate).replace("T"," ");    
+    return post(`admin/topic/create/${courseName}`,topicData);
 }

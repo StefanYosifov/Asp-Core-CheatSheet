@@ -9,5 +9,7 @@
         public const string SuccessfullyEditedTopic = "You have successfully edited the topic";
 
         public const string EditingTopicFailed = "There was an issue editing the topic";
+
+        public const string SuccessfullyAddedATopic = "You have successfully added a topic";
     }
 }

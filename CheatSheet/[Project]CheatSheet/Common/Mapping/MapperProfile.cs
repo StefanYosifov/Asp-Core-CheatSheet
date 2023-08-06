@@ -22,11 +22,11 @@
 
     public class MapperProfile : Profile
     {
-        private readonly ICurrentUser userService;
+        public ICurrentUser Service { get; }
 
         public MapperProfile(ICurrentUser userService)
         {
-            this.userService = userService;
+            this.Service = userService;
 
             //Likes
             CreateMap<LikeResourceModel, ResourceLike>()
@@ -110,7 +110,7 @@
                 .ForMember(dest => dest.CommentLikes, opt => opt.MapFrom(src => src.CommentLikes.Select(cl =>
                     new CommentLikeModel
                     {
-                        Id = src.CommentLikes.FirstOrDefault(l => l.CommentId == cl.CommentId).Id.ToString(),
+                        Id = src.CommentLikes.FirstOrDefault(l => l.CommentId == cl.CommentId)!.Id.ToString(),
                         CommentId = src.Id.ToString(),
                         CreatedOn = src.CreatedOn.ToString(Formatter.DateFormatter),
                         UserId = src.UserId
@@ -225,6 +225,15 @@
             CreateMap<CreateCourseAdminModel, CourseDetails>()
                 .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.CourseDescription))
                 .ForMember(dest => dest.Summary, opt => opt.MapFrom(src => src.Summary));
+
+            CreateMap<TopicCreateDetailsAdminModel, Video>()
+                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.VideoName));
+
+            CreateMap<TopicCreateDetailsAdminModel, Topic>()
+                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.TopicName))
+                .ForMember(dest => dest.Content, opt => opt.MapFrom(src => src.TopicContent))
+                .ForMember(dest => dest.StartTime, opt => opt.MapFrom(src => DateTime.Parse(src.TopicStartDate)))
+                .ForMember(dest => dest.EndTime, opt => opt.MapFrom(src => DateTime.Parse(src.TopicEndDate)));
 
         }
     }

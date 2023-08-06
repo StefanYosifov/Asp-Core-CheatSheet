@@ -23,6 +23,8 @@ export const CourseVideo = () => {
         setCourseLessonData(id);
     }, [id]);
 
+
+    
     useEffect(() => {
         if (pdfFile) {
             WebViewer(
@@ -47,6 +49,9 @@ export const CourseVideo = () => {
 
     return (
         <div className='bg-bgWhiteUI-0'>
+            <div>
+                Hello Welcome to the Training Page
+            </div>
             {isLoading && pdfFile && videoUrl ? (
                 <>
                     <div className="w-full shadow-md flex-row divide-y border mx-4 mt-2">
@@ -65,7 +70,9 @@ export const CourseVideo = () => {
                     </div>
                 </>
             ) : (
-                <p>WAITING</p>
+                <div className='flex text-center items-center justify-center'>
+                    <h1>Waiting, it may take a while for AWS Connection to be established</h1>
+                </div>
             )}
 
         </div>

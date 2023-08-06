@@ -19,7 +19,7 @@ export const Details2 = () => {
   const details = useDetailsStore((state) => state.data);
   const getDetails = useDetailsStore((state) => state.getResource);
   const likeResource = useDetailsStore((state) => state.likeResource);
-  const dislikeResource = useUserDetails((store) => store.dislikeResource);
+  const dislikeResource = useDetailsStore((store) => store.dislikeResource);
   const deleteDetails = useDetailsStore((state) => state.deleteResource);
   const changeVisibility = useDetailsStore((state) => state.changeVisibility);
 

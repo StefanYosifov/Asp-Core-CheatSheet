@@ -84,17 +84,17 @@ export const ResourceAdd = () => {
     return (
         <>
             <div className=" w-full flex flex-col min-h-screen justify-center items-center">
-                <div className="bg-slate-50 w-8/12 h-full border rounded-md shadow-lg">
-                    <form onSubmit={onSubmit} className="max-w-md mx-auto">
+                <div className="bg-bgWhiteUI-0 w-10/12 h-full border rounded-md shadow-lg flex justify-center py-14">
+                    <form onSubmit={onSubmit} className="max-w-md">
                         <div className="mb-4">
-                            <label htmlFor="title" className="block text-lg text-gray-700 font-bold my-2">
+                            <label htmlFor="title" className="block text-xl text-bgBlackUI-0 tracking-wide font-semibold my-2">
                                 Title
                             </label>
                             <input
                                 id="title"
                                 name="title"
                                 type="text"
-                                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                className="shadow appearance-none border rounded w-full py-2 px-3 text-bgBlackUI-0 leading-tight focus:outline-none focus:shadow-outline"
                                 required
                                 minLength="3"
                                 maxLength="50"
@@ -102,20 +102,20 @@ export const ResourceAdd = () => {
                             />
                         </div>
                         <div className="mb-4">
-                            <label htmlFor="imageUrl" className="block text-lg text-gray-700 font-bold mb-2">
+                            <label htmlFor="imageUrl" className="block text-xl text-bgBlackUI-0 tracking-wide font-semibold my-2">
                                 Image URL
                             </label>
                             <input
                                 id="imageUrl"
                                 name="imageUrl"
                                 type="text"
-                                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                className="shadow appearance-none border rounded w-full py-2 px-3 text-bgBlackUI-0 leading-tight focus:outline-none focus:shadow-outline"
                                 onChange={onChange}
                                 required
                             />
                         </div>
                         <div className="mb-4">
-                            <label htmlFor="content" className="block text-lg text-gray-700 font-bold mb-2">
+                            <label htmlFor="content" className="block text-xl text-bgBlackUI-0 tracking-wide font-semibold my-2">
                                 Content
                             </label>
                             <CKEditor
@@ -126,7 +126,7 @@ export const ResourceAdd = () => {
                             />
                         </div>
                         <div className="my-4">
-                            <span className="block text-gray-700 font-bold mb-2">Categories:</span>
+                            <span className="block text-bgBlackUI-0 tracking-wide font-semibold font-serif mb-2">Categories:</span>
                             <div className="grid grid-cols-2 gap-4">
                                 {categories.map(category => (
                                     <div key={category.id} className="flex items-center">
@@ -138,7 +138,7 @@ export const ResourceAdd = () => {
                                             onChange={handleCategoryChange}
                                             className="mr-2"
                                         />
-                                        <label className="text-base text-gray-700">{categoryDictionary[category.id]}</label>
+                                        <label className="text-base text-bgBlackUI-0">{categoryDictionary[category.id]}</label>
                                     </div>
                                 ))}
                             </div>
@@ -146,7 +146,7 @@ export const ResourceAdd = () => {
                         <div className="flex items-center justify-between">
                             <button
                                 type="submit"
-                                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                                className="bg-pinkUI-0 text-bgWhiteUI-0 tracking-wide font-semibold font-serif py-2 px-5 mt-2 rounded focus:outline-none focus:shadow-outline"
                             >
                                 Save
                             </button>

@@ -32,7 +32,7 @@ export const CourseMy = () => {
 
   return (
     <>
-      <div className="flex">
+      <div className="flex mt-16 ml-72">
         <input
           type="checkbox"
           id="choose-me"
@@ -42,14 +42,15 @@ export const CourseMy = () => {
         />
         <label
           htmlFor="choose-me"
-          className="select-none cursor-pointer rounded-lg border-2 border-gray-200 py-3 px-6 font-bold text-gray-200 transition-colors duration-200 ease-in-out peer-checked:bg-gray-200 peer-checked:text-gray-900 peer-checked:border-gray-200"
+          className="select-none cursor-pointer rounded-lg border-2 border-gray-200 py-3 px-6 font-bold bg-pinkUI-0 text-gray-200 transition-colors duration-200 ease-in-out peer-checked:bg-pinkUI-0 peer-checked:text-bgBlackUI-0 peer-checked:border-gray-200"
         >
           Toggle archived courses
         </label>
       </div>
+
       {courses.length > 0 ? (
-        <div className="flex justify-center h-screen">
-          <div className="container grid grid-cols-3 gap-4 m-16">
+        <div className="flex justify-center h-screen border border-t-pinkUI-0 mt-4">
+          <div className="container grid grid-cols-3 gap-4 ">
             {courses.map((course, index) => (
               <div className="aspect-w-1" key={index}>
                 <CourseMyItem course={course} />
@@ -59,7 +60,7 @@ export const CourseMy = () => {
         </div>
       ) : (
         <p>Awaiting</p>
-      )}
+        )}
     </>
   );
 };

@@ -1,7 +1,7 @@
-import { clearUserData, clearUserToken } from "../../../api/util"
+import { useUserDetails } from "../../../stores/useUserDetails";
 
 
 export const Logout=()=>{
-    clearUserData();
-    clearUserToken();
+    const logout=useUserDetails((state)=>state.logout);
+    logout();
 }

@@ -39,7 +39,6 @@ function App() {
           <Route path='/' element={<Layout />}>
             <Route path={APP_URLS.REGISTER} Component={RegisterPage} />
             <Route path={APP_URLS.LOGIN} Component={Login} />
-
             <Route element={<RequireAuth />}>
               <Route path={APP_URLS.HOME} Component={HomePage} />
               <Route path={APP_URLS.LOGOUT} Component={Logout} />

@@ -104,7 +104,8 @@ export const PrivateCourses = () => {
                     <div className="flex items-center mt-4 gap-x-3">
                         <button
                             onClick={() => { setIsTopicModalOpen() }}
-                            className="w-1/2 px-5 py-2 text-sm text-gray-800 transition-colors duration-200 bg-white border rounded-lg sm:w-auto dark:hover:bg-gray-800 dark:bg-gray-900 hover:bg-gray-100 dark:text-white dark:border-gray-700">
+                            className="w-1/2 px-5 py-2 text-sm text-gray-800 transition-colors duration-200 bg-white border rounded-lg sm:w-auto dark:hover:bg-gray-800 dark:bg-gray-900 hover:bg-gray-100 dark:text-white dark:border-gray-700"
+                            disabled={!selectedCourseName}>
                             Add Topic
                         </button>
 

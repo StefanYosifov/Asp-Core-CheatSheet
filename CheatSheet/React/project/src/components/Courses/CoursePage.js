@@ -48,7 +48,7 @@ export const CoursePage = () => {
                     <ul className="grid grid-cols-2 gap-2 mr-1 p-1">
                       {topics.map((item, index) => (
                         <>
-                         {isOpen && <Issue showIssue={true}topicId={item.id} />}
+                          {isOpen && <Issue showIssue={true} topicId={item.id} />}
                           <li
                             key={index}
                             className={`border rounded-lg p-4 ${expandedItem === index ? "bg-indigo-400" : ""

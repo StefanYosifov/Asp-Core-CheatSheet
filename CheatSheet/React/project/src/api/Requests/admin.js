@@ -1,4 +1,4 @@
-import { get, patch, post, postWithoutNotification } from "./requests"
+import { get, patch, post } from "./requests";
 
 
 
@@ -12,6 +12,10 @@ export const getAdminTopicsByCourseName=(courseId)=>{
 
 export const getTopicSecondaryDetailsByTopicId=(topicId)=>{
     return get(`admin/resource/secondary/${topicId}`);
+}
+
+export const getIssues=(query)=>{
+    return get(`admin/issues?${query}`);
 }
 
 export const updateTopicSecondaryDetails=(topicId,updatedData)=>{

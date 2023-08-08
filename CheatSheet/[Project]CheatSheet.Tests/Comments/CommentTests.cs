@@ -8,11 +8,15 @@ namespace _Project_CheatSheet.Tests.Comments
     using _Project_CheatSheet.Features.Comment.Models;
     using _Project_CheatSheet.Features.Comment.Services;
     using _Project_CheatSheet.Infrastructure.Data.SQL;
+    using _Project_CheatSheet.Tests.Fixtures;
     using AutoMapper;
+
+    using Constants.GlobalConstants.Resource;
 
     using Features.Comment.Interfaces;
 
     using Microsoft.AspNetCore.Http;
+    using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
 
     using Moq;
@@ -21,196 +25,158 @@ namespace _Project_CheatSheet.Tests.Comments
 
     using Comment = Comment;
 
-    public class CommentServiceTests
+    public class CommentServiceTests : IClassFixture<ResourcesTestFixture>
     {
-        private ICommentService _commentService;
-        private CheatSheetDbContext _dbContext;
-        private Mock<ICurrentUser> _currentUserServiceMock;
-        private Mock<IMapper> _mapperMock;
+        private readonly ResourcesTestFixture fixture;
 
-
-        Resource globalResource=new Resource()
+        public CommentServiceTests(ResourcesTestFixture fixture)
         {
-            UserId = "pesho",
-            Content = "This is a very nice comment isn't it?",
-            Id = Guid.NewGuid(),
-            IsPublic = true,
-            Title = "THE BEST TITLE TO EVER EXIST",
-            ImageUrl = "https:/snimki.bg",
-            CreatedBy = "pesho",
-            CreatedOn = DateTime.UtcNow,
-            UpdatedBy = "pesho",
-            UpdatedOn = DateTime.UtcNow,
-        };
-
-
-        public CommentServiceTests()
-        {
-            // Set up the in-memory database with IHttpContextAccessor mock
-            var options = new DbContextOptionsBuilder<CheatSheetDbContext>()
-                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
-                .Options;
-
-
-            var httpContextAccessorMock = new Mock<IHttpContextAccessor>();
-            httpContextAccessorMock.Setup(x => x.HttpContext.User.Identity.Name).Returns(It.IsAny<string>());
-            
-            _dbContext = new CheatSheetDbContext(options, httpContextAccessorMock.Object);
-
-            _currentUserServiceMock = new Mock<ICurrentUser>();
-            _mapperMock = new Mock<IMapper>();
-            _commentService = new CommentService(
-                _dbContext,
-                _currentUserServiceMock.Object,
-                _mapperMock.Object);
-
-
-            _dbContext.Add(globalResource);
-            _dbContext.SaveChangesAsync();
+            this.fixture = fixture;
         }
 
-        // Test for CreateAComment method
+
         [Fact]
-        public async Task CreateAComment_ShouldThrowServiceException_WhenInputCommentModelIsNull()
+        public async Task CreateACommentShouldReturnCorrectMessageOnSuccess()
         {
-            // Arrange
+            var findResource = await fixture.DbContext.Resources.FirstOrDefaultAsync();
+
+            var commentModel = new InputCommentModel()
+            {
+                Content = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                ResourceId = findResource.Id.ToString(),
+                UserId = "pesho"
+            };
+
+            var result=await fixture.CommentService.CreateAComment(commentModel);
+            Assert.Equal(CommentMessages.OnSuccessfulPostComment,result);
+        }
+
+        [Fact]
+        public async Task CreateACommentShouldThrowExceptionWhenInputCommentModelIsNull()
+        {
             InputCommentModel nullCommentModel = null;
 
-            // Act & Assert
-            await Assert.ThrowsAsync<ServiceException>(() => _commentService.CreateAComment(nullCommentModel));
+            await Assert.ThrowsAsync<CustomException>(() => fixture.CommentService.CreateAComment(nullCommentModel));
         }
 
         [Fact]
-        public async Task CreateAComment_ShouldThrowServiceException_WhenResourceDoesNotExist()
+        public async Task CreateACommentShouldThrowExceptionIfResourceCannotBeFound()
         {
-            // Arrange
-            var inputCommentModel = new InputCommentModel
+            var commentModel = new InputCommentModel()
             {
+                Content = "asddasdasdasdasdasdas",
                 ResourceId = Guid.NewGuid().ToString(),
-                Content = "This is a test comment.ISNT IT THE BEST THING EVER TO EXISTS?"
+                UserId = "qewrZXC"
             };
 
-
-            // Act & Assert
-            await Assert.ThrowsAsync<ServiceException>(() => _commentService.CreateAComment(inputCommentModel));
+            await Assert.ThrowsAsync<CustomException>(()=>fixture.CommentService.CreateAComment(commentModel));
         }
 
         [Fact]
-        public async Task CreateAComment_ShouldReturnSuccessMessage_WhenCommentIsCreated()
+        public async Task EditCommentShouldReturnCorrectMessageOnSuccess()
         {
-            // Arrange
-            var validResourceId = this.globalResource.Id;
-            var inputCommentModel = new InputCommentModel
+            var findComment=await fixture.DbContext.Comments.FirstOrDefaultAsync(c=>c.UserId=="pesho");
+
+            var editCommentModel = new EditCommentModel()
             {
-                ResourceId = validResourceId.ToString(),
-                Content = "This is a test comment."
+                Content = "qweweqeqwewqewqewqweq"
             };
 
-            var validUser = new User
-            {
-                Id = Guid.NewGuid().ToString(), // Assuming the current user has an Id
-                UserName = "peshoBe"
-            };
+            var result = await fixture.CommentService.EditComment(findComment.Id.ToString(), editCommentModel);
 
-
-            _currentUserServiceMock.Setup(mock => mock.GetUserId())
-                .Returns(validUser.Id);
-
-            var resource = new Resource
-            {
-                Content = "This is a random content",
-                ImageUrl = "This is a very nice image url!!!",
-                Title = "A NICE TITLE TOO HUH",
-                UserId = validUser.Id
-            };
-            _dbContext.Resources.Add(resource);
-            await _dbContext.SaveChangesAsync();
-
-            // Act
-            var result = await _commentService.CreateAComment(inputCommentModel);
-
-            // Assert
-            Assert.Equal(CommentMessages.OnSuccessfulPostComment, result);
-
-            // Verify that the comment is added to the database
-            var commentInDb = await _dbContext.Comments.FirstOrDefaultAsync(c => c.UserId == validUser.Id);
-            Assert.NotNull(commentInDb);
-            Assert.Equal(validUser.Id, commentInDb.UserId);
-            Assert.Equal(inputCommentModel.Content, commentInDb.Content);
+            Assert.Equal(CommentMessages.OnSuccessfulEditComment,result);
         }
 
         [Fact]
-        [InlineData()]
-        public async Task DeleteCommentShouldThrowExceptionIfCommentIsDeletedIsNullBelongsToDifferentUserOrDoesNotExist()
+        public async Task EditCommentShouldThrowExceptionIfTheCommentDoesNotExist()
         {
-            Comment dbComment = new Comment()
+            var editCommentModel = new EditCommentModel()
+            {
+                Content = "qweweqeqwewqewqewqweq"
+            };
+
+            await Assert.ThrowsAsync<ServiceException>(()=>fixture.CommentService.EditComment(Guid.NewGuid().ToString(),editCommentModel));
+        }
+
+        [Fact]
+        public async Task EditCommentShouldThrowExceptionIfTheCommentHasBeenDeleted()
+        {
+            var findResource = await fixture.DbContext.Resources.FirstOrDefaultAsync();
+
+            var comment = new Comment()
             {
                 UserId = "pesho",
-                Content = "This is a very nice Content, isn't it?",
-                CreatedOn = DateTime.UtcNow,
-                CreatedBy = "pesho",
-                UpdatedOn = DateTime.UtcNow,
-                UpdatedBy = "pesho",
-                ResourceId = globalResource.Id,
+                Content = "aaaaaaaaaaaaaaaaa",
+                IsDeleted = true,
+                ResourceId = findResource.Id
             };
 
-            Comment dbCommentDeleted = new Comment()
+            await fixture.DbContext.Comments.AddAsync(comment);
+            await fixture.DbContext.SaveChangesAsync();
+
+            var commentToTryToEditWith = new EditCommentModel()
             {
-                UserId = "peshoQdeRiba",
-                Content = "This is a very nice Content, isn't it?",
-                CreatedOn = DateTime.UtcNow,
-                CreatedBy = "pesho",
-                UpdatedOn = DateTime.UtcNow,
-                UpdatedBy = "pesho",
-                ResourceId = globalResource.Id,
-                IsDeleted = true
+                Content = "adsadasdasdasdasdasdas"
             };
 
-
-            await _dbContext.Comments.AddAsync(dbComment);
-            await _dbContext.SaveChangesAsync();
-            await _dbContext.Comments.AddAsync(dbCommentDeleted);
-            await _dbContext.SaveChangesAsync();
-
-            _currentUserServiceMock.Setup(mock => mock.GetUserId())
-                .Returns("pesho123");
-
-            Assert.ThrowsAsync<ServiceException>(() => _commentService.DeleteComment($"Invalid{dbComment.Id}"));
-            Assert.ThrowsAsync<ServiceException>(() => _commentService.DeleteComment($"{dbCommentDeleted.Id}"));
-            Assert.ThrowsAsync<ServiceException>(() => _commentService.DeleteComment($"{dbComment.Id}"));
+            await Assert.ThrowsAsync<ServiceException>(() =>
+                fixture.CommentService.EditComment(comment.Id.ToString(), commentToTryToEditWith));
         }
 
         [Fact]
-        public async Task DeleteCommentShouldReturnMessageIfSuccessful()
+        public async Task DeleteCommentShouldReturnCorrectMessageOnSuccess()
         {
-            Comment dbCommentDeleted = new Comment()
+            var findComment=await fixture.DbContext.Comments.Select(c=>new
             {
-                UserId = "123456",
-                Content = "This is a very nice Content, isn't it?",
-                CreatedOn = DateTime.UtcNow,
-                CreatedBy = "pesho",
-                UpdatedOn = DateTime.UtcNow,
-                UpdatedBy = "pesho",
-                ResourceId = globalResource.Id,
-                IsDeleted = false
-            };
+                c.Id,
+                c.UserId
+            }).FirstOrDefaultAsync(c=>c.UserId=="pesho");
 
-            await _dbContext.Comments.AddAsync(dbCommentDeleted);
-            await _dbContext.SaveChangesAsync();
+            var result = await fixture.CommentService.DeleteComment(findComment.Id.ToString());
 
-            var httpContextAccessorMock = new Mock<IHttpContextAccessor>();
-            httpContextAccessorMock.Setup(x => x.HttpContext!.User.Identity.Name).Returns(It.IsAny<string>());
-
-            _currentUserServiceMock.Setup(mock => mock.GetUserId())
-                .Returns("123456");
-
-           var result=_commentService.DeleteComment(dbCommentDeleted.Id.ToString());
-            
-
-            Assert.Equal(CommentMessages.OnSuccessfulDeleteComment,result.Result);
-         
+            Assert.Equal(CommentMessages.OnSuccessfulDeleteComment,result);
         }
 
+        [Fact]
+        public async Task DeleteCommentThrowsExceptionIfUserAttemptsToDeleteTheCommentFromAnotherUser()
+        {
+            var findComment=await fixture.DbContext.Comments.Select(c=>new
+            {
+                c.Id,
+                c.UserId
+            }).FirstOrDefaultAsync(c=>c.UserId!="pesho");
 
+            Assert.ThrowsAsync<ServiceException>(() => fixture.CommentService.DeleteComment(findComment.Id.ToString()));
+        }
+
+        [Fact]
+        public async Task DeleteCommentThrowsExceptionIfUserAttemptsToDeleteDeletedComment()
+        {
+            var findComment =
+                await fixture.DbContext.Comments.FirstOrDefaultAsync(c => c.IsDeleted == true && c.UserId == "pesho");
+
+            Assert.ThrowsAsync<ServiceException>(() => fixture.CommentService.DeleteComment(findComment.Id.ToString()));
+        }
+
+        [Fact]
+        public async Task GetCommentsFromResourceShouldReturnCorrectAmountOfComment()
+        {
+            var findResource = await fixture.DbContext.Resources.FirstOrDefaultAsync(r=>r.UserId=="alice");
+
+            var result = await fixture.CommentService.GetCommentsFromResource(findResource.Id.ToString());
+
+            Assert.Equal(2, result.Count());
+        }
+
+        [Fact]
+        public async Task GetCommentsFroMResourceShouldReturn0IfIncorrectIdHasBeenPassed()
+        {
+            string randomId=Guid.NewGuid().ToString();
+
+            var result = await fixture.CommentService.GetCommentsFromResource(randomId);
+
+            Assert.Equal(0, result.Count());
+        }
     }
 }
+      

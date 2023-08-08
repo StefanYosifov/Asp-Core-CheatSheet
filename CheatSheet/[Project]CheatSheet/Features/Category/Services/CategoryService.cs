@@ -1,11 +1,10 @@
 ﻿namespace _Project_CheatSheet.Features.Category.Services
 {
-    using Resources.Enums;
-    using Infrastructure.Data;
+    using _Project_CheatSheet.Infrastructure.Data.SQL;
     using Interfaces;
     using Microsoft.EntityFrameworkCore;
     using Models;
-    using _Project_CheatSheet.Infrastructure.Data.SQL;
+    using Resources.Enums;
 
     public class CategoryService : ICategoryService
     {

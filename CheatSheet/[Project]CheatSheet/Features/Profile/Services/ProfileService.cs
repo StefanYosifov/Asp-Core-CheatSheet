@@ -3,7 +3,6 @@
     using _Project_CheatSheet.Infrastructure.Data.SQL;
     using AutoMapper;
     using Common.UserService.Interfaces;
-    using Infrastructure.Data;
     using Interfaces;
     using Microsoft.EntityFrameworkCore;
     using Models;

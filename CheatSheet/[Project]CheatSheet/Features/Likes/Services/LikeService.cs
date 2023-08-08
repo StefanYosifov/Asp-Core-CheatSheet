@@ -30,7 +30,7 @@
         public int GetCommentLikesCount(LikeCommentModel commentModel)
         {
             return context.CommentLikes
-                .Count(c => c.Id.ToString() == commentModel.CommentId);
+                .Count(c => c.CommentId.ToString() == commentModel.CommentId);
         }
 
         public async Task<string> LikeAComment(LikeCommentModel likeComment)

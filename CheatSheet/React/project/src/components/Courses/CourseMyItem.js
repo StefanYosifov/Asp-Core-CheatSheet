@@ -16,7 +16,6 @@ export const CourseMyItem = ({ course }) => {
                             </div>
                             <div className="p-4 flex flex-col justify-between h-full">
                                 <div>
-                                    <span className="px-2 py-1 leading-none bg-orange-200 text-orange-800 rounded-full font-semibold uppercase tracking-wide text-xs">{course.category}</span>
                                     <h2 className="mt-2 mb-2 font-bold">{course.title}</h2>
                                     <p className="text-sm overflow-hidden">{course.description}</p>
                                 </div>
@@ -24,7 +23,7 @@ export const CourseMyItem = ({ course }) => {
                             <div className="p-4 border-t border-b text-xs text-gray-700">
                                 <span className="flex items-center">
                                     {course.hasPaid === true ? (
-                                        <span className="flex items-center">
+                                        <span className="flex items-center text-pinkUI-0 font-semibold">
                                             <Link to={{
                                                 pathname: `/course/trainings/${course.id}/${encodeURIComponent(course.title)}`,
                                                 state:'mystate' 

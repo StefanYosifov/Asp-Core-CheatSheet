@@ -6,6 +6,7 @@
 
     using Common.Caching;
     using Common.Exceptions;
+    using Common.Extensions;
     using Common.UserService.Interfaces;
 
     using Constants.CachingConstants;
@@ -13,6 +14,9 @@
     using Constants.GlobalConstants.Course;
 
     using Interfaces;
+
+    using Microsoft.AspNetCore.Identity;
+    using System.Security.Claims;
 
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Caching.Memory;
@@ -108,7 +112,7 @@
 
             CustomException.ThrowIfNull(course, CourseMessages.CourseNotFound);
 
-            if (await context.UserCourses.AnyAsync(uc =>
+            if (await context.UserCourses.AllAsync(uc =>
                     uc.UserId != userId && uc.CourseId.ToString() != course.Id.ToString()))
             {
                 throw new ServiceException(CourseMessages.UserNotInCourse);

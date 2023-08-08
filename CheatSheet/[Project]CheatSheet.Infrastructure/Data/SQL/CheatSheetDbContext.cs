@@ -4,10 +4,8 @@
     using _Project_CheatSheet.Infrastructure.Data.SQL.Models.Base.Interfaces;
     using _Project_CheatSheet.Infrastructure.Data.SQL.Seed;
     using Microsoft.AspNetCore.Http;
-    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
-    using Microsoft.Extensions.Options;
 
     public class CheatSheetDbContext : IdentityDbContext<User>
     {

@@ -6,12 +6,12 @@
     using AutoMapper.QueryableExtensions;
     using Common.Exceptions;
     using Common.UserService.Interfaces;
-
     using Constants.GlobalConstants.Comment;
     using Constants.GlobalConstants.Resource;
     using Interfaces;
     using Microsoft.EntityFrameworkCore;
     using Models;
+    using System.Net;
 
     public class CommentService : ICommentService
     {
@@ -31,16 +31,13 @@
 
         public async Task<string> CreateAComment(InputCommentModel comment)
         {
-            if (comment == null)
-            {
-                throw new ServiceException(CommentMessages.OnEmptyComment);
-            }
+
+            ServiceException.ThrowIfNull(comment,CommentMessages.OnEmptyComment);
+
+            comment.Content = WebUtility.HtmlDecode(comment.Content);
 
             var resource = await GetResource(comment.ResourceId.ToLower());
-            if (resource == null)
-            {
-                throw new ServiceException(CommentMessages.OnUnsuccessfulPostComment);
-            }
+            ServiceException.ThrowIfNull(resource,CommentMessages.OnUnsuccessfulPostComment);
 
             var userId = currentUserService.GetUserId();
 
@@ -95,6 +92,8 @@
             }
 
             var userId = currentUserService.GetUserId();
+
+            var test = await context.Comments.OrderBy(c=>c.CreatedOn).Where(c=>c.Id.ToString()==resourceId).ToArrayAsync();
 
             IEnumerable<CommentModel> comments = await context.Comments
                 .OrderBy(c => c.CreatedOn)

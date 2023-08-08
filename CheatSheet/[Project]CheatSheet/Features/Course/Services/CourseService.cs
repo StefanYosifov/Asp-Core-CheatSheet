@@ -1,33 +1,35 @@
 ﻿namespace _Project_CheatSheet.Features.Course.Services
 {
-    using _Project_CheatSheet.Infrastructure.Data.SQL;
     using AutoMapper;
     using AutoMapper.QueryableExtensions;
+
     using Common.Caching;
     using Common.Pagination;
     using Common.UserService.Interfaces;
-    using Constants.CachingConstants;
+
     using Enums;
 
+    using Infrastructure.Data.SQL;
     using Infrastructure.Data.SQL.Models;
 
     using Interfaces;
+
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Caching.Memory;
+
     using Models;
+
     using static Constants.CachingConstants.CachingConstants.Course;
-    using Course = Infrastructure.Data.SQL.Models.Course;
 
     public class CourseService : ICourseService
     {
-        private readonly string[] featuredCategories = new string[] { "C#", "JavaScript", "Python", "Java", "Web" };
         private const int FeaturedCategoriesCount = 6;
         private const byte CoursesPerPage = 6;
-
 
         private readonly IMemoryCache cache;
         private readonly CheatSheetDbContext context;
         private readonly ICurrentUser currentUserService;
+        private readonly string[] featuredCategories = { "C#", "JavaScript", "Python", "Java", "Web" };
         private readonly IMapper mapper;
         private readonly ICacheService setCache;
 
@@ -37,7 +39,7 @@
             ICurrentUser currentUserService,
             IMemoryCache cache,
             ICacheService setCache
-            )
+        )
         {
             this.context = context;
             this.mapper = mapper;
@@ -77,10 +79,9 @@
         public async Task<CourseRespondAllPaginated> GetAllCourses(int page, CourseRequestQueryModel query)
         {
             var userId = currentUserService.GetUserId();
-            string splitQueryCategoriesText = string.Join(',', query.Categories);
-            string[] splitQueryCategoriesArr = splitQueryCategoriesText.Split(',');
+            var splitQueryCategoriesText = string.Join(',', query.Categories);
+            var splitQueryCategoriesArr = splitQueryCategoriesText.Split(',');
             var cacheKey = $"Courses_{page}_{query.Search}_{query.Sort}_{splitQueryCategoriesText}";
-
 
             if (cache.TryGetValue(cacheKey, out CourseRespondAllPaginated cachedResult))
             {
@@ -98,7 +99,8 @@
 
             if (query.Categories.Count > 0)
             {
-                courses = courses.Where(c => c.CategoryCourseCourses.Any(cc => splitQueryCategoriesArr.Contains(cc.CategoryCourse.Name)));
+                courses = courses.Where(c =>
+                    c.CategoryCourseCourses.Any(cc => splitQueryCategoriesArr.Contains(cc.CategoryCourse.Name)));
             }
 
             if (query.Sort != null && query.Sort.ToString() != "All")
@@ -107,7 +109,8 @@
                 {
                     CourseFilters.Active => courses.Where(c => c.StartDate > DateTime.UtcNow),
                     CourseFilters.Passed => courses.Where(c => c.StartDate < DateTime.UtcNow),
-                    CourseFilters.OnGoing => courses.Where(c => c.StartDate < DateTime.UtcNow && c.EndDate > DateTime.UtcNow),
+                    CourseFilters.OnGoing => courses.Where(c =>
+                        c.StartDate < DateTime.UtcNow && c.EndDate > DateTime.UtcNow)
                 };
             }
 
@@ -147,7 +150,7 @@
             var paginationResult = await Pagination<CourseRespondAllModel>.CreateAsync(filteredResults, page);
 
             foreach (var course in
-                     paginationResult) //Todo think of better way to implement, without the need of yet another class
+                     paginationResult)
             {
                 course.HasPaid = true;
             }
@@ -191,20 +194,70 @@
                 .Select(cc => cc.Name)
                 .ToArrayAsync();
 
-            string[] filterEnum = Enum.GetValues(typeof(CourseFilters))
-                            .Cast<CourseFilters>()
-                            .Select(x => x.ToString())
-                            .ToArray();
+            var filterEnum = Enum.GetValues(typeof(CourseFilters))
+                .Cast<CourseFilters>()
+                .Select(x => x.ToString())
+                .ToArray();
 
             var sortingModel = new CourseFilterModel
             {
                 Categories = languages,
-                Sortings = filterEnum,
+                Sortings = filterEnum
             };
 
             setCache.SetCache(cacheKey, sortingModel, CategoriesCoursesCache);
 
             return sortingModel;
+        }
+
+        public async Task<ICollection<CourseRespondUpcomingModel>> GetUpcomingCourses()
+        {
+            var userId = currentUserService.GetUserId();
+            var cacheKey = $"upcomingCourses_{userId}";
+
+            if (cache.TryGetValue(cacheKey, out ICollection<CourseRespondUpcomingModel> upcomingCourses))
+            {
+                return upcomingCourses;
+            }
+
+            var getUpComingCourses = await context.Courses
+                .AsNoTracking()
+                .Include(c => c.CategoryCourseCourses)
+                .ThenInclude(cc => cc.Course)
+                .Where(c => c.StartDate > DateTime.UtcNow &&
+                            c.CategoryCourseCourses.Any(ccc => featuredCategories.Contains(ccc.CategoryCourse.Name)))
+                .Take(FeaturedCategoriesCount)
+                .OrderBy(x => x.StartDate)
+                .ProjectTo<CourseRespondUpcomingModel>(mapper.ConfigurationProvider)
+                .ToArrayAsync();
+
+            setCache.SetCache(cacheKey, getUpComingCourses, UpComingCourses);
+            return getUpComingCourses;
+        }
+
+        public async Task<CoursePreviewModel> GetPreviewCourseData(string id)
+        {
+            var courseDetailsData = await context.Courses
+                .Include(c => c.Topics)
+                .ThenInclude(t => t.Video)
+                .Include(c => c.UsersCourses)
+                .FirstOrDefaultAsync(c => c.Id.ToString() == id);
+
+            return new CoursePreviewModel
+            {
+                Id = courseDetailsData.Id.ToString(),
+                Name = courseDetailsData.Title,
+                Price = courseDetailsData.Price,
+                IntroductionVideoUrl = courseDetailsData.Topics.Where(t => t.CourseId.ToString() == id)
+                    .Select(v => v.Video.VideoUrl).FirstOrDefault(),
+                PeopleParticipating = courseDetailsData.UsersCourses.Count(uc => uc.CourseId.ToString() == id),
+                Topics = courseDetailsData.Topics.Select(topic => new TopicDetailModel
+                {
+                    Name = topic.Name,
+                    Content = topic.Content,
+                    Resources = new List<string> { topic.Video.Name }
+                }).ToList()
+            };
         }
 
         private IQueryable<CourseRespondAllModel> FilterWhetherArchiveOrNotQuery(bool isArchived,
@@ -227,57 +280,5 @@
 
             return filteredResults;
         }
-
-        public async Task<ICollection<CourseRespondUpcomingModel>> GetUpcomingCourses()
-        {
-
-
-            var userId = currentUserService.GetUserId();
-            var cacheKey = $"upcomingCourses_{userId}";
-
-            if (cache.TryGetValue(cacheKey, out ICollection<CourseRespondUpcomingModel> upcomingCourses))
-            {
-                return upcomingCourses;
-            }
-
-            var getUpComingCourses = await context.Courses
-                .AsNoTracking()
-                .Include(c => c.CategoryCourseCourses)
-                .ThenInclude(cc => cc.Course)
-                .Where(c => c.StartDate > DateTime.UtcNow && c.CategoryCourseCourses.Any(ccc => featuredCategories.Contains(ccc.CategoryCourse.Name)))
-                .Take(FeaturedCategoriesCount)
-                .OrderBy(x => x.StartDate)
-                .ProjectTo<CourseRespondUpcomingModel>(mapper.ConfigurationProvider)
-                .ToArrayAsync();
-
-            setCache.SetCache(cacheKey, getUpComingCourses, CachingConstants.Course.UpComingCourses);
-            return getUpComingCourses;
-        }
-
-
-    public async Task<CoursePreviewModel> GetPreviewCourseData(string id)
-    {
-        var courseDetailsData = await context.Courses
-            .Include(c => c.Topics)
-            .ThenInclude(t => t.Video)
-            .Include(c => c.UsersCourses)
-            .FirstOrDefaultAsync(c => c.Id.ToString() == id);
-
-        return new CoursePreviewModel()
-        {
-            Id = courseDetailsData.Id.ToString(),
-            Name = courseDetailsData.Title,
-            Price = courseDetailsData.Price,
-            IntroductionVideoUrl = courseDetailsData.Topics.Where(t => t.CourseId.ToString() == id).Select(v => v.Video.VideoUrl).FirstOrDefault(),
-            PeopleParticipating = courseDetailsData.UsersCourses.Count(uc => uc.CourseId.ToString() == id),
-            Topics = courseDetailsData.Topics.Select(topic => new TopicDetailModel
-            {
-                Name = topic.Name,
-                Content = topic.Content,
-                Resources = new List<string> { topic.Video.Name }
-            }).ToList()
-        };
-
     }
-}
 }

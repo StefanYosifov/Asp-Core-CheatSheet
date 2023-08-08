@@ -91,6 +91,13 @@
         {
             var userId = currentUserService.GetUserId();
 
+
+            var testResource = await context.Resources.ToArrayAsync();
+
+            var seeResources = await context.Resources
+                .Where(res => res.UserId.ToLower() == userId.ToLower())
+                .ToArrayAsync();;
+
             IEnumerable<ResourceModel> resources = await context.Resources
                 .AsNoTracking()
                 .Include(res => res.CategoryResources)
@@ -108,6 +115,9 @@
             var userId = currentUserService.GetUserId();
 
             var resourceModels = context.Resources.AsQueryable();
+
+            var resourceModelsTesting = await context.Resources.AsQueryable().ToArrayAsync();
+
 
             if (!string.IsNullOrWhiteSpace(query.Search))
             {
@@ -246,14 +256,12 @@
             var userId = currentUserService.GetUserId();
             var resource = await context.Resources.FindAsync(Guid.Parse(id));
 
-            if (resource == null)
-            {
-                throw new Exception(ResourceMessages.SuchModelDoesNotExist);
-            }
+
+            ServiceException.ThrowIfNull(resource,ResourceMessages.SuchModelDoesNotExist);
 
             if (resource.UserId != userId || resource.IsDeleted)
             {
-                throw new Exception(ResourceMessages.OnUnsuccessfulResourceRemove);
+                throw new ServiceException(ResourceMessages.OnUnsuccessfulResourceRemove);
             }
 
             context.Remove(resource);

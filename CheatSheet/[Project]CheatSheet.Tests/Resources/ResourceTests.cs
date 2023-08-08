@@ -1,19 +1,24 @@
 ﻿namespace _Project_CheatSheet.Tests.Resources
 {
+    using _Project_CheatSheet.Tests.Fixtures;
     using Common.Exceptions;
-
-    using Constants.GlobalConstants.Category;
     using Constants.GlobalConstants.Resource;
 
     using Features.Resources.Models;
 
+    using Infrastructure.Data.SQL.Models;
+
+    using Microsoft.EntityFrameworkCore;
+
     using Xunit;
+
 
     public class ResourceTests : IClassFixture<ResourcesTestFixture>
     {
         private readonly ResourcesTestFixture fixture;
 
-        public ResourceTests(ResourcesTestFixture fixture)
+        public ResourceTests(
+            ResourcesTestFixture fixture)
         {
             this.fixture = fixture;
         }
@@ -30,7 +35,7 @@
                 CategoryIds = new List<int>() { 1, 2, 3 },
             };
 
-            var result =await fixture.ResourceService.AddResources(resourceAddModel);
+            var result = await fixture.ResourceService.AddResources(resourceAddModel);
 
             Assert.NotNull(result);
             Assert.Equal(ResourceMessages.OnSuccessfulResourceAdd, result);
@@ -108,12 +113,12 @@
         public async Task GetMyResourceShouldReturnCorrectCountForTheUser()
         {
             var result = fixture.ResourceService.GetMyResources();
-            
-            Assert.Equal(1,result.Result.Count());
+
+            Assert.Equal(1, result.Result.Count());
         }
 
         [Fact]
-        public async Task GetPublicResourcesShouldReturnAllNonPublicResources()
+        public async Task GetPublicResourcesShouldReturnAllPublicResources()
         {
             ResourceQueryModel queryModel = new ResourceQueryModel()
             {
@@ -121,11 +126,114 @@
                 Search = null,
                 Sort = null
             };
-           var result=fixture.ResourceService.GetPublicResources(1, queryModel);
-           Assert.NotNull(result);
-           Assert.Equal(3,result.Result.Resources.Count);
-            
+            var result = fixture.ResourceService.GetPublicResources(1, queryModel);
+            Assert.NotNull(result);
+            Assert.Equal(3, result.Result.Resources.Count);
+
         }
-        
+
+        [Fact]
+        public async Task RemoveResourceByIdShouldWorkIfTheUserOwningItTriesToDeleteIt()
+        {
+            var resource = await fixture.DbContext.Resources.Select(r => new
+            {
+                r.Id,
+                r.UserId
+            }).FirstOrDefaultAsync(r => r.UserId == "pesho");
+
+            var result = await fixture.ResourceService.RemoveResource(resource.Id.ToString());
+
+            Assert.Equal(ResourceMessages.OnSuccessfulResourceRemove, result);
+        }
+
+        [Fact]
+        public async Task RemoveResourceByIdShouldThrowAnExceptionIfAnotherUserTriesToDeleteIt()
+        {
+            var resource = await fixture.DbContext.Resources.Select(r => new
+            {
+                r.Id,
+                r.UserId
+            }).FirstOrDefaultAsync(r => r.UserId != "pesho");
+
+            await Assert.ThrowsAsync<ServiceException>(() => fixture.ResourceService.RemoveResource(resource.Id.ToString()));
+
+        }
+
+        [Fact]
+        public async Task RemoveResourceByIdShouldThrowAnExceptionIfTheResourceDoesNotExist()
+        {
+            var resourceId=Guid.NewGuid().ToString();
+            await Assert.ThrowsAsync<CustomException>(() => fixture.ResourceService.RemoveResource(resourceId));
+        }
+
+        [Fact]
+        public async Task RemoveResourceByIdShouldThrowAnExceptionIfTheResourceHasBeenDeleted()
+        {
+            var resource = new Resource()
+            {
+                Content = "aaaaaaaaaaaaaaaaaaaaaa",
+                CreatedBy = "pesho",
+                ImageUrl = "https://imageurl.com",
+                IsDeleted = true,
+                IsPublic = true,
+                Title = "Test title 123, test 123 123",
+                UserId = "pesho",
+            };
+
+            await fixture.DbContext.Resources.AddAsync(resource);
+            await fixture.DbContext.SaveChangesAsync();
+
+            await Assert.ThrowsAsync<ServiceException>(() => fixture.ResourceService.RemoveResource(resource.Id.ToString()));
+        }
+
+        [Fact]
+        public async Task ChangeVisibilityShouldChangeBooleanIfCorrect()
+        {
+            var resource = await fixture.DbContext.Resources.Select(r => new
+            {
+                r.Id,
+                r.UserId
+            }).FirstOrDefaultAsync(r => r.UserId == "pesho");
+
+            var result = await fixture.ResourceService.ChangeVisibility(resource.Id.ToString());
+
+            Assert.NotNull(result);
+            Assert.Equal(ResourceMessages.SuccessfullyVisibilityChanged,result);
+        }
+
+        [Fact]
+        public async Task ChangeVisibilityShouldNotWorkIfAnotherUserTriesToChangeIt()
+        {
+            var resource = await fixture.DbContext.Resources.Select(r => new
+            {
+                r.Id,
+                r.UserId
+            }).FirstOrDefaultAsync(r => r.UserId != "pesho");
+
+           await Assert.ThrowsAsync<ServiceException>(()=> fixture.ResourceService.ChangeVisibility(resource.Id.ToString()));
+        }
+
+        [Fact]
+        public async Task ChangeVisibilityShouldNotWorkIfTheResourceHasBeenDeleted()
+        {
+            var resource = new Resource()
+            {
+                Content = "aaaaaaaaaaaaaaaaaaaaaa",
+                CreatedBy = "pesho",
+                ImageUrl = "https://imageurl.com",
+                IsDeleted = true,
+                IsPublic = true,
+                Title = "Test title 123, test 123 123",
+                UserId = "pesho",
+            };
+
+            await fixture.DbContext.Resources.AddAsync(resource);
+            await fixture.DbContext.SaveChangesAsync();
+
+            await Assert.ThrowsAsync<ServiceException>(()=> fixture.ResourceService.ChangeVisibility(resource.Id.ToString()));
+
+        }
+
+
     }
 }

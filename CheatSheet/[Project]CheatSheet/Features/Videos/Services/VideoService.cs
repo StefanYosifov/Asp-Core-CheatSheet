@@ -8,8 +8,6 @@
     using Constants.CachingConstants;
     using Constants.GlobalConstants.Course;
 
-    using Infrastructure.Data;
-
     using Interfaces;
 
     using Microsoft.EntityFrameworkCore;
@@ -44,21 +42,21 @@
                 return cachedVideo;
             }
 
-            var course = await context.Courses
+            var findCourse = await context.Courses
                 .Include(c=>c.Topics)
                 .ThenInclude(v=>v.Video)
                 .Where(c => c.Topics.Any(t => t.Id == topicId))
                 .FirstOrDefaultAsync();
 
-            CustomException.ThrowIfNull(course, CourseMessages.CourseNotFound);
+            CustomException.ThrowIfNull(findCourse, CourseMessages.CourseNotFound);
 
-            if (await context.UserCourses.AnyAsync(uc =>
-                    uc.UserId != userId && uc.CourseId.ToString() != course.Id.ToString()))
+            if (await context.UserCourses.AllAsync(uc =>
+                    uc.UserId != userId && uc.CourseId.ToString() != findCourse.Id.ToString()))
             {
                 throw new ServiceException(CourseMessages.UserNotInCourse);
             }
 
-            var youtubeVideoUrl = course.Topics.Select(t => t.Video.VideoUrl.Split("=")[1]).FirstOrDefault();
+            var youtubeVideoUrl = findCourse.Topics.Select(t => t.Video.VideoUrl.Split("=")[1]).FirstOrDefault();
             cacheService.SetCache(cacheKey, youtubeVideoUrl, CachingConstants.Lessons.YoutubeUrl);
 
             return youtubeVideoUrl;

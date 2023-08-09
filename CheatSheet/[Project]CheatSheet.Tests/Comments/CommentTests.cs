@@ -3,23 +3,10 @@
 namespace _Project_CheatSheet.Tests.Comments
 {
     using _Project_CheatSheet.Common.Exceptions;
-    using _Project_CheatSheet.Common.UserService.Interfaces;
     using _Project_CheatSheet.Constants.GlobalConstants.Comment;
     using _Project_CheatSheet.Features.Comment.Models;
-    using _Project_CheatSheet.Features.Comment.Services;
-    using _Project_CheatSheet.Infrastructure.Data.SQL;
     using _Project_CheatSheet.Tests.Fixtures;
-    using AutoMapper;
-
-    using Constants.GlobalConstants.Resource;
-
-    using Features.Comment.Interfaces;
-
-    using Microsoft.AspNetCore.Http;
-    using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
-
-    using Moq;
 
     using Xunit;
 
@@ -40,7 +27,7 @@ namespace _Project_CheatSheet.Tests.Comments
         {
             var findResource = await fixture.DbContext.Resources.FirstOrDefaultAsync();
 
-            var commentModel = new InputCommentModel()
+            var commentModel = new CommentInputModel()
             {
                 Content = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 ResourceId = findResource.Id.ToString(),
@@ -54,15 +41,15 @@ namespace _Project_CheatSheet.Tests.Comments
         [Fact]
         public async Task CreateACommentShouldThrowExceptionWhenInputCommentModelIsNull()
         {
-            InputCommentModel nullCommentModel = null;
+            CommentInputModel nullModel = null;
 
-            await Assert.ThrowsAsync<CustomException>(() => fixture.CommentService.CreateAComment(nullCommentModel));
+            await Assert.ThrowsAsync<CustomException>(() => fixture.CommentService.CreateAComment(nullModel));
         }
 
         [Fact]
         public async Task CreateACommentShouldThrowExceptionIfResourceCannotBeFound()
         {
-            var commentModel = new InputCommentModel()
+            var commentModel = new CommentInputModel()
             {
                 Content = "asddasdasdasdasdasdas",
                 ResourceId = Guid.NewGuid().ToString(),
@@ -77,7 +64,7 @@ namespace _Project_CheatSheet.Tests.Comments
         {
             var findComment=await fixture.DbContext.Comments.FirstOrDefaultAsync(c=>c.UserId=="pesho");
 
-            var editCommentModel = new EditCommentModel()
+            var editCommentModel = new CommentEditModel()
             {
                 Content = "qweweqeqwewqewqewqweq"
             };
@@ -90,7 +77,7 @@ namespace _Project_CheatSheet.Tests.Comments
         [Fact]
         public async Task EditCommentShouldThrowExceptionIfTheCommentDoesNotExist()
         {
-            var editCommentModel = new EditCommentModel()
+            var editCommentModel = new CommentEditModel()
             {
                 Content = "qweweqeqwewqewqewqweq"
             };
@@ -114,7 +101,7 @@ namespace _Project_CheatSheet.Tests.Comments
             await fixture.DbContext.Comments.AddAsync(comment);
             await fixture.DbContext.SaveChangesAsync();
 
-            var commentToTryToEditWith = new EditCommentModel()
+            var commentToTryToEditWith = new CommentEditModel()
             {
                 Content = "adsadasdasdasdasdasdas"
             };

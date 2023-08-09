@@ -4,10 +4,10 @@
 
     using Constants.GlobalConstants.Comment;
 
-    public class InputCommentModel
+    public class CommentInputModel
     {
 
-        public InputCommentModel()
+        public CommentInputModel()
         {
             Id = Guid.NewGuid().ToString();
         }

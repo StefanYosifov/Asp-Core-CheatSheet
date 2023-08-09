@@ -2,7 +2,7 @@
 {
     using Microsoft.AspNetCore.WebUtilities;
 
-    public class AwsResponseFileModel
+    public class AwsFileModel
     {
         public byte[] Bytes { get; set; }
 

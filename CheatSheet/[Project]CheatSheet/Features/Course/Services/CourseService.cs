@@ -50,7 +50,7 @@
 
         public async Task<bool> JoinCourse(string id)
         {
-            var getCourse = await context.Courses.FindAsync(id);
+            var getCourse = await context.Courses.FindAsync(Guid.Parse(id));
 
             if (getCourse == null)
             {
@@ -94,13 +94,16 @@
             {
                 var wildcard = $"%{query.Search.ToLower()}%";
 
-                courses = courses.Where(c => EF.Functions.Like(c.Title.ToLower(), wildcard));
+                courses = courses
+                    .Where(c => EF.Functions.Like(c.Title.ToLower(), wildcard));
             }
 
             if (query.Categories.Count > 0)
             {
-                courses = courses.Where(c =>
-                    c.CategoryCourseCourses.Any(cc => splitQueryCategoriesArr.Contains(cc.CategoryCourse.Name)));
+                courses = courses
+                    .Where(c =>
+                        c.CategoryCourseCourses
+                            .Any(cc => splitQueryCategoriesArr.Contains(cc.CategoryCourse.Name)));
             }
 
             if (query.Sort != null && query.Sort.ToString() != "All")
@@ -116,8 +119,7 @@
 
             var mappedCourses = courses.ProjectTo<CourseRespondAllModel>(mapper.ConfigurationProvider);
 
-            var paginationResult =
-                await Pagination<CourseRespondAllModel>.CreateAsync(mappedCourses, page, CoursesPerPage);
+            var paginationResult = await Pagination<CourseRespondAllModel>.CreateAsync(mappedCourses, page, CoursesPerPage);
 
             var allCoursesResult = new CourseRespondAllPaginated
             {
@@ -149,8 +151,7 @@
 
             var paginationResult = await Pagination<CourseRespondAllModel>.CreateAsync(filteredResults, page);
 
-            foreach (var course in
-                     paginationResult)
+            foreach (var course in paginationResult)
             {
                 course.HasPaid = true;
             }
@@ -165,7 +166,8 @@
             var userId = currentUserService.GetUserId();
             var course = await context.Courses
                 .Include(u => u.UsersCourses)
-                .FirstOrDefaultAsync(c => c.Id.ToString() == id && c.UsersCourses.Any(uc => uc.UserId == userId));
+                .FirstOrDefaultAsync(c => c.Id.ToString() == id && 
+                                          c.UsersCourses.Any(uc => uc.UserId == userId));
 
             if (course == null)
             {

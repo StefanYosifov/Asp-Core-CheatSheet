@@ -4,9 +4,9 @@
     using Constants.GlobalConstants.Resource;
     using System.ComponentModel.DataAnnotations;
 
-    public class DetailResources
+    public class ResourceDetailModel
     {
-        public DetailResources()
+        public ResourceDetailModel()
         {
             ResourceLikes = new HashSet<ResourceLike>();
             CategoryNames = new List<string>();

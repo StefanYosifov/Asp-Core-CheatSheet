@@ -20,7 +20,7 @@
         [HttpPost("send")]
         [ActionHandlingFilter]
         [ExceptionHandlingActionFilter]
-        public async Task<string> PostAComment(InputCommentModel comment)
+        public async Task<string> PostAComment(CommentInputModel comment)
             => await service.CreateAComment(comment);
 
         [HttpGet("get/{id}")]
@@ -31,7 +31,7 @@
         [HttpPatch("edit/{id}")]
         [ActionHandlingFilter]
         [ExceptionHandlingActionFilter]
-        public async Task<string> EditComment(string id, EditCommentModel comment)
+        public async Task<string> EditComment(string id, CommentEditModel comment)
             => await service.EditComment(id, comment);
 
         [HttpDelete("delete/{id}")]

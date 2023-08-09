@@ -1,9 +1,13 @@
 ﻿namespace _Project_CheatSheet.Features.Category.Services
 {
-    using _Project_CheatSheet.Infrastructure.Data.SQL;
+    using Infrastructure.Data.SQL;
+
     using Interfaces;
+
     using Microsoft.EntityFrameworkCore;
+
     using Models;
+
     using Resources.Enums;
 
     public class CategoryService : ICategoryService
@@ -18,26 +22,28 @@
         public async Task<CategorySortingModel> GetCategories()
         {
             var categories = await context.Categories
-               .AsNoTracking()
-               .Select(x => new CategoryModel
-               {
-                   Id = x.Id,
-                   Name = x.Name,
-               })
-               .ToArrayAsync();
+                .AsNoTracking()
+                .Select(x => new CategoryModel
+                {
+                    Id = x.Id,
+                    Name = x.Name
+                })
+                .ToArrayAsync();
 
-            var sorting=((ResourceSorting[])Enum.GetValues(typeof(ResourceSorting))).Select(s=>new SortingModel()
-            {
-                Id=(int)s,
-                Name=s.ToString(),
-            }).ToArray();
+            var sorting = ((ResourceSorting[])Enum
+                    .GetValues(typeof(ResourceSorting)))
+                .Select(s => new SortingModel
+                {
+                    Id = (int)s,
+                    Name = s.ToString()
+                })
+                .ToArray();
 
-            return new CategorySortingModel()
+            return new CategorySortingModel
             {
-                Categories=categories,
+                Categories = categories,
                 Sorting = sorting
             };
         }
-
     }
 }

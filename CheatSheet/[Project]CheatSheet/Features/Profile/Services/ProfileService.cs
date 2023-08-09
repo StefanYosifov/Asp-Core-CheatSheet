@@ -23,14 +23,14 @@
             this.mapper = mapper;
         }
 
-        public async Task<UserEditModel> EditProfileData(UserEditModel userEdit)
+        public async Task<ProfileUserEditModel> EditProfileData(ProfileUserEditModel profileUserEdit)
         {
             var currentUser = await currentUserService.GetUser();
-            context.Entry(currentUser).CurrentValues.SetValues(userEdit);
+            context.Entry(currentUser).CurrentValues.SetValues(profileUserEdit);
             try
             {
                 await context.SaveChangesAsync();
-                return userEdit;
+                return profileUserEdit;
             }
             catch (DbUpdateException)
             {
@@ -40,7 +40,9 @@
 
         public async Task<ProfileModel> GetProfileData(string userId)
         {
-            var postCount = await context.Resources.CountAsync(p => p.UserId == userId);
+            var postCount = await context.Resources
+                .CountAsync(p => p.UserId == userId);
+
             var likedResourceIds = await context.ResourceLikes
                 .Where(rl => rl.UserId == userId)
                 .Select(rl => rl.ResourceId)
@@ -58,14 +60,14 @@
                 .CountAsync();
 
             var findUser = await context.Users.FindAsync(userId);
-            var user = mapper.Map<UserModel>(findUser);
+            var user = mapper.Map<ProfileUserModel>(findUser);
 
             var profileModel = new ProfileModel
             {
                 PostCount = postCount,
                 ResourceLikes = totalResourceLikes,
                 CommentLikes = totalLikedComments,
-                User = user
+                ProfileUser = user
             };
 
             return profileModel;

@@ -29,7 +29,6 @@
             var objectResult = context.Result as ObjectResult;
             if (objectResult?.Value == null)
             {
-                //var objectInstance = GetObjectInstance(failureType, failureMessage);
                 context.HttpContext.Response.StatusCode = failureStatusCode;
                 context.HttpContext.Response.ContentLength = Encoding.UTF8.GetByteCount(failureMessage);
                 await context.HttpContext.Response.WriteAsync(failureMessage, Encoding.UTF8);
@@ -43,15 +42,5 @@
                 context.Result = new OkObjectResult(successMessage);
             }
         }
-
-
-
-        //private object GetObjectInstance(Type type, string failedMessage)
-        //{
-        //    var constructor = type.GetConstructor(new[] { typeof(string) });
-        //    var objectInstance = constructor.Invoke(new object[] { failedMessage });
-        //    objectInstance.GetType().GetProperty("Value")?.SetValue(objectInstance, failedMessage);
-        //    return objectInstance;
-        //}
     }
 }

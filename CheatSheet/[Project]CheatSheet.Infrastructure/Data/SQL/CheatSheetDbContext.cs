@@ -155,6 +155,8 @@
                     k.CategoryCourseId
                 });
 
+            modelBuilder.Entity<Issue>()
+                .HasQueryFilter(i => !i.IsDeleted);
             
 
             DataSeeder.SeedRoles(modelBuilder);

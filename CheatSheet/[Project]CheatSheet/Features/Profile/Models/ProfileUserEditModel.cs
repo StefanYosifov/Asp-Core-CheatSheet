@@ -4,7 +4,7 @@
 
     using Constants.GlobalConstants.User;
 
-    public class UserEditModel
+    public class ProfileUserEditModel
     {
         public string? ProfilePictureUrl { get; set; }
 

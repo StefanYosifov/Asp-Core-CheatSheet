@@ -32,7 +32,8 @@ public class IssueService : IIssueService
 
     public async Task<ICollection<IssueRespondModel>> GetIssues(IssueQuery? query)
     {
-        IQueryable<Issue> issues = context.Issues.AsQueryable();
+        IQueryable<Issue> issues = context.Issues
+            .AsQueryable();
 
         if (!string.IsNullOrWhiteSpace(query.SearchString))
         {
@@ -56,15 +57,13 @@ public class IssueService : IIssueService
 
         var filteredIssues = issues.ProjectTo<IssueRespondModel>(mapper.ConfigurationProvider);
 
-
         return await Pagination<IssueRespondModel>.CreateAsync(filteredIssues, query.CurrentPage, 6);
-
     }
 
-    public async Task<ICollection<IssueCategoryModel>> GetIssuesCategories()
-    {
-        return await context.CategoriesIssues.ProjectTo<IssueCategoryModel>(mapper.ConfigurationProvider).ToArrayAsync();
-    }
+    public async Task<ICollection<IssueCategoryModel>> GetIssuesCategories() 
+        => await context.CategoriesIssues
+            .ProjectTo<IssueCategoryModel>(mapper.ConfigurationProvider)
+            .ToArrayAsync();
 
     public async Task<string> WithdrawIssue(string issueId)
     {
@@ -103,7 +102,8 @@ public class IssueService : IIssueService
 
         var userId = userService.GetUserId();
 
-        if (await context.UserCourses.AllAsync(uc => uc.UserId != userId))
+        var userNotInCourse = await context.UserCourses.AllAsync(uc => uc.UserId != userId);
+        if (userNotInCourse)
         {
             throw new ServiceException(IssueMessages.NotInCourse);
         }

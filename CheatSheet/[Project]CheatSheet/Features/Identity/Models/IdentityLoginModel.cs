@@ -4,7 +4,7 @@
 
     using Constants.GlobalConstants.User;
 
-    public class LoginModel
+    public class IdentityLoginModel
     {
         [Required]
         [StringLength(UserConstants.NameMaxLength, MinimumLength = UserConstants.NameMinLength)]

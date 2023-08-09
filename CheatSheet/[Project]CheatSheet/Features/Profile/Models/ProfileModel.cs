@@ -15,6 +15,6 @@
         [Range(ProfileConstants.MinValue, ProfileConstants.MaxValue)]
         public int CommentLikes { get; set; }
 
-        [Required] public virtual UserModel User { get; set; } = null!;
+        [Required] public virtual ProfileUserModel ProfileUser { get; set; } = null!;
     }
 }

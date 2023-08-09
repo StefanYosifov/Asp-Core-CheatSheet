@@ -23,12 +23,12 @@
         [HttpPost("login")]
         [ActionHandlingFilter("", UserIdentityMessages.OnFailedLogin)]
         [ExceptionHandlingActionFilter()]
-        public async Task<Response> Login(LoginModel loginModel)
-            => await service.AuthenticateLogin(loginModel);
+        public async Task<Response> Login(IdentityLoginModel identityLoginModel)
+            => await service.AuthenticateLogin(identityLoginModel);
 
         [HttpPost("register")]
         [ExceptionHandlingActionFilter()]
-        public async Task<Response> Register(RegisterModel registerModel)
-            => await service.AuthenticateRegister(registerModel);
+        public async Task<Response> Register(IdentityRegisterModel identityRegisterModel)
+            => await service.AuthenticateRegister(identityRegisterModel);
     }
 }

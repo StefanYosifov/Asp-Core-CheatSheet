@@ -25,6 +25,7 @@ namespace _Project_CheatSheet.Tests.Fixtures
 
     using IResourceService = Features.Resources.Interfaces.IResourceService;
     using System.Numerics;
+    using _Project_CheatSheet.Tests.Fixtures.Setup;
 
     public class ResourcesTestFixture : IDisposable
     {
@@ -40,13 +41,13 @@ namespace _Project_CheatSheet.Tests.Fixtures
         {
             const string userId = "pesho";
 
-            
-
             var httpContextAccessorMock = SetupFixtureDependencies.HttpContextMock();
             var currentUserServiceMock = SetupFixtureDependencies.CurrentUserServiceMock(userId);
             var mapper = SetupFixtureDependencies.SetupMapper(currentUserServiceMock);
-            this.DbContext = SetupFixtureDependencies.CheatSheetDbContextMock(httpContextAccessorMock).Object;
-
+            var options = new DbContextOptionsBuilder<CheatSheetDbContext>()
+                .UseInMemoryDatabase("RandomName")
+                .Options;            
+            this.DbContext = new CheatSheetDbContext(options,httpContextAccessorMock.Object);
 
             var commentServiceMock = new Mock<CommentService>(DbContext, currentUserServiceMock.Object, mapper);
             var resourceServiceMock = new Mock<ResourceService>(DbContext, mapper, currentUserServiceMock.Object);

@@ -3,8 +3,6 @@
     using _Project_CheatSheet.Common.Caching;
     using _Project_CheatSheet.Infrastructure.Data.SQL;
     using Constants.CachingConstants;
-
-    using Infrastructure.Data;
     using Interfaces;
     using Microsoft.Extensions.Caching.Memory;
     using Models;
@@ -38,7 +36,7 @@
                 UsersCount = context.Users.Count()
             };
 
-            cacheService.SetCache(cacheKey, newStatisticsModel, CachingConstants.Course.HomeStatistics);
+            cacheService.SetCache(cacheKey, newStatisticsModel, CachingConstants.Statistics.HomeStatistics);
             return newStatisticsModel;
         }
 

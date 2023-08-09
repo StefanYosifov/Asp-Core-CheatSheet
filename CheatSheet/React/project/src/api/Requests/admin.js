@@ -1,4 +1,4 @@
-import { get, patch, post } from "./requests";
+import { del, get, patch, post } from "./requests";
 
 
 
@@ -15,7 +15,12 @@ export const getTopicSecondaryDetailsByTopicId=(topicId)=>{
 }
 
 export const getIssues=(query)=>{
+    console.log(query);
     return get(`admin/issues?${query}`);
+}
+
+export const getIssuesFilteringCategories=()=>{
+    return get(`admin/issues/filters`);
 }
 
 export const updateTopicSecondaryDetails=(topicId,updatedData)=>{
@@ -32,4 +37,8 @@ export const createdTopic=(courseName,topicData)=>{
     topicData.topicStartDate=String(topicData.topicStartDate).replace("T"," ");
     topicData.topicEndDate=String(topicData.topicEndDate).replace("T"," ");    
     return post(`admin/topic/create/${courseName}`,topicData);
+}
+
+export const resolveIssue=(issueId)=>{
+    return del(`admin/issues/delete/${issueId}`);
 }

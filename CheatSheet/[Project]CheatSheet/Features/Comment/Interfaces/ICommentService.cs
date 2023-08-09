@@ -6,9 +6,9 @@
     {
         public Task<IEnumerable<CommentModel>> GetCommentsFromResource(string resourceId);
 
-        public Task<string> CreateAComment(InputCommentModel comment);
+        public Task<string> CreateAComment(CommentInputModel comment);
 
-        public Task<string> EditComment(string id, EditCommentModel commentModel);
+        public Task<string> EditComment(string id, CommentEditModel model);
 
         public Task<string> DeleteComment(string id); //Todo Investigate why using isn't working
     }

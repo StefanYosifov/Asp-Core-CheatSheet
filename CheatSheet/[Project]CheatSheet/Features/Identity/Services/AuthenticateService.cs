@@ -34,15 +34,15 @@ public class AuthenticateService : IAuthenticateService
         this.mapper = mapper;
     }
 
-    public async Task<Response> AuthenticateLogin(LoginModel loginModel)
+    public async Task<Response> AuthenticateLogin(IdentityLoginModel identityLoginModel)
     {
-        var user = await userManager.FindByNameAsync(loginModel.Username);
+        var user = await userManager.FindByNameAsync(identityLoginModel.Username);
         if (user == null)
         {
             throw new ServiceException(AuthenticationMessages.WrongCredentials);
         }
 
-        var result = await signInManager.CheckPasswordSignInAsync(user, loginModel.Password, false);
+        var result = await signInManager.CheckPasswordSignInAsync(user, identityLoginModel.Password, false);
         if (!result.Succeeded)
         {
             throw new ServiceException(AuthenticationMessages.WrongCredentials);
@@ -68,22 +68,22 @@ public class AuthenticateService : IAuthenticateService
         return response;
     }
 
-    public async Task<Response> AuthenticateRegister(RegisterModel registerModel)
+    public async Task<Response> AuthenticateRegister(IdentityRegisterModel identityRegisterModel)
     {
-        var userNameExists = await userManager.FindByNameAsync(registerModel.UserName);
+        var userNameExists = await userManager.FindByNameAsync(identityRegisterModel.UserName);
         if (userNameExists != null)
         {
             throw new ServiceException(AuthenticationMessages.UserNameOrEmailExist);
         }
 
-        var emailExists = await userManager.FindByEmailAsync(registerModel.Email);
+        var emailExists = await userManager.FindByEmailAsync(identityRegisterModel.Email);
         if (emailExists != null)
         {
             throw new ServiceException(AuthenticationMessages.UserNameOrEmailExist);
         }
 
-        var user = mapper.Map<User>(registerModel);
-        var result = await userManager.CreateAsync(user, registerModel.Password);
+        var user = mapper.Map<User>(identityRegisterModel);
+        var result = await userManager.CreateAsync(user, identityRegisterModel.Password);
 
         if (!result.Succeeded)
         {
@@ -108,6 +108,7 @@ public class AuthenticateService : IAuthenticateService
     private async Task<Response> GetResponse(JwtSecurityToken token, User user)
     {
         var response = new Response();
+
         response.AccessToken = new JwtSecurityTokenHandler().WriteToken(token);
         response.Roles = await userManager.GetRolesAsync(user);
         response.UserId = user.Id;

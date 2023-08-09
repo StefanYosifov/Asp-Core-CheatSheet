@@ -6,6 +6,6 @@
     {
         public Task<ProfileModel> GetProfileData(string id);
 
-        public Task<UserEditModel> EditProfileData(UserEditModel user);
+        public Task<ProfileUserEditModel> EditProfileData(ProfileUserEditModel profileUser);
     }
 }

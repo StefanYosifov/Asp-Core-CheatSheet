@@ -4,8 +4,8 @@
     {
         public ICollection<string> Roles { get; set; }
 
-        public string AccessToken { get; set; }
+        public string AccessToken { get; set; } = null!;
 
-        public string UserId { get; set; }
+        public string UserId { get; set; } = null!;
     }
 }

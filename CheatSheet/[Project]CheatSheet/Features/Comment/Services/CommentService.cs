@@ -1,17 +1,24 @@
 ﻿namespace _Project_CheatSheet.Features.Comment.Services
 {
-    using _Project_CheatSheet.Infrastructure.Data.SQL;
-    using _Project_CheatSheet.Infrastructure.Data.SQL.Models;
+    using System.Net;
+
     using AutoMapper;
     using AutoMapper.QueryableExtensions;
+
     using Common.Exceptions;
     using Common.UserService.Interfaces;
+
     using Constants.GlobalConstants.Comment;
     using Constants.GlobalConstants.Resource;
+
+    using Infrastructure.Data.SQL;
+    using Infrastructure.Data.SQL.Models;
+
     using Interfaces;
+
     using Microsoft.EntityFrameworkCore;
+
     using Models;
-    using System.Net;
 
     public class CommentService : ICommentService
     {
@@ -29,15 +36,14 @@
             this.mapper = mapper;
         }
 
-        public async Task<string> CreateAComment(InputCommentModel comment)
+        public async Task<string> CreateAComment(CommentInputModel comment)
         {
-
-            ServiceException.ThrowIfNull(comment,CommentMessages.OnEmptyComment);
+            CustomException.ThrowIfNull(comment, CommentMessages.OnEmptyComment);
 
             comment.Content = WebUtility.HtmlDecode(comment.Content);
 
             var resource = await GetResource(comment.ResourceId.ToLower());
-            ServiceException.ThrowIfNull(resource,CommentMessages.OnUnsuccessfulPostComment);
+            CustomException.ThrowIfNull(resource, CommentMessages.OnUnsuccessfulPostComment);
 
             var userId = currentUserService.GetUserId();
 
@@ -53,26 +59,29 @@
             return CommentMessages.OnSuccessfulPostComment;
         }
 
-        public async Task<string> EditComment(string id, EditCommentModel commentModel)
+        public async Task<string> EditComment(string id, CommentEditModel model)
         {
             var currentUserId = currentUserService.GetUserId();
-            var comment = await context.Comments.FindAsync(Guid.Parse(id));
+
+            var comment = await context.Comments
+                .FindAsync(Guid.Parse(id));
 
             if (comment == null || comment.UserId != currentUserId || comment.IsDeleted)
             {
                 throw new ServiceException(ResourceMessages.NoPermission);
             }
 
-            context.Entry(comment).CurrentValues.SetValues(commentModel);
+            context.Entry(comment).CurrentValues.SetValues(model);
             await context.SaveChangesAsync();
             return CommentMessages.OnSuccessfulEditComment;
-
         }
 
         public async Task<string> DeleteComment(string id)
         {
-            var comment = await context.Comments.FindAsync(Guid.Parse(id));
             var userId = currentUserService.GetUserId();
+
+            var comment = await context.Comments
+                .FindAsync(Guid.Parse(id));
 
             if (comment == null || comment.UserId != userId || comment.IsDeleted)
             {
@@ -86,14 +95,8 @@
 
         public async Task<IEnumerable<CommentModel>> GetCommentsFromResource(string resourceId)
         {
-            if (resourceId.Length != 36)
-            {
-                return Enumerable.Empty<CommentModel>();
-            }
-
             var userId = currentUserService.GetUserId();
 
-            var test = await context.Comments.OrderBy(c=>c.CreatedOn).Where(c=>c.Id.ToString()==resourceId).ToArrayAsync();
 
             IEnumerable<CommentModel> comments = await context.Comments
                 .OrderBy(c => c.CreatedOn)
@@ -102,14 +105,19 @@
 
             foreach (var comment in comments)
             {
-                comment.HasLiked = comment.CommentLikes.Select(cl => cl.UserId).Any(c => c == userId);
+                bool hasLiked=await context.CommentLikes
+                    .AnyAsync(cl => cl.CommentId.ToString() == comment.Id && cl.UserId == userId);
+                comment.HasLiked = hasLiked;
             }
+
             return comments;
         }
 
         private async Task<Resource?> GetResource(string resourceId)
         {
-            var resource = await context.Resources.FindAsync(Guid.Parse(resourceId));
+            var resource = await context.Resources
+                .FindAsync(Guid.Parse(resourceId));
+
             return resource;
         }
     }

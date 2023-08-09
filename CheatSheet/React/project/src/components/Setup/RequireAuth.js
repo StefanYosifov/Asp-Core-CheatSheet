@@ -1,12 +1,15 @@
 
 import { Navigate, Outlet, useLocation } from "react-router-dom";
-import useAuth from "../../hooks/useAuth";
-import { getUserData } from "../../api/util";
+import { useUserDetails } from "../../stores/useUserDetails";
 
 const RequireAuth = () => {
-    const { auth } = useAuth();
     const location = useLocation();
-    const user=getUserData();
+    const user=useUserDetails((state)=>state.user);
+    console.log(user);
+    console.log(user);
+    console.log(user);
+    console.log(user);
+    
     return (
         user
             ? <Outlet />

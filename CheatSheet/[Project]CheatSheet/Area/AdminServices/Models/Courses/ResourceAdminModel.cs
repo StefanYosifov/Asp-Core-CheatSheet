@@ -1,4 +1,4 @@
-﻿namespace _Project_CheatSheet.Area.AdminServices.Models
+﻿namespace _Project_CheatSheet.Area.AdminServices.Models.Courses
 {
     public class ResourceAdminModel
     {

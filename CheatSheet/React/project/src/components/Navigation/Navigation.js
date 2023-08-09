@@ -1,14 +1,12 @@
 import { NavLink, useNavigate } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-import { getUserId } from '../../api/Requests/profile';
+import { useState } from 'react';
 import { validateToken } from '../../api/Requests/validateJWTtoken';
 import { useUserDetails } from '../../stores/useUserDetails';
 import { URLS } from '../../constants/URLConstants';
-import { DropDown } from '../Helper components/DropDown';
 
 export const Navigation = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [userId, setUserId] = useState(undefined);
+  const userId = useUserDetails((state) => state.user.userId);
   const userIsAuthenticated = useUserDetails((state) => state.isAuthenticated);
   const userData = useUserDetails((state) => state.user);
   const navigate = useNavigate();
@@ -16,41 +14,10 @@ export const Navigation = () => {
   const isAuthenticated = validateToken();
   console.log(isAuthenticated);
 
-  useEffect(() => {
-    getUserId().then(res => setUserId(res.data));
-  }, [userId]);
-
   const handleMenuClick = () => {
     setMenuOpen(!menuOpen);
   };
 
-const DropDown=()=>{
-
-return(
-  <div className="navbar bg-bgWhiteUI-0">
-  <div className="flex-1">
-    <a className="btn btn-ghost normal-case text-xl">daisyUI</a>
-  </div>
-  <div className="flex-none">
-    <ul className="menu menu-horizontal px-1">
-      <li><a>Link</a></li>
-      <li>
-        <details>
-          <summary>
-            Parent
-          </summary>
-          <ul className="p-2 bg-base-100">
-            <li><a>Link 1</a></li>
-            <li><a>Link 2</a></li>
-          </ul>
-        </details>
-      </li>
-    </ul>
-  </div>
-</div>
-)
-  
-};
 
   console.log(userData);
   console.log(userIsAuthenticated);
@@ -63,12 +30,12 @@ return(
         {userIsAuthenticated === false ? (
           <>
             <li>
-              <NavLink to="/login" className="text-bgWhiteUI-0 px-2 py-1 rounded-lg hover:bg-red-700">
+              <NavLink to="/login" className="text-bgWhiteUI-0 p-2 rounded-lg hover:bg-pinkUI-0">
                 Login
               </NavLink>
             </li>
             <li>
-              <NavLink to="/register" className="text-bgWhiteUI-0 px-2 py-1 rounded-lg hover:bg-red-700">
+              <NavLink to="/register" className="text-bgWhiteUI-0 p-2 rounded-lg hover:bg-pinkUI-0">
                 Register
               </NavLink>
             </li>
@@ -135,23 +102,23 @@ return(
               </li>
             </ul>
             <li className="relative">
-              <button className="text-white px-2 py-1 rounded-lg hover:bg-red-700 focus:outline-none mr-2" onClick={handleMenuClick}>
+              <button className="text-white px-2 py-1 rounded-lg hover:bg-pinkUI-0 focus:outline-none mr-2" onClick={handleMenuClick}>
                 Profile <i className="fas fa-caret-down ml-2"></i>
               </button>
-              {menuOpen && userId !== undefined && (
+              {menuOpen && userIsAuthenticated !== undefined && (
                 <ul className="absolute right-0 mt-2 py-2 w-40 bg-white rounded-lg shadow-xl">
                   <li>
-                    <NavLink to={`/profile/${userId}`} className="text-gray-800 hover:bg-red-700 hover:text-white px-3 py-2 rounded-lg block">
+                    <NavLink to={`/profile/${userId}`} className="text-gray-800 hover:bg-pinkUI-0 hover:text-bgWhiteUI-0 px-3 py-2 rounded-lg block">
                       My Profile
                     </NavLink>
                   </li>
                   <li>
-                    <NavLink to="/settings" className="text-gray-800 hover:bg-red-700 hover:text-white px-3 py-2 rounded-lg block">
+                    <NavLink to="/settings" className="text-gray-800 hover:bg-pinkUI-0 hover:text-bgWhiteUI-0 px-3 py-2 rounded-lg block">
                       Settings
                     </NavLink>
                   </li>
                   <li>
-                    <NavLink to="/logout" className="text-gray-800 hover:bg-red-700 hover:text-white px-3 py-2 rounded-lg block">
+                    <NavLink to="/logout" className="text-gray-800 hover:bg-pinkUI-0 hover:text-bgWhiteUI-0 px-3 py-2 rounded-lg block">
                       Logout
                     </NavLink>
                   </li>

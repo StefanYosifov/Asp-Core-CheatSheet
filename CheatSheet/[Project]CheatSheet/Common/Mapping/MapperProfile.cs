@@ -1,9 +1,9 @@
 ﻿namespace _Project_CheatSheet.Common.Mapping
 {
+    using _Project_CheatSheet.Area.AdminServices.Models.Courses;
     using _Project_CheatSheet.Infrastructure.Data.MongoDb.Models;
     using _Project_CheatSheet.Infrastructure.Data.SQL.Models;
-
-    using Area.AdminServices.Models;
+    using Area.AdminServices.Models.Issues;
 
     using AutoMapper;
 
@@ -36,10 +36,10 @@
                 .ForMember(dest => dest.ResourceId, opt => opt.MapFrom(src => Guid.Parse(src.ResourceId)));
 
             //Authentication
-            CreateMap<RegisterModel, User>();
+            CreateMap<IdentityRegisterModel, User>();
 
             //Profile
-            CreateMap<User, UserModel>()
+            CreateMap<User, ProfileUserModel>()
                 .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.UserName))
                 .ForMember(dest => dest.UserId, opt => opt.MapFrom(src => src.Id.ToString()))
                 .ForMember(dest => dest.UserProfileDescription, opt => opt.MapFrom(src => src.ProfileDescription))
@@ -65,7 +65,7 @@
                 .ForMember(dest => dest.CategoryNames,
                     opt => opt.MapFrom(src => src.CategoryResources.Select(cr => cr.Category.Name)));
 
-            CreateMap<Resource, DetailResources>()
+            CreateMap<Resource, ResourceDetailModel>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id.ToString()))
                 .ForMember(dest => dest.DateTime,
                     opt => opt.MapFrom(src => src.CreatedOn.ToString(Formatter.DateFormatter)))
@@ -234,6 +234,17 @@
                 .ForMember(dest => dest.Content, opt => opt.MapFrom(src => src.TopicContent))
                 .ForMember(dest => dest.StartTime, opt => opt.MapFrom(src => DateTime.Parse(src.TopicStartDate)))
                 .ForMember(dest => dest.EndTime, opt => opt.MapFrom(src => DateTime.Parse(src.TopicEndDate)));
+
+            CreateMap<Issue, GetIssuesAdminModel>()
+                .ForMember(dest => dest.LocationIssue, opt => opt.MapFrom(src => src.CategoryIssue!.LocationIssue))
+                .ForMember(dest => dest.TopicName, opt => opt.MapFrom(src => src.Topic.Name))
+                .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.User.UserName));
+
+            CreateMap<Course, IssueViewModel>()
+                .ForMember(dest => dest.Id,
+                    opt => opt.MapFrom(src => src.Topics
+                        .SelectMany(t => t.TopicIssues)
+                        .Select(ti => ti.Id)));
 
         }
     }

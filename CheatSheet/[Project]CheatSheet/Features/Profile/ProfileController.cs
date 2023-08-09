@@ -44,7 +44,7 @@
         [Authorize]
         [HttpPatch("update")]
         [ActionHandlingFilter("", ProfileMessages.OnUnsuccessfulUserChange)]
-        public async Task<UserEditModel> UpdateProfileData(UserEditModel userModel)
-            => await service.EditProfileData(userModel);
+        public async Task<ProfileUserEditModel> UpdateProfileData(ProfileUserEditModel profileUserModel)
+            => await service.EditProfileData(profileUserModel);
     }
 }

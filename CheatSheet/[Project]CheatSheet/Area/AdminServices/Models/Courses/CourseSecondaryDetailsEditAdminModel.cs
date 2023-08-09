@@ -1,4 +1,4 @@
-﻿namespace _Project_CheatSheet.Area.AdminServices.Models
+﻿namespace _Project_CheatSheet.Area.AdminServices.Models.Courses
 {
     using System.ComponentModel.DataAnnotations;
 
@@ -19,7 +19,7 @@
         [StringLength(VideoConstants.VideoNameMaxLength, MinimumLength = VideoConstants.VideoNameMinLength)]
         public string VideoName { get; set; } = null!;
 
-        [Required] [Url] public string VideoUrl { get; set; } = null!;
+        [Required][Url] public string VideoUrl { get; set; } = null!;
 
         [Required] public string StartTime { get; set; } = null!;
 

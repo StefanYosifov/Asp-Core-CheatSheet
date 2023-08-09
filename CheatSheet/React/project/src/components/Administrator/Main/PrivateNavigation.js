@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { PrivateCourses } from "../Courses/PrivateCourses";
+import { Issues } from "../Issues/Issues";
 
 
 export const PrivateNavigation = () => {
@@ -9,6 +10,8 @@ export const PrivateNavigation = () => {
         switch (activeItem) {
             case ACTIVE_ELEMENTS.Course:
                 return <PrivateCourses />
+            case ACTIVE_ELEMENTS.Issues:
+                return <Issues/>
             default:
                 return <PrivateCourses />
         }
@@ -26,6 +29,7 @@ export const PrivateNavigation = () => {
                 <div className="grid grid-cols-3 gap-5">
                     <button
                         className="text-white p-4 rounded bg-pinkUI-0 shadow-md flex items-center justify-center"
+                        onClick={(event)=>{event.preventDefault();setActiveItem(ACTIVE_ELEMENTS.Course)}}
                     >
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -45,6 +49,7 @@ export const PrivateNavigation = () => {
                     </button>
                     <button
                         className="p-4 rounded bg-bgWhiteUI-0 text-bg-pinkUI-0shadow-md flex items-center justify-center"
+                        onClick={(event)=>{event.preventDefault();setActiveItem(ACTIVE_ELEMENTS.Issues)}}
                     >
                         <svg
                             xmlns="http://www.w3.org/2000/svg"

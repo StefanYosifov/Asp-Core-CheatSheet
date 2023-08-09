@@ -91,8 +91,8 @@
         {
             var userId = currentUserService.GetUserId();
 
-
-            var testResource = await context.Resources.ToArrayAsync();
+            var testResource = await context.Resources
+                .ToArrayAsync();
 
             var seeResources = await context.Resources
                 .Where(res => res.UserId.ToLower() == userId.ToLower())
@@ -114,9 +114,12 @@
         {
             var userId = currentUserService.GetUserId();
 
-            var resourceModels = context.Resources.AsQueryable();
+            var resourceModels = context.Resources
+                .AsQueryable();
 
-            var resourceModelsTesting = await context.Resources.AsQueryable().ToArrayAsync();
+            var resourceModelsTesting = await context.Resources
+                .AsQueryable()
+                .ToArrayAsync();
 
 
             if (!string.IsNullOrWhiteSpace(query.Search))
@@ -130,7 +133,8 @@
             if (!string.IsNullOrWhiteSpace(query.Category) && query.Sort.ToString() != "None")
             {
                 resourceModels =
-                    resourceModels.Where(r => r.CategoryResources.Any(cr => cr.Category.Name == query.Category));
+                    resourceModels
+                        .Where(r => r.CategoryResources.Any(cr => cr.Category.Name == query.Category));
             }
 
             if (query.Sort != null && query.Sort.ToString() != "None")
@@ -147,7 +151,8 @@
             }
 
             var mappedResources =
-                resourceModels.Where(r => r.IsPublic == true || r.UserId == userId)
+                resourceModels
+                    .Where(r => r.IsPublic == true || r.UserId == userId)
                     .ProjectTo<ResourceModel>(mapper.ConfigurationProvider);
 
             var paginatedModels = await Pagination<ResourceModel>.CreateAsync(mappedResources, pageNumber);
@@ -161,13 +166,13 @@
             return filteredResources;
         }
 
-        public async Task<DetailResources> GetResourceById(string? resourceId)
+        public async Task<ResourceDetailModel> GetResourceById(string? resourceId)
         {
-            IEnumerable<DetailResources> details = await context.Resources
+            IEnumerable<ResourceDetailModel> details = await context.Resources
                 .Include(r => r.User)
                 .Include(r => r.Comments)
                 .Include(r => r.Comments)
-                .ProjectTo<DetailResources>(mapper.ConfigurationProvider)
+                .ProjectTo<ResourceDetailModel>(mapper.ConfigurationProvider)
                 .Where(r => r.Id == resourceId).ToListAsync();
 
             var userId = currentUserService.GetUserId();
@@ -221,8 +226,7 @@
         public int GetTotalPage()
         {
             var userId = currentUserService.GetUserId();
-            var pages = (double)context
-                .Resources
+            var pages = (double)context.Resources
                 .Where(r => r.IsPublic || r.UserId == userId)
                 .CountAsync()
                 .Result / ResourcesPerPage;
@@ -272,7 +276,8 @@
         public async Task<string> ChangeVisibility(string id)
         {
             var userId = currentUserService.GetUserId();
-            var resource = await context.Resources.FindAsync(Guid.Parse(id));
+            var resource = await context.Resources
+                .FindAsync(Guid.Parse(id));
 
             if (resource == null || resource.UserId != userId || resource.IsDeleted)
             {

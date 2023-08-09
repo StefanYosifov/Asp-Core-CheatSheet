@@ -37,7 +37,7 @@
         [HttpGet("details/{id}")]
         [ActionHandlingFilter("", ResourceMessages.SuchModelDoesNotExist, StatusCodes.Status404NotFound)]
         [ExceptionHandlingActionFilter]
-        public async Task<DetailResources> GetResourceDetails(string id)
+        public async Task<ResourceDetailModel> GetResourceDetails(string id)
             => await resourceService.GetResourceById(id);
 
         [HttpPost("add")]

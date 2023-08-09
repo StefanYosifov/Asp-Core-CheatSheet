@@ -3,7 +3,7 @@ import { updateProfile } from "../../api/Requests/profile";
 
 export const ProfileEdit = ({ profileData }) => {
 
-    { console.log(profileData) }
+    {console.log(profileData) }
 
     const [formData, setFormData] = useState({
         profilePictureUrl: profileData.profilePictureUrl,

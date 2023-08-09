@@ -1,6 +1,5 @@
 ﻿namespace _Project_CheatSheet.Tests.Likes
 {
-    using System.Runtime.InteropServices;
     using _Project_CheatSheet.Tests.Fixtures;
     using Common.Exceptions;
 

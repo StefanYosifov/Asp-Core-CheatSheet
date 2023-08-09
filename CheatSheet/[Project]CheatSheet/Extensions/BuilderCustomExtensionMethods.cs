@@ -1,28 +1,20 @@
 ﻿namespace _Project_CheatSheet.Extensions
 {
-    using System.Reflection;
-    using System.Text;
-
     using _Project_CheatSheet.Common.Exceptions;
     using _Project_CheatSheet.Common.UserService.Interfaces;
     using _Project_CheatSheet.Infrastructure.Data.MongoDb.Store;
     using _Project_CheatSheet.Infrastructure.Data.SQL;
     using _Project_CheatSheet.Infrastructure.Data.SQL.Models;
     using _Project_CheatSheet.Infrastructure.Data.SQL.Models.Enums;
-
     using Amazon;
     using Amazon.Extensions.NETCore.Setup;
     using Amazon.Runtime;
     using Amazon.S3;
-
     using AutoMapper;
-
     using Common.Filters_and_Attributes.Attributes;
     using Common.Mapping;
     using Common.Repositories.MongoRepository;
-
     using Infrastructure.Data.SQL.Seed;
-
     using Microsoft.AspNetCore.Authentication.JwtBearer;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.Extensions.Configuration;
@@ -30,8 +22,9 @@
     using Microsoft.Extensions.Options;
     using Microsoft.IdentityModel.Tokens;
     using Microsoft.OpenApi.Models;
-
     using MongoDB.Driver;
+    using System.Reflection;
+    using System.Text;
 
     public static class BuilderCustomExtensionMethods
     {
@@ -203,5 +196,6 @@
 
             return serviceCollection;
         }
+
     }
 }

@@ -1,14 +1,19 @@
 ﻿namespace _Project_CheatSheet.Features.Likes.Services
 {
-    using _Project_CheatSheet.Infrastructure.Data.SQL;
-    using _Project_CheatSheet.Infrastructure.Data.SQL.Models;
     using AutoMapper;
+
     using Common.Exceptions;
     using Common.UserService.Interfaces;
 
     using Constants.GlobalConstants.Likes;
+
+    using Infrastructure.Data.SQL;
+    using Infrastructure.Data.SQL.Models;
+
     using Interfaces;
+
     using Microsoft.EntityFrameworkCore;
+
     using Models;
 
     public class LikeService : ILikeService
@@ -36,7 +41,8 @@
         public async Task<string> LikeAComment(LikeCommentModel likeComment)
         {
             var userId = currentUserService.GetUserId();
-            var findComment = await context.Comments.FindAsync(Guid.Parse(likeComment.CommentId));
+            var findComment = await context.Comments
+                .FindAsync(Guid.Parse(likeComment.CommentId));
 
             if (findComment == null || findComment.CommentLikes.Any(cl => cl.UserId == userId))
             {
@@ -58,8 +64,10 @@
         public async Task<string> RemoveLikeFromComment(LikeCommentModel likeComment)
         {
             var userId = currentUserService.GetUserId();
+
             var commentLike =
-                await context.CommentLikes.FirstOrDefaultAsync(c => c.CommentId.ToString() == likeComment.CommentId);
+                await context.CommentLikes
+                    .FirstOrDefaultAsync(c => c.CommentId.ToString() == likeComment.CommentId);
 
             if (commentLike == null)
             {
@@ -85,8 +93,13 @@
         public async Task<string> LikeAResource(LikeResourceModelAdd likeResource)
         {
             var userId = currentUserService.GetUserId();
-            if (context.ResourceLikes.Any(rl => rl.UserId == userId
-                                                && rl.ResourceId.ToString() == likeResource.ResourceId))
+
+            var hasLikedAlready = context.ResourceLikes
+                .Any(rl => rl.UserId == userId
+                           && rl.ResourceId.ToString() ==
+                           likeResource.ResourceId);
+
+            if (hasLikedAlready)
             {
                 throw new ServiceException(LikeMessages.OnFailedLikedResource);
             }
@@ -103,8 +116,9 @@
         {
             var userId = currentUserService.GetUserId();
             var resourceLike =
-                await context.ResourceLikes.FirstOrDefaultAsync(rl =>
-                    rl.ResourceId.ToString() == likeResource.ResourceId);
+                await context.ResourceLikes
+                    .FirstOrDefaultAsync(rl => rl.ResourceId.ToString() == likeResource.ResourceId);
+
             if (resourceLike == null)
             {
                 throw new ServiceException(LikeMessages.OnFailedRemoveResource);

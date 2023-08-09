@@ -8,8 +8,6 @@ using Microsoft.AspNetCore.Http.Json;
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json.Serialization;
 
-using _Project_CheatSheet.Infrastructure.Data.SQL.Seed;
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -23,11 +21,9 @@ builder.Services.AddDbContext<CheatSheetDbContext>(options =>
     .RegisterJwtAuthentication(builder.Configuration);
 
 //Services
-
 builder.Services.RegisterApplicationServices(typeof(IAuthenticateService));
 builder.Services.AddScoped<ICurrentUser, CurrentUser>();
 builder.Services.AddScoped<ICacheService, CacheService>();
-builder.Services.AddScoped<DataSeeder>();
 
 //Data providers
 builder.Services
@@ -55,7 +51,6 @@ builder.Services.Configure<JsonOptions>(options =>
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     await app.RegisterSeedData();

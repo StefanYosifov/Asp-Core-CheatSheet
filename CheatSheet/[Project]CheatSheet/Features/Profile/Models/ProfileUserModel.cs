@@ -4,7 +4,7 @@
 
     using Constants.GlobalConstants.User;
 
-    public class UserModel
+    public class ProfileUserModel
     {
         [Required] public string UserName { get; set; } = null!;
 

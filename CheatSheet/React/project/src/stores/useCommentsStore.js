@@ -24,6 +24,7 @@ const useCommentsStore = create((set) => ({
             const response = await sendAComment({ comment, id });
             set((prevState) => ({ ...prevState, data: [...prevState.data, comment] }));
             set({ isLoading: false});
+            toast.success(response.data);
         }
         catch (error) {
             console.log(error.message);

@@ -50,13 +50,18 @@
 
             CustomException.ThrowIfNull(findCourse, CourseMessages.CourseNotFound);
 
-            if (await context.UserCourses.AllAsync(uc =>
-                    uc.UserId != userId && uc.CourseId.ToString() != findCourse.Id.ToString()))
+            var userNotInCourse = await context.UserCourses.AllAsync(uc =>
+                uc.UserId != userId && uc.CourseId.ToString() != findCourse.Id.ToString());
+
+            if (userNotInCourse)
             {
                 throw new ServiceException(CourseMessages.UserNotInCourse);
             }
 
-            var youtubeVideoUrl = findCourse.Topics.Select(t => t.Video.VideoUrl.Split("=")[1]).FirstOrDefault();
+            var youtubeVideoUrl = findCourse.Topics
+                .Select(t => t.Video.VideoUrl.Split("=")[1])
+                .FirstOrDefault();
+
             cacheService.SetCache(cacheKey, youtubeVideoUrl, CachingConstants.Lessons.YoutubeUrl);
 
             return youtubeVideoUrl;

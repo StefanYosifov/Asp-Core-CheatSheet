@@ -9,6 +9,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Features\Videos\Models\**" />
+    <Content Remove="Features\Videos\Models\**" />
+    <EmbeddedResource Remove="Features\Videos\Models\**" />
+    <None Remove="Features\Videos\Models\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
     <PackageReference Include="AWSSDK.Extensions.NETCore.Setup" Version="3.7.7" />
     <PackageReference Include="AWSSDK.S3" Version="3.7.200.1" />
@@ -27,7 +34,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\Videos\Models\" />
     <Folder Include="Features\Videos\Services\" />
   </ItemGroup>
 

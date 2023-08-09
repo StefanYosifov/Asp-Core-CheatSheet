@@ -1,6 +1,8 @@
 ﻿namespace _Project_CheatSheet.Area.AdminServices
 {
+    using _Project_CheatSheet.Area.AdminServices.Models.Courses;
     using Common.Filters;
+    using Common.Pagination;
 
     using Features;
 
@@ -10,6 +12,7 @@
     using Microsoft.AspNetCore.Mvc;
 
     using Models;
+    using Models.Issues;
 
     [Authorize(Policy = "ElevatedRights")]
     [Route("/admin")]
@@ -59,5 +62,21 @@
         [ExceptionHandlingActionFilter]
         public async Task<string> CreateTopicToAdd(string courseName, [FromBody]TopicCreateDetailsAdminModel createdTopic)
             => await service.AddTopicToCourse(courseName, createdTopic);
+
+        [HttpGet("issues")]
+        [ActionHandlingFilter]
+        [ExceptionHandlingActionFilter]
+        public async Task<PaginatedIssuesAdminModel> GetAllIssues([FromQuery]IssueQueryModel query)
+            => await service.GetIssues(query);
+
+        [HttpGet("issues/filters")]
+        [ActionHandlingFilter]
+        [ExceptionHandlingActionFilter]
+        public async Task<IssueFilteringAdminModel> GetFilteringData()
+            => await service.GetFilteringData();
+
+        [HttpDelete("issues/delete/{issueId}")]
+        public async Task<string> ResolveIssue(int issueId)
+            => await service.ResolveIssue(issueId);
     }
 }

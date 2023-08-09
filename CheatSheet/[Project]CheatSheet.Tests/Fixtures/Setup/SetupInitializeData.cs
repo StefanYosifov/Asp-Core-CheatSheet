@@ -1,4 +1,4 @@
-﻿namespace _Project_CheatSheet.Tests.Fixtures
+﻿namespace _Project_CheatSheet.Tests.Fixtures.Setup
 {
     using System.Collections;
 
@@ -69,7 +69,8 @@
                     UpdatedOn = DateTime.UtcNow,
                 }
             };
-            await SaveIntoDatabase(resources, context);
+            await context.Resources.AddRangeAsync(resources);
+            await context.SaveChangesAsync();
 
             var comments = new List<Comment>
             {
@@ -115,7 +116,8 @@
                     IsDeleted = true
                 }
             };
-            await SaveIntoDatabase(comments, context);
+            await context.Comments.AddRangeAsync(comments);
+            await context.SaveChangesAsync();
 
             var resourceLikes = new List<ResourceLike>
             {
@@ -144,7 +146,8 @@
                     ResourceId = resources[3].Id,
                 }
             };
-            await SaveIntoDatabase(resourceLikes, context);
+            await context.ResourceLikes.AddRangeAsync(resourceLikes);
+            await context.SaveChangesAsync();
 
             var categories = new List<Category>
             {
@@ -174,7 +177,8 @@
                     Name = "PHP"
                 }
             };
-            await SaveIntoDatabase(categories, context);
+            await context.Categories.AddRangeAsync(categories);
+            await context.SaveChangesAsync();
         }
 
         internal static async Task IntializeDataForCourses(CheatSheetDbContext context)

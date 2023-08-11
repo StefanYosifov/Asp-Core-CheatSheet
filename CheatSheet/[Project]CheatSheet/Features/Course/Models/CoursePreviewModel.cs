@@ -1,7 +1,5 @@
 ﻿namespace _Project_CheatSheet.Features.Course.Models
 {
-    using Humanizer;
-
     public class CoursePreviewModel
     {
         public CoursePreviewModel()

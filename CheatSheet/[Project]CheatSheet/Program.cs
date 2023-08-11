@@ -11,6 +11,7 @@ using System.Text.Json.Serialization;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
 //Identity
@@ -21,16 +22,19 @@ builder.Services.AddDbContext<CheatSheetDbContext>(options =>
     .RegisterJwtAuthentication(builder.Configuration);
 
 //Services
+
 builder.Services.RegisterApplicationServices(typeof(IAuthenticateService));
 builder.Services.AddScoped<ICurrentUser, CurrentUser>();
 builder.Services.AddScoped<ICacheService, CacheService>();
 
 //Data providers
+
 builder.Services
     .RegisterMongoDb(builder.Configuration)
     .RegisterAwsService(builder.Configuration);
 
 //Auto mapper
+
 builder.Services
     .RegisterAutoMapper(builder.Configuration);
 
@@ -53,7 +57,6 @@ var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
-    await app.RegisterSeedData();
     app.UseMigrationsEndPoint();
     app.UseDeveloperExceptionPage();
     app.UseSwagger();

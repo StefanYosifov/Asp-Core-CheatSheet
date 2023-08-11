@@ -62,7 +62,7 @@
                         .Any(cc => cc.CategoryCourse.Name == query.CategoryName));
             }
 
-            if (query.CourseActivity != null && query.CourseActivity.ToString() != "All")
+            if (query.CourseActivity.ToString() != "All")
             {
                 courses = query.CourseActivity switch
                 {
@@ -225,12 +225,6 @@
 
         public async Task<IssueFilteringAdminModel> GetFilteringData()
         {
-
-            var test =
-                await context
-                    .Courses
-                    .Where(c => c.Topics.Any(t => t.TopicIssues.Count >= 1))
-                    .ToArrayAsync();
 
             var findCoursesWithIssues =
                 await context

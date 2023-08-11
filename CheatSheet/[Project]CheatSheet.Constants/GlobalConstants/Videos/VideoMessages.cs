@@ -3,7 +3,7 @@
     public static class VideoMessages
     {
 
-        public const string OnUnsuccessfulGetVideoId = "There was an error retreaving the ID";
+        public const string UnsuccessfulGetVideoId = "There was an error retreaving the ID";
 
     }
 }

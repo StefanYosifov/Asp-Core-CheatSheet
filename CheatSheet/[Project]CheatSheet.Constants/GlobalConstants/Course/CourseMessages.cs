@@ -2,12 +2,12 @@
 {
     public class CourseMessages
     {
-        public const string OnUnsuccessfulCourseRetrieval = "Course cannot be found or does not exist";
+        public const string UnsuccessfulCourseRetrieval = "Course cannot be found or does not exist";
 
-        public const string OnSuccessfulPayment =
+        public const string SuccessfulPayment =
             "Congratulations, you have joined the course, thank you for being part of the family";
 
-        public const string OnUnsuccessfulPayment = "There was an issues with the payment,please try again";
+        public const string UnsuccessfulPayment = "There was an issues with the payment,please try again";
 
         public const string CourseNotFound = "Couldn't find course";
 

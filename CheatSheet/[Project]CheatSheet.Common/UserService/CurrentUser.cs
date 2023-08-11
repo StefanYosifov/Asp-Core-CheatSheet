@@ -25,14 +25,10 @@
             return await context.Users.FindAsync(id);
         }
 
-        public string GetUserId()
-        {
-            return user.FindFirstValue(ClaimTypes.NameIdentifier);
-        }
+        public string GetUserId() 
+            => user.FindFirstValue(ClaimTypes.NameIdentifier);
 
-        public string GetUserName()
-        {
-            return user.Identity!.Name!;
-        }
+        public string GetUserName() 
+            => user.Identity!.Name!;
     }
 }

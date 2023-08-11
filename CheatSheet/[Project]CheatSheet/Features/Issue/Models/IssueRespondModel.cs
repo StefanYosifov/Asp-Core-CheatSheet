@@ -16,5 +16,5 @@ public class IssueRespondModel
 
     [Required]
     [StringLength(IssueConstants.IssueDescriptionMaxLength, MinimumLength = IssueConstants.IssueDescriptionMinLength)]
-    public string Description { get; set; }
+    public string Description { get; set; } = null!;
 }

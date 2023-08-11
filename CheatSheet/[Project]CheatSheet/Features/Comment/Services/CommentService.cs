@@ -38,12 +38,12 @@
 
         public async Task<string> CreateAComment(CommentInputModel comment)
         {
-            CustomException.ThrowIfNull(comment, CommentMessages.OnEmptyComment);
+            CustomException.ThrowIfNull(comment, CommentMessages.EmptyComment);
 
             comment.Content = WebUtility.HtmlDecode(comment.Content);
 
             var resource = await GetResource(comment.ResourceId.ToLower());
-            CustomException.ThrowIfNull(resource, CommentMessages.OnUnsuccessfulPostComment);
+            CustomException.ThrowIfNull(resource, CommentMessages.UnsuccessfulPostComment);
 
             var userId = currentUserService.GetUserId();
 
@@ -56,7 +56,7 @@
 
             await context.Comments.AddAsync(dbComment);
             await context.SaveChangesAsync();
-            return CommentMessages.OnSuccessfulPostComment;
+            return CommentMessages.SuccessfulPostComment;
         }
 
         public async Task<string> EditComment(string id, CommentEditModel model)
@@ -73,7 +73,7 @@
 
             context.Entry(comment).CurrentValues.SetValues(model);
             await context.SaveChangesAsync();
-            return CommentMessages.OnSuccessfulEditComment;
+            return CommentMessages.SuccessfulEditComment;
         }
 
         public async Task<string> DeleteComment(string id)
@@ -85,12 +85,12 @@
 
             if (comment == null || comment.UserId != userId || comment.IsDeleted)
             {
-                throw new ServiceException(CommentMessages.OnUnsuccessfulDeleteComment);
+                throw new ServiceException(CommentMessages.UnsuccessfulDeleteComment);
             }
 
             context.Remove(comment);
             await context.SaveChangesAsync();
-            return CommentMessages.OnSuccessfulDeleteComment;
+            return CommentMessages.SuccessfulDeleteComment;
         }
 
         public async Task<IEnumerable<CommentModel>> GetCommentsFromResource(string resourceId)

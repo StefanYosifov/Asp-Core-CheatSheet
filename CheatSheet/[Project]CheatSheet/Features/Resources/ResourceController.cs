@@ -1,13 +1,12 @@
 ﻿namespace _Project_CheatSheet.Features.Resources
 {
-    using Common.Filters;
+    using Common.Filters_and_Attributes.Filters;
 
     using Constants.GlobalConstants.Resource;
 
     using Interfaces;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
-    using Microsoft.AspNetCore.Mvc.Filters;
     using Models;
 
     [Route("/resource")]
@@ -59,7 +58,7 @@
         {
             if (!await TryUpdateModelAsync(resourceEdit))
             {
-                return NotFound(ResourceMessages.OnInvalidRequestsResourceEdit);
+                return NotFound(ResourceMessages.InvalidRequestsResourceEdit);
             }
             var resourceResult = await resourceService.EditResource(id, resourceEdit);
             return Ok(resourceResult);

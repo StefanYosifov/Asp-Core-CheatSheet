@@ -1,7 +1,5 @@
 ﻿namespace _Project_CheatSheet.Features.Issue.Services;
 
-using _Project_CheatSheet.Infrastructure.Data.SQL;
-using _Project_CheatSheet.Infrastructure.Data.SQL.Models;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Common.Exceptions;
@@ -9,10 +7,11 @@ using Common.Pagination;
 using Common.UserService.Interfaces;
 using Constants.GlobalConstants.Issue;
 using Enums;
+using Infrastructure.Data.SQL;
+using Infrastructure.Data.SQL.Models;
 using Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Models;
-using System.Linq;
 
 public class IssueService : IIssueService
 {
@@ -32,12 +31,12 @@ public class IssueService : IIssueService
 
     public async Task<ICollection<IssueRespondModel>> GetIssues(IssueQuery? query)
     {
-        IQueryable<Issue> issues = context.Issues
+        var issues = context.Issues
             .AsQueryable();
 
         if (!string.IsNullOrWhiteSpace(query.SearchString))
         {
-            string wildcard = $"%{query.SearchString.ToLower()}%";
+            var wildcard = $"%{query.SearchString.ToLower()}%";
 
             issues = issues
                 .Where(i => EF.Functions.Like(i.Title.ToLower(), wildcard));
@@ -52,7 +51,7 @@ public class IssueService : IIssueService
         {
             IssueSorting.Deleted => issues.OrderBy(i => i.IsDeleted),
             IssueSorting.Newest => issues.OrderByDescending(i => i.CreatedOn),
-            IssueSorting.Oldest => issues.OrderBy(i => i.CreatedOn),
+            IssueSorting.Oldest => issues.OrderBy(i => i.CreatedOn)
         };
 
         var filteredIssues = issues.ProjectTo<IssueRespondModel>(mapper.ConfigurationProvider);
@@ -60,10 +59,12 @@ public class IssueService : IIssueService
         return await Pagination<IssueRespondModel>.CreateAsync(filteredIssues, query.CurrentPage, 6);
     }
 
-    public async Task<ICollection<IssueCategoryModel>> GetIssuesCategories() 
-        => await context.CategoriesIssues
+    public async Task<ICollection<IssueCategoryModel>> GetIssuesCategories()
+    {
+        return await context.CategoriesIssues
             .ProjectTo<IssueCategoryModel>(mapper.ConfigurationProvider)
             .ToArrayAsync();
+    }
 
     public async Task<string> WithdrawIssue(string issueId)
     {
@@ -99,7 +100,6 @@ public class IssueService : IIssueService
 
     public async Task<string> CreateIssue(IssueRequestModel issue)
     {
-
         var userId = userService.GetUserId();
 
         var userNotInCourse = await context.UserCourses.AllAsync(uc => uc.UserId != userId);
@@ -119,6 +119,5 @@ public class IssueService : IIssueService
         await context.SaveChangesAsync();
 
         return IssueMessages.SuccessfullyAddedIssue;
-
     }
 }

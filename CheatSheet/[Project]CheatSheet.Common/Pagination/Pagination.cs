@@ -27,7 +27,11 @@
                 pageIndex = 1;
             }
 
-            var items = await source.Skip((pageIndex - 1) * itemsPerPage).Take(itemsPerPage).ToListAsync();
+            var items = await source
+                .Skip((pageIndex - 1) * itemsPerPage)
+                .Take(itemsPerPage)
+                .ToListAsync();
+
             return new Pagination<T>(items, count, pageIndex, itemsPerPage);
         }
     }

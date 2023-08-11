@@ -1,7 +1,7 @@
 ﻿namespace _Project_CheatSheet.Extensions
 {
-    using _Project_CheatSheet.Common.Exceptions;
-    using _Project_CheatSheet.Common.UserService.Interfaces;
+    using Common.Exceptions;
+    using Common.UserService.Interfaces;
     using _Project_CheatSheet.Infrastructure.Data.MongoDb.Store;
     using _Project_CheatSheet.Infrastructure.Data.SQL;
     using _Project_CheatSheet.Infrastructure.Data.SQL.Models;
@@ -14,7 +14,6 @@
     using Common.Filters_and_Attributes.Attributes;
     using Common.Mapping;
     using Common.Repositories.MongoRepository;
-    using Infrastructure.Data.SQL.Seed;
     using Microsoft.AspNetCore.Authentication.JwtBearer;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.Extensions.Configuration;
@@ -42,10 +41,12 @@
             {
                 var interfaceType = implementationType.GetInterface($"I{implementationType.Name}");
                 CustomException.ThrowIfNull(interfaceType);
+
                 if (interfaceType.CustomAttributes.Any(ca=>ca.AttributeType.Name==nameof(ServiceSingletonAttribute)))
                 {
                     serviceCollection.AddSingleton(implementationType);
                 }
+
                 serviceCollection.AddScoped(interfaceType, implementationType);
             }
         }
@@ -175,25 +176,6 @@
             {
                 s.SwaggerDoc("v1", new OpenApiInfo { Title = "Cheat sheet swagger API", Version = "v1" });
             });
-            return serviceCollection;
-        }
-
-        public static async Task<IApplicationBuilder> RegisterSeedData(this IApplicationBuilder serviceCollection)
-        {
-            ArgumentNullException.ThrowIfNull(serviceCollection, nameof(serviceCollection));
-
-            using var scope = serviceCollection.ApplicationServices.CreateScope();
-            var services = scope.ServiceProvider;
-            try
-            {
-                var context = services.GetRequiredService<CheatSheetDbContext>();
-                await DataSeeder.Initializer(context);
-            }
-            catch (Exception ex)
-            {
-
-            }
-
             return serviceCollection;
         }
 

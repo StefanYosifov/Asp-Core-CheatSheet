@@ -76,14 +76,13 @@
             return true;
         }
 
-        public async Task<CourseRespondAllPaginated> GetAllCourses(int page, CourseRequestQueryModel query)
+        public async Task<CourseAllPaginatedModel> GetAllCourses(int page, CourseRequestQueryModel query)
         {
-            var userId = currentUserService.GetUserId();
             var splitQueryCategoriesText = string.Join(',', query.Categories);
             var splitQueryCategoriesArr = splitQueryCategoriesText.Split(',');
             var cacheKey = $"Courses_{page}_{query.Search}_{query.Sort}_{splitQueryCategoriesText}";
 
-            if (cache.TryGetValue(cacheKey, out CourseRespondAllPaginated cachedResult))
+            if (cache.TryGetValue(cacheKey, out CourseAllPaginatedModel cachedResult))
             {
                 return cachedResult;
             }
@@ -117,11 +116,11 @@
                 };
             }
 
-            var mappedCourses = courses.ProjectTo<CourseRespondAllModel>(mapper.ConfigurationProvider);
+            var mappedCourses = courses.ProjectTo<CourseAllModel>(mapper.ConfigurationProvider);
 
-            var paginationResult = await Pagination<CourseRespondAllModel>.CreateAsync(mappedCourses, page, CoursesPerPage);
+            var paginationResult = await Pagination<CourseAllModel>.CreateAsync(mappedCourses, page, CoursesPerPage);
 
-            var allCoursesResult = new CourseRespondAllPaginated
+            var allCoursesResult = new CourseAllPaginatedModel
             {
                 Courses = paginationResult,
                 TotalPages = (int)Math.Ceiling((decimal)mappedCourses.Count() / CoursesPerPage)
@@ -132,13 +131,13 @@
             return allCoursesResult;
         }
 
-        public async Task<IEnumerable<CourseRespondAllModel>> GetMyCourses(int page, string? toggle)
+        public async Task<IEnumerable<CourseAllModel>> GetMyCourses(int page, string? toggle)
         {
             var userId = currentUserService.GetUserId();
             var isArchived = string.IsNullOrWhiteSpace(toggle) || toggle == "true";
 
             var cacheKey = $"My_Courses_{userId}_{page}_{isArchived}";
-            if (cache.TryGetValue(cacheKey, out IEnumerable<CourseRespondAllModel> cachedResult))
+            if (cache.TryGetValue(cacheKey, out IEnumerable<CourseAllModel> cachedResult))
             {
                 return cachedResult;
             }
@@ -149,7 +148,7 @@
 
             var filteredResults = FilterWhetherArchiveOrNotQuery(isArchived, courseResult);
 
-            var paginationResult = await Pagination<CourseRespondAllModel>.CreateAsync(filteredResults, page);
+            var paginationResult = await Pagination<CourseAllModel>.CreateAsync(filteredResults, page);
 
             foreach (var course in paginationResult)
             {
@@ -161,9 +160,10 @@
             return paginationResult;
         }
 
-        public async Task<CourseRespondModel> GetCourseDetails(string id)
+        public async Task<CourseModel> GetCourseDetails(string id)
         {
             var userId = currentUserService.GetUserId();
+
             var course = await context.Courses
                 .Include(u => u.UsersCourses)
                 .FirstOrDefaultAsync(c => c.Id.ToString() == id && 
@@ -174,13 +174,13 @@
                 return null;
             }
 
-            return mapper.Map<CourseRespondModel>(course);
+            return mapper.Map<CourseModel>(course);
         }
 
-        public async Task<CourseRespondPaymentModel> GetPaymentDetails(string id)
+        public async Task<CoursePaymentModel> GetPaymentDetails(string id)
         {
             var getCourse = await context.Courses.FindAsync(Guid.Parse(id));
-            return mapper.Map<CourseRespondPaymentModel>(getCourse);
+            return mapper.Map<CoursePaymentModel>(getCourse);
         }
 
         public async Task<CourseFilterModel> GetCoursesFilteringData()
@@ -212,12 +212,12 @@
             return sortingModel;
         }
 
-        public async Task<ICollection<CourseRespondUpcomingModel>> GetUpcomingCourses()
+        public async Task<ICollection<CourseUpcomingModel>> GetUpcomingCourses()
         {
             var userId = currentUserService.GetUserId();
             var cacheKey = $"upcomingCourses_{userId}";
 
-            if (cache.TryGetValue(cacheKey, out ICollection<CourseRespondUpcomingModel> upcomingCourses))
+            if (cache.TryGetValue(cacheKey, out ICollection<CourseUpcomingModel> upcomingCourses))
             {
                 return upcomingCourses;
             }
@@ -230,7 +230,7 @@
                             c.CategoryCourseCourses.Any(ccc => featuredCategories.Contains(ccc.CategoryCourse.Name)))
                 .Take(FeaturedCategoriesCount)
                 .OrderBy(x => x.StartDate)
-                .ProjectTo<CourseRespondUpcomingModel>(mapper.ConfigurationProvider)
+                .ProjectTo<CourseUpcomingModel>(mapper.ConfigurationProvider)
                 .ToArrayAsync();
 
             setCache.SetCache(cacheKey, getUpComingCourses, UpComingCourses);
@@ -250,8 +250,10 @@
                 Id = courseDetailsData.Id.ToString(),
                 Name = courseDetailsData.Title,
                 Price = courseDetailsData.Price,
-                IntroductionVideoUrl = courseDetailsData.Topics.Where(t => t.CourseId.ToString() == id)
-                    .Select(v => v.Video.VideoUrl).FirstOrDefault(),
+                IntroductionVideoUrl = courseDetailsData.Topics
+                    .Where(t => t.CourseId.ToString() == id)
+                    .Select(v => v.Video.VideoUrl)
+                    .FirstOrDefault(),
                 PeopleParticipating = courseDetailsData.UsersCourses.Count(uc => uc.CourseId.ToString() == id),
                 Topics = courseDetailsData.Topics.Select(topic => new TopicDetailModel
                 {
@@ -262,22 +264,22 @@
             };
         }
 
-        private IQueryable<CourseRespondAllModel> FilterWhetherArchiveOrNotQuery(bool isArchived,
+        private IQueryable<CourseAllModel> FilterWhetherArchiveOrNotQuery(bool isArchived,
             IQueryable<Course> courseResult)
         {
-            IQueryable<CourseRespondAllModel> filteredResults;
+            IQueryable<CourseAllModel> filteredResults;
             var currentDate = DateTime.Now;
             if (isArchived)
             {
                 filteredResults = courseResult
                     .Where(c => c.EndDate <= currentDate)
-                    .ProjectTo<CourseRespondAllModel>(mapper.ConfigurationProvider);
+                    .ProjectTo<CourseAllModel>(mapper.ConfigurationProvider);
             }
             else
             {
                 filteredResults = courseResult
                     .Where(c => c.EndDate > currentDate)
-                    .ProjectTo<CourseRespondAllModel>(mapper.ConfigurationProvider);
+                    .ProjectTo<CourseAllModel>(mapper.ConfigurationProvider);
             }
 
             return filteredResults;

@@ -9,6 +9,6 @@
         public const int ImageUrlMaxLength = 300;
 
         public const int ContentMinLength = 25;
-        public const int ContentMaxLength = 5000;
+        public const int ContentMaxLength = 15000;
     }
 }

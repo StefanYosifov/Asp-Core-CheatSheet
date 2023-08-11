@@ -1,8 +1,8 @@
 ﻿namespace _Project_CheatSheet.Infrastructure.Data.SQL
 {
-    using _Project_CheatSheet.Infrastructure.Data.SQL.Models;
-    using _Project_CheatSheet.Infrastructure.Data.SQL.Models.Base.Interfaces;
-    using _Project_CheatSheet.Infrastructure.Data.SQL.Seed;
+    using Models;
+    using Models.Base.Interfaces;
+    using Seed;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
@@ -49,7 +49,6 @@
                 optionsBuilder.UseSqlServer(
                     "Server=(localdb)\\MSSQLLocalDB;Database=CheatSheet;Integrated Security=true");
             }
-                optionsBuilder.EnableSensitiveDataLogging();
         }
 
 
@@ -182,6 +181,7 @@
         {
             var currentTime = DateTime.UtcNow;
             var userName = httpContext?.HttpContext?.User?.Identity?.Name;
+
             if (string.IsNullOrWhiteSpace(userName))
             {
                 userName = "admin";

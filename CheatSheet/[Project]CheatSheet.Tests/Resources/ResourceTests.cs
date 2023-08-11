@@ -1,26 +1,41 @@
 ﻿namespace _Project_CheatSheet.Tests.Resources
 {
-    using _Project_CheatSheet.Tests.Fixtures;
     using Common.Exceptions;
     using Constants.GlobalConstants.Resource;
-
     using Features.Resources.Models;
-
+    using Features.Resources.Services;
+    using Fixtures.Setup;
+    using Infrastructure.Data.SQL;
     using Infrastructure.Data.SQL.Models;
-
     using Microsoft.EntityFrameworkCore;
-
+    using Moq;
     using Xunit;
 
 
-    public class ResourceTests : IClassFixture<ResourcesTestFixture>
+    public class ResourceTests : IDisposable
     {
-        private readonly ResourcesTestFixture fixture;
+        private readonly Features.Resources.Interfaces.IResourceService resourceService;
+        private readonly CheatSheetDbContext DbContext;
+        private const string userId = "pesho";
 
-        public ResourceTests(
-            ResourcesTestFixture fixture)
+        public ResourceTests()
         {
-            this.fixture = fixture;
+            var httpContextAccessorMock = SetupFixtureDependencies.HttpContextMock();
+            var currentUserServiceMock = SetupFixtureDependencies.CurrentUserServiceMock(userId);
+            var mapper = SetupFixtureDependencies.SetupMapper(currentUserServiceMock);
+            var memoryCache = SetupFixtureDependencies.setupCache();
+
+
+            var options = new DbContextOptionsBuilder<CheatSheetDbContext>()
+                .UseInMemoryDatabase("RandomName")
+                .Options;
+            this.DbContext = new CheatSheetDbContext(options, httpContextAccessorMock.Object);
+            SetupInitializeData.InitializeDataForResources(userId, DbContext);
+
+            var resourceServiceMock = new Mock<ResourceService>(DbContext, mapper, currentUserServiceMock.Object);
+
+            this.resourceService = resourceServiceMock.Object;
+
         }
 
 
@@ -35,10 +50,10 @@
                 CategoryIds = new List<int>() { 1, 2, 3 },
             };
 
-            var result = await fixture.ResourceService.AddResources(resourceAddModel);
+            var result = await resourceService.AddResources(resourceAddModel);
 
             Assert.NotNull(result);
-            Assert.Equal(ResourceMessages.OnSuccessfulResourceAdd, result);
+            Assert.Equal(ResourceMessages.SuccessfulResourceAdd, result);
         }
 
         [Fact]
@@ -68,9 +83,9 @@
                 CategoryIds = new List<int>() { -1 },
             };
 
-            await Assert.ThrowsAsync<ServiceException>(() => fixture.ResourceService.AddResources(resourceAddModel));
-            await Assert.ThrowsAsync<ServiceException>(() => fixture.ResourceService.AddResources(resourceAddModel2));
-            await Assert.ThrowsAsync<ServiceException>(() => fixture.ResourceService.AddResources(resourceAddModel3));
+            await Assert.ThrowsAsync<ServiceException>(() => resourceService.AddResources(resourceAddModel));
+            await Assert.ThrowsAsync<ServiceException>(() => resourceService.AddResources(resourceAddModel2));
+            await Assert.ThrowsAsync<ServiceException>(() => resourceService.AddResources(resourceAddModel3));
 
 
         }
@@ -102,17 +117,16 @@
                 CategoryIds = new List<int>(),
             };
 
-            await Assert.ThrowsAsync<ServiceException>(() => fixture.ResourceService.AddResources(resourceAddModel));
-            await Assert.ThrowsAsync<ServiceException>(() => fixture.ResourceService.AddResources(resourceAddModel2));
-            await Assert.ThrowsAsync<ServiceException>(() => fixture.ResourceService.AddResources(resourceAddModel3));
-
+            await Assert.ThrowsAsync<ServiceException>(() => resourceService.AddResources(resourceAddModel));
+            await Assert.ThrowsAsync<ServiceException>(() => resourceService.AddResources(resourceAddModel2));
+            await Assert.ThrowsAsync<ServiceException>(() => resourceService.AddResources(resourceAddModel3));
 
         }
 
         [Fact]
         public async Task GetMyResourceShouldReturnCorrectCountForTheUser()
         {
-            var result = fixture.ResourceService.GetMyResources();
+            var result = resourceService.GetMyResources();
 
             Assert.Equal(1, result.Result.Count());
         }
@@ -126,7 +140,7 @@
                 Search = null,
                 Sort = null
             };
-            var result = fixture.ResourceService.GetPublicResources(1, queryModel);
+            var result = resourceService.GetPublicResources(1, queryModel);
             Assert.NotNull(result);
             Assert.Equal(3, result.Result.Resources.Count);
 
@@ -135,35 +149,37 @@
         [Fact]
         public async Task RemoveResourceByIdShouldWorkIfTheUserOwningItTriesToDeleteIt()
         {
-            var resource = await fixture.DbContext.Resources.Select(r => new
+            var resource = await DbContext.Resources.Select(r => new
             {
                 r.Id,
                 r.UserId
             }).FirstOrDefaultAsync(r => r.UserId == "pesho");
 
-            var result = await fixture.ResourceService.RemoveResource(resource.Id.ToString());
+            var result = await resourceService.RemoveResource(resource.Id.ToString());
 
-            Assert.Equal(ResourceMessages.OnSuccessfulResourceRemove, result);
+            Assert.Equal(ResourceMessages.SuccessfulResourceRemove, result);
         }
 
         [Fact]
         public async Task RemoveResourceByIdShouldThrowAnExceptionIfAnotherUserTriesToDeleteIt()
         {
-            var resource = await fixture.DbContext.Resources.Select(r => new
+            var resource = await DbContext.Resources.Select(r => new
             {
                 r.Id,
                 r.UserId
-            }).FirstOrDefaultAsync(r => r.UserId != "pesho");
+            })
+                .FirstOrDefaultAsync(r => r.UserId != "pesho");
 
-            await Assert.ThrowsAsync<ServiceException>(() => fixture.ResourceService.RemoveResource(resource.Id.ToString()));
+            await Assert.ThrowsAsync<ServiceException>(() =>
+                resourceService.RemoveResource(resource.Id.ToString()));
 
         }
 
         [Fact]
         public async Task RemoveResourceByIdShouldThrowAnExceptionIfTheResourceDoesNotExist()
         {
-            var resourceId=Guid.NewGuid().ToString();
-            await Assert.ThrowsAsync<CustomException>(() => fixture.ResourceService.RemoveResource(resourceId));
+            var resourceId = Guid.NewGuid().ToString();
+            await Assert.ThrowsAsync<CustomException>(() => resourceService.RemoveResource(resourceId));
         }
 
         [Fact]
@@ -176,41 +192,43 @@
                 ImageUrl = "https://imageurl.com",
                 IsDeleted = true,
                 IsPublic = true,
-                Title = "Test title 123, test 123 123",
+                Title = "Test title 123, test 123 123!!!",
                 UserId = "pesho",
             };
 
-            await fixture.DbContext.Resources.AddAsync(resource);
-            await fixture.DbContext.SaveChangesAsync();
+            await DbContext.Resources.AddAsync(resource);
+            await DbContext.SaveChangesAsync();
 
-            await Assert.ThrowsAsync<ServiceException>(() => fixture.ResourceService.RemoveResource(resource.Id.ToString()));
+            await Assert.ThrowsAsync<ServiceException>(() =>
+                resourceService.RemoveResource(resource.Id.ToString()));
         }
 
         [Fact]
         public async Task ChangeVisibilityShouldChangeBooleanIfCorrect()
         {
-            var resource = await fixture.DbContext.Resources.Select(r => new
+            var resource = await DbContext.Resources.Select(r => new
             {
                 r.Id,
                 r.UserId
             }).FirstOrDefaultAsync(r => r.UserId == "pesho");
 
-            var result = await fixture.ResourceService.ChangeVisibility(resource.Id.ToString());
+            var result = await resourceService.ChangeVisibility(resource.Id.ToString());
 
             Assert.NotNull(result);
-            Assert.Equal(ResourceMessages.SuccessfullyVisibilityChanged,result);
+            Assert.Equal(ResourceMessages.SuccessfullyVisibilityChanged, result);
         }
 
         [Fact]
         public async Task ChangeVisibilityShouldNotWorkIfAnotherUserTriesToChangeIt()
         {
-            var resource = await fixture.DbContext.Resources.Select(r => new
+            var resource = await DbContext.Resources.Select(r => new
             {
                 r.Id,
                 r.UserId
             }).FirstOrDefaultAsync(r => r.UserId != "pesho");
 
-           await Assert.ThrowsAsync<ServiceException>(()=> fixture.ResourceService.ChangeVisibility(resource.Id.ToString()));
+            await Assert.ThrowsAsync<ServiceException>(() =>
+                resourceService.ChangeVisibility(resource.Id.ToString()));
         }
 
         [Fact]
@@ -227,13 +245,18 @@
                 UserId = "pesho",
             };
 
-            await fixture.DbContext.Resources.AddAsync(resource);
-            await fixture.DbContext.SaveChangesAsync();
+            await DbContext.Resources.AddAsync(resource);
+            await DbContext.SaveChangesAsync();
 
-            await Assert.ThrowsAsync<ServiceException>(()=> fixture.ResourceService.ChangeVisibility(resource.Id.ToString()));
+            await Assert.ThrowsAsync<ServiceException>(() =>
+                resourceService.ChangeVisibility(resource.Id.ToString()));
 
         }
 
-
+        public void Dispose()
+        {
+            DbContext.Dispose();
+        }
     }
 }
+

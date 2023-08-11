@@ -2,7 +2,7 @@
 {
     public class TopicMessages
     {
-        public const string OnUnsuccessful = "There was an issue retrieving this topic";
+        public const string Unsuccessful = "There was an issue retrieving this topic";
 
         public const string TopicDoesNotExist = "The topic you're trying to achieve does not exist";
 

@@ -8,7 +8,7 @@
 
         public string? SearchString { get; set; }
 
-        public string TopicId { get; set; }
+        public string TopicId { get; set; } = null!;
 
         public IssueSorting IssueSorting { get; set; }
     }

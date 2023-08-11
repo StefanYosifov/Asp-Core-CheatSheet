@@ -1,6 +1,6 @@
 ﻿namespace _Project_CheatSheet.Features.Videos
 {
-    using Common.Filters;
+    using Common.Filters_and_Attributes.Filters;
 
     using Constants.GlobalConstants.Videos;
 
@@ -24,7 +24,7 @@
         }
 
         [HttpGet("id/{videoId}")]
-        [ActionHandlingFilter("", VideoMessages.OnUnsuccessfulGetVideoId)]
+        [ActionHandlingFilter("", VideoMessages.UnsuccessfulGetVideoId)]
         [ExceptionHandlingActionFilter]
         public async Task<string?> GetVideoId(Guid videoId)
             => await service.GetVideoId(videoId);

@@ -1,6 +1,5 @@
 ﻿namespace _Project_CheatSheet.Features.Resources.Interfaces
 {
-    using Common.Pagination;
     using Models;
 
     public interface IResourceService

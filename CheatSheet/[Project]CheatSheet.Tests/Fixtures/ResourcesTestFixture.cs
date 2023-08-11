@@ -1,31 +1,17 @@
-﻿using Microsoft.EntityFrameworkCore;
-
-namespace _Project_CheatSheet.Tests.Fixtures
+﻿namespace _Project_CheatSheet.Tests.Fixtures
 {
     using _Project_CheatSheet.Infrastructure.Data.SQL;
-    using _Project_CheatSheet.Infrastructure.Data.SQL.Models;
-    using AutoMapper;
-    using Common.Mapping;
-    using Common.UserService.Interfaces;
+    using _Project_CheatSheet.Tests.Fixtures.Setup;
     using Features.Comment.Interfaces;
     using Features.Comment.Services;
+    using Features.Identity.Interfaces;
+    using Features.Likes.Interfaces;
+    using Features.Likes.Services;
     using Features.Resources.Services;
-    using Microsoft.AspNetCore.Http;
     using Microsoft.EntityFrameworkCore;
     using Moq;
     using System;
-    using System.Collections.Generic;
-
-    using Authentication;
-
-    using Features.Identity.Interfaces;
-    using Features.Identity.Services;
-    using Features.Likes.Interfaces;
-    using Features.Likes.Services;
-
     using IResourceService = Features.Resources.Interfaces.IResourceService;
-    using System.Numerics;
-    using _Project_CheatSheet.Tests.Fixtures.Setup;
 
     public class ResourcesTestFixture : IDisposable
     {
@@ -48,6 +34,8 @@ namespace _Project_CheatSheet.Tests.Fixtures
                 .UseInMemoryDatabase("RandomName")
                 .Options;            
             this.DbContext = new CheatSheetDbContext(options,httpContextAccessorMock.Object);
+            
+            SetupInitializeData.InitializeDataForResources(userId, DbContext).Wait();
 
             var commentServiceMock = new Mock<CommentService>(DbContext, currentUserServiceMock.Object, mapper);
             var resourceServiceMock = new Mock<ResourceService>(DbContext, mapper, currentUserServiceMock.Object);
@@ -56,7 +44,6 @@ namespace _Project_CheatSheet.Tests.Fixtures
             CommentService = commentServiceMock.Object;
             ResourceService = resourceServiceMock.Object;
             LikeService = likeServiceMock.Object;
-            SetupInitializeData.InitializeDataForResources(userId, DbContext).Wait();
         }
 
         public void Dispose()

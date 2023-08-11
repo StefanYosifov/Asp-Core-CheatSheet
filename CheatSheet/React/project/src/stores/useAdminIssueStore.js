@@ -28,12 +28,6 @@ const useAdminIssueStore = create((set) => ({
             set({ isLoading: true });
             const response = await getIssuesFilteringCategories();
             if (response.status === 200) {
-                console.log(response.data);
-                console.log(response.data);
-                console.log(response.data);
-                console.log(response.data);
-                console.log(response.data);
-
                 set({ filteringCategories: response.data });
             }
         } catch (error) {

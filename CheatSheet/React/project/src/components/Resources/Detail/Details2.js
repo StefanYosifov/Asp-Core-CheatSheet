@@ -54,7 +54,7 @@ export const Details2 = () => {
           <img
             src={details.imageUrl}
             alt="Image"
-            className="w-6/12 rounded-lg shadow-md mb-4"
+            className="w-6/12 max-h-96 object-cover rounded-lg shadow-md mb-4"
           />
           <div>
 

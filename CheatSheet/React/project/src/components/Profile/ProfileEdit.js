@@ -50,37 +50,39 @@ export const ProfileEdit = ({ profileData }) => {
                             <div className="mt-4">
                                 <h1>Personal details</h1>
                                 <h3>Edit your personal information</h3>
-                                <div className="grid grid-cols-2 gap-4">
+                                <div className="grid grid-cols-2 gap-4 text-bgBlackUI-0">
                                     <div>
-                                        <label for="input-label" className="block text-sm font-medium mb-2 text-bgWhiteUI-0">
+                                        <label className="block text-sm font-medium mb-2 text-bgWhiteUI-0">
                                             Username
                                         </label>
-                                        <input type="text" className="py-3 px-4 block w-full border-gray-200 rounded-md text-sm " placeholder="Here's your username"
+                                        <input type="text" className="py-3 px-4 block w-full border-gray-200 rounded-md text-sm" 
+                                        placeholder="Here's your username"
                                             id="username"
                                             disabled={true}
                                             defaultValue={profileData.userName} />
                                     </div>
-                                    <div className="">
-                                        <label for="input-label" className="block text-sm font-medium mb-2 tracking-wide">
+                                    <div>
+                                        <label htmlFor="input-label" className="block text-sm font-medium mb-2 tracking-wide">
                                             Profile picture
                                         </label>
-                                        <input type="text" className="py-3 px-4 w-full border-gray-200 rounded-md text-sm focus:border-pinkUI-0 focus:ring-pinkUI-0 dark:border-pinkUI-0 dark:text-gray-700" placeholder="This is placeholder"
+                                        <input type="text" className="py-3 px-4 w-full border-gray-200 rounded-md text-sm focus:border-pinkUI-0 focus:ring-pinkUI-0" 
+                                        placeholder="Add your profile picture URL here"
                                             id="profilePictureUrl"
                                             name="profilePictureUrl"
                                             value={formData.profilePictureUrl || ''}
                                             onChange={handleInputChange} />
                                     </div>
                                     <div>
-                                        <label for="input-label" className="block text-sm font-medium mb-2 tracking-wide">
+                                        <label htmlFor="input-label" className="block text-sm font-medium mb-2 tracking-wide">
                                             Profile description
                                         </label>
-                                        <input type="text" className="py-3 px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:border-gray-700 dark:text-gray-400" placeholder="This is placeholder"
+                                        <input type="text" className="py-3 px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:border-gray-700 dark:text-gray-400" placeholder="Add some description here"
                                             id="profileDescription"
                                             name="profileDescription"
                                             value={formData.profileDescription || ''}
                                             onChange={handleInputChange} />
                                     </div>  <div>
-                                        <label for="input-label" className="block text-sm font-medium mb-2 tracking-wide">
+                                        <label htmlFor="input-label" className="block text-sm font-medium mb-2 tracking-wide">
                                             Background Url
                                         </label>
                                         <input type="text" className="py-3 px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:border-gray-700 dark:text-gray-400" placeholder="This is placeholder"
@@ -89,7 +91,7 @@ export const ProfileEdit = ({ profileData }) => {
                                             value={formData.profileBackground || ''}
                                             onChange={handleInputChange} />
                                     </div>  <div>
-                                        <label for="input-label" className="block text-sm font-medium mb-2 tracking-wide">
+                                        <label htmlFor="input-label" className="block text-sm font-medium mb-2 tracking-wide">
                                             Job
                                         </label>
                                         <input type="text" className="py-3 px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:border-gray-700 dark:text-gray-400" placeholder="This is placeholder"
@@ -99,7 +101,7 @@ export const ProfileEdit = ({ profileData }) => {
                                             onChange={handleInputChange} />
                                     </div>
                                     <div>
-                                        <label for="input-label" className="block text-sm font-medium mb-2 tracking-wide">
+                                        <label htmlFor="input-label" className="block text-sm font-medium mb-2 tracking-wide">
                                             Education
                                         </label>
                                         <input type="text" className="py-3 px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:border-gray-700 dark:text-gray-400" placeholder="This is placeholder"
@@ -112,7 +114,7 @@ export const ProfileEdit = ({ profileData }) => {
                             </div>
                             <button
                                 type="submit"
-                                className="inline-flex items-center mt-6 px-4 py-2 bg-red-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-500 active:bg-blue-700 focus:outline-none focus:border-blue-900 focus:shadow-outline-gray disabled:opacity-50 transition ease-in-out duration-150"
+                                className="inline-flex items-center mt-6 px-4 py-2 bg-pinkUI-0 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-indigo-600 active:bg-blue-700 focus:outline-none focus:border-blue-900 focus:shadow-outline-gray disabled:opacity-50 transition ease-in-out duration-150"
                             >
                                 Update Information
                             </button>

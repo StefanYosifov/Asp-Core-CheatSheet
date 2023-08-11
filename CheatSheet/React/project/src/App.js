@@ -28,6 +28,7 @@ import { Logout } from './components/Authentication/Logout/Logout';
 import { Login } from './components/Authentication/Login/Login';
 import RegisterPage from './components/Authentication/Register/Register';
 import { PrivateNavigation } from './components/Administrator/Main/PrivateNavigation';
+import { About } from './components/Static pages/About us';
 
 function App() {
   return (
@@ -57,6 +58,7 @@ function App() {
               <Route path={APP_URLS.COURSES_MINE} Component={CourseMy} />
               <Route path={APP_URLS.PRIVATE} Component={PrivateNavigation} />
               <Route path={APP_URLS.COURSES_OVERVIEW} Component={CourseOverView} />
+              <Route path={APP_URLS.ABOUT} Component={About}/>
             </Route>
           </Route>
         </Routes>

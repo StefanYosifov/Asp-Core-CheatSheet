@@ -18,6 +18,7 @@ export const URLS={
     TERMS:`/terms`,
     PRIVACY:`/privacy`,
     PRIVATE:`/private`,
+    ABOUT:`/about`
 }
 
 export const APP_URLS = {
@@ -42,6 +43,7 @@ export const APP_URLS = {
     COURSES_LESSON:'/course/trainings/lesson/:id/:topicTitle',
     COURSES_JOIN: '/course/join/:id',
     COURSES_MINE: '/course/mine/:id',
-    PRIVATE:`/private`
+    PRIVATE:`/private`,
+    ABOUT:`/about`
   };
 

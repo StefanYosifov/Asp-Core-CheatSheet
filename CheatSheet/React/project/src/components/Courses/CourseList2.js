@@ -120,13 +120,13 @@ const ALLCourses = () => {
 
 
     return (
-        <div className="mx-28 bg-bgWhiteUI-0 p-1 my-8 shadow-sm">
+        <div className="mx-28 bg-bgWhiteUI-0 p-1 my-8 shadow-sm border">
             <section className="ml-2">
-            <button
-             onClick={(event) => { event.preventDefault(); setQueryParameters(queryParameters) }}
-             className="px-8 text-sm py-2.5 overflow-hidden text-pinkUI-0 transition-colors duration-300 bg-bgBlackUI-0 rounded-lg shadow sm:w-auto sm:mx-2 hover:bg-gray-700 focus:ring focus:ring-gray-300 focus:ring-opacity-80">
-                Search
-            </button>
+                <button
+                    onClick={(event) => { event.preventDefault(); setQueryParameters(queryParameters) }}
+                    className="px-8 text-sm py-2.5 overflow-hidden text-pinkUI-0 transition-colors duration-300 bg-bgBlackUI-0 rounded-lg shadow sm:w-auto sm:mx-2 hover:bg-gray-700 focus:ring focus:ring-gray-300 focus:ring-opacity-80">
+                    Search
+                </button>
             </section>
             <div className="flex">
                 <article className="w-1/5 h-screen">
@@ -178,11 +178,14 @@ const ALLCourses = () => {
                             </div>
                         )}
                     </div>
-                    <Pagination
-                        currentPage={Number(id)}
-                        totalPages={Number(totalPages)}
-                        onPageChange={(pageNumber) => navigate(`${URLS.COURSES}${pageNumber}`)}
-                    />
+                    <section className="mb-4">
+
+                        <Pagination
+                            currentPage={Number(id)}
+                            totalPages={Number(totalPages)}
+                            onPageChange={(pageNumber) => navigate(`${URLS.COURSES}${pageNumber}`)}
+                        />
+                    </section>
                 </article>
             </div>
         </div>

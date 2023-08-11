@@ -105,27 +105,39 @@ const useDetailsStore = create((set) => ({
     },
     addCategory: (value) => {
         set((state) => {
-            const isCategorySelected = state.editData.chosenCategories.some(
-                (category) => category.name === value
-            );
-
-            if (isCategorySelected) {
-                return state;
-            }
-            const updatedCategories = [
-                ...state.editData.chosenCategories,
-                { name: value },
-            ];
-
-            return {
-                ...state,
-                editData: {
-                    ...state.editData,
-                    chosenCategories: updatedCategories,
-                },
-            };
+          const isCategorySelected = state.editData.chosenCategories.some(
+            (category) => category.name === value
+          );
+      
+          if (isCategorySelected) {
+            return state;
+          }
+      
+          const categoryToAdd = state.editData.allAvailableCategories.find(
+            (category) => category.name === value
+          );
+      
+          if (!categoryToAdd) {
+            return state; 
+          }
+      
+          const updatedCategories = [
+            ...state.editData.chosenCategories,
+            {
+              id: categoryToAdd.id,
+              name: value,
+            },
+          ];
+      
+          return {
+            ...state,
+            editData: {
+              ...state.editData,
+              chosenCategories: updatedCategories,
+            },
+          };
         });
-    },
+      },
     removeCategory: (value) => {
         console.log(value);
         set((state) => {
@@ -153,7 +165,6 @@ const useDetailsStore = create((set) => ({
     },
     setEditedResource: async (id, resource) => {
         const errors=resourceFormValidator(resource);
-        console.log(errors);
         if(Object.values(errors).length>0){
             Object.values(errors).forEach((error)=>toast.error(error));
             return;

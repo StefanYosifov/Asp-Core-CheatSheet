@@ -4,7 +4,6 @@
     using Amazon.S3;
     using AutoMapper;
     using AutoMapper.QueryableExtensions;
-    using Infrastructure.Data;
     using Interfaces;
     using Microsoft.EntityFrameworkCore;
     using Models;
@@ -30,6 +29,7 @@
             var topic = await context.Topics
                 .Include(t => t.Video)
                 .FirstOrDefaultAsync(t => t.Id.ToString() == id);
+
             return mapper.Map<TopicRespondModel>(topic);
         }
 

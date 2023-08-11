@@ -1,6 +1,7 @@
 ﻿namespace _Project_CheatSheet.Features.Comment
 {
-    using Common.Filters;
+    using Common.Filters_and_Attributes.Filters;
+
     using Interfaces;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;

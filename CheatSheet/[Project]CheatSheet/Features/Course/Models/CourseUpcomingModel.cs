@@ -4,7 +4,7 @@
 
     using Constants.GlobalConstants.Course;
 
-    public class CourseRespondUpcomingModel
+    public class CourseUpcomingModel
     {
 
         public string Id { get; set; } = null!;

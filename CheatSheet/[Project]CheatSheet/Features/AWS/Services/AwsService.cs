@@ -19,26 +19,33 @@
 
     public class AwsService : IAwsService
     {
-        private const string BucketName = "pdffiles";
+        private readonly string bucketName;
+
+        private readonly CheatSheetDbContext context;
         private readonly IMemoryCache cache;
         private readonly ICacheService cacheService;
-        private readonly CheatSheetDbContext context;
         private readonly IAmazonS3 s3;
         private readonly ICurrentUser userService;
+        private readonly IConfiguration configuration;
 
         public AwsService(
-            IAmazonS3 s3,
-            ICurrentUser userService,
-            CheatSheetDbContext context,
-            IMemoryCache cache,
-            ICacheService cacheService)
+            CheatSheetDbContext context, 
+            IMemoryCache cache, 
+            ICacheService cacheService, 
+            IAmazonS3 s3, 
+            ICurrentUser userService, 
+            IConfiguration configuration)
         {
-            this.s3 = s3;
-            this.userService = userService;
             this.context = context;
             this.cache = cache;
             this.cacheService = cacheService;
+            this.s3 = s3;
+            this.userService = userService;
+            this.configuration = configuration;
+            this.bucketName = configuration["AWS:BucketName"];
+
         }
+
 
         public async Task<string> UploadFile(Guid id, IFormFile file)
         {
@@ -46,8 +53,8 @@
             {
                 var putObjectRequest = new PutObjectRequest
                 {
-                    BucketName = BucketName,
-                    Key = $"{id}",
+                    BucketName = configuration[""],
+                    Key = id.ToString(),
                     ContentType = file.ContentType,
                     InputStream = file.OpenReadStream(),
                     Metadata =
@@ -83,7 +90,7 @@
 
             var request = new GetPreSignedUrlRequest
             {
-                BucketName = BucketName,
+                BucketName = bucketName,
                 Key = $"{id}",
                 Expires = DateTime.Now.AddMinutes(CachingConstants.Lessons.PdfFileUrl)
             };

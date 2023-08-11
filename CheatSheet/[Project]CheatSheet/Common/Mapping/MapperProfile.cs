@@ -22,6 +22,9 @@
 
     public class MapperProfile : Profile
     {
+
+        // I know it's generally bad practice to inject into the mapper dependencies
+        // However it removes the need to do plenty of other queries in some cases
         public ICurrentUser Service { get; }
 
         public MapperProfile(ICurrentUser userService)
@@ -118,22 +121,22 @@
                 .ForMember(dest => dest.LikeCount, opt => opt.MapFrom(dest => dest.CommentLikes.Count));
 
             //Courses
-            CreateMap<Course, CourseRespondModel>()
+            CreateMap<Course, CourseModel>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id.ToString()))
-                .ForMember(dest => dest.Topics, opt => opt.MapFrom(src => src.Topics.Select(t => new TopicsRespondModel
+                .ForMember(dest => dest.Topics, opt => opt.MapFrom(src => src.Topics.Select(t => new TopicsModel
                 {
                     TopicId = t.Id.ToString(),
                     Name = t.Name
                 })));
 
-            CreateMap<Course, CourseRespondPaymentModel>()
+            CreateMap<Course, CoursePaymentModel>()
                 .ForMember(dest => dest.CourseId, opt => opt.MapFrom(src => src.Id.ToString()))
                 .ForMember(dest => dest.CourseName, opt => opt.MapFrom(src => src.Title))
                 .ForMember(dest => dest.CourseDescription, opt => opt.MapFrom(src => src.Description))
                 .ForMember(dest => dest.StartTime,
                     opt => opt.MapFrom(src => src.StartDate.ToString(Formatter.DateOnlyFormatter)));
 
-            CreateMap<Course, CourseRespondAllModel>()
+            CreateMap<Course, CourseAllModel>()
                 .BeforeMap((src, dest) => dest.HasPaid = false)
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id.ToString()))
                 .ForMember(dest => dest.TopicsCount, opt => opt.MapFrom(src => src.Topics.Count))
@@ -150,7 +153,7 @@
                         .Where(ccc => ccc.CourseId == src.Id)
                         .Select(cc => cc.CategoryCourse.Name)));
 
-            CreateMap<Course, CourseRespondUpcomingModel>()
+            CreateMap<Course, CourseUpcomingModel>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id.ToString()))
                 .ForMember(dest => dest.Title, opt => opt.MapFrom(src => src.Title))
                 .ForMember(dest => dest.ImageUrl, opt => opt.MapFrom(src => src.ImageUrl))
@@ -173,7 +176,7 @@
                 .ForMember(dest => dest.VideoId, opt => opt.MapFrom(src => src.VideoId.ToString()))
                 .ForMember(dest => dest.VideoName, opt => opt.MapFrom(src => src.Video.Name));
 
-            CreateMap<Topic, TopicsRespondModel>()
+            CreateMap<Topic, TopicsModel>()
                 .ForMember(dest => dest.TopicId, opt => opt.MapFrom(src => src.Id))
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name))
                 .ForMember(dest => dest.StarTime,

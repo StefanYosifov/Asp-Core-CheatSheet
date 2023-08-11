@@ -1,7 +1,9 @@
 ﻿namespace _Project_CheatSheet.Features.Issue
 {
-    using _Project_CheatSheet.Features.Issue.Models;
-    using Common.Filters;
+    using Common.Filters_and_Attributes.Filters;
+
+    using Models;
+
     using Interfaces;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;

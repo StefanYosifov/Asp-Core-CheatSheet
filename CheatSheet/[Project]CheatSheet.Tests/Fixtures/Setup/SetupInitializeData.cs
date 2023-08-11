@@ -502,6 +502,7 @@
             await context.SaveChangesAsync();
 
 
+
             var videos = new List<Video>
             {
                 new()
@@ -577,6 +578,36 @@
                 },
             };
             await context.Topics.AddRangeAsync(topics);
+            await context.SaveChangesAsync();
+
+            var issues = new List<Issue>()
+            {
+                new()
+                {
+                    CategoryIssueId = categoryIssues[0].Id,
+                    UserId = "pesho",
+                    IsDeleted = false,
+                    Description = "There is a little bit of a problem over here, can you look into it?",
+                    TopicId = topics[2].Id
+                },
+                new()
+                {
+                    CategoryIssueId = categoryIssues[1].Id,
+                    UserId = "john",
+                    IsDeleted = false,
+                    Description = "Experiencing a critical issue, need urgent attention.",
+                    TopicId = topics[1].Id
+                },
+                new()
+                {
+                    CategoryIssueId = categoryIssues[0].Id,
+                    UserId = "mary",
+                    IsDeleted = false,
+                    Description = "I found a potential bug, please investigate.",
+                    TopicId = topics[0].Id
+                },
+            };
+            await context.Issues.AddRangeAsync(issues);
             await context.SaveChangesAsync();
 
         }

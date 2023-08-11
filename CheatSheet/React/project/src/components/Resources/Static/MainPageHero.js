@@ -16,8 +16,8 @@ export const MainPageHero = () => {
                     </h2>
 
                     <p className="block max-w-2xl mt-4">
-                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aut corporis esse dolorum, illum, consectetur earum provident alias dolore omnis quis tempore voluptatum excepturi ea numquam? Aperiam fugiat consequuntur nostrum odio. </p>
-
+                    Your unique contributions can make a significant impact on the entire community. When you add a resource to our platform, you're not just sharing content; you're enriching the learning experience for thousands of learners worldwide. Here's why adding a resource is a valuable and rewarding endeavor
+                    </p>
                     <div className="mt-6 sm:-mx-2">
                         <Link 
                         to={`${URLS.RESOURCES_ADD}`}

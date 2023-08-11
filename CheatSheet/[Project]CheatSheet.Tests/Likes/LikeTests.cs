@@ -14,7 +14,6 @@
     using Xunit;
 
 
-
     public class LikeTests:IClassFixture<ResourcesTestFixture>
     {
         private readonly ResourcesTestFixture fixture;
@@ -35,7 +34,7 @@
             };
             var result = await fixture.LikeService.LikeAComment(comment);
 
-            Assert.Equal(LikeMessages.OnSuccessfulLikedComment,result);
+            Assert.Equal(LikeMessages.SuccessfulLikedComment,result);
         }
 
         [Fact]
@@ -80,7 +79,7 @@
             await fixture.LikeService.LikeAComment(comment);
             var result = await fixture.LikeService.RemoveLikeFromComment(comment);
 
-            Assert.Equal(LikeMessages.OnSuccessfulRemovedComment,result);
+            Assert.Equal(LikeMessages.SuccessfulRemovedComment,result);
         }
 
         [Fact]
@@ -111,7 +110,7 @@
             };
 
             var result=await fixture.LikeService.LikeAResource(like);
-            Assert.Equal(LikeMessages.OnSuccessfulLikedResource,result);
+            Assert.Equal(LikeMessages.SuccessfulLikedResource,result);
         }
 
         [Fact]
@@ -148,7 +147,7 @@
             };
 
             var result = await fixture.LikeService.RemoveLikeFromResource(likeResource);
-            Assert.Equal(LikeMessages.OnSuccesfulRemoveLikeResource,result);
+            Assert.Equal(LikeMessages.SuccessfulRemoveLikeResource,result);
         }
 
         [Fact]

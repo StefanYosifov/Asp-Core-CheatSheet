@@ -1,7 +1,6 @@
 ﻿namespace _Project_CheatSheet.Features.AWS
 {
-    using Amazon.S3.Model;
-    using Common.Filters;
+    using Common.Filters_and_Attributes.Filters;
 
     using Interfaces;
 

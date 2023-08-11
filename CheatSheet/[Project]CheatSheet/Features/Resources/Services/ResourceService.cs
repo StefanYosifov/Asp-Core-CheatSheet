@@ -47,7 +47,7 @@
 
             if (isNull || resourceModel.CategoryIds.Count == 0)
             {
-                throw new ServiceException(ResourceMessages.OnUnsuccessfulResourceAdd);
+                throw new ServiceException(ResourceMessages.UnsuccessfulResourceAdd);
             }
 
             var userId = currentUserService.GetUserId();
@@ -84,7 +84,7 @@
                 await context.SaveChangesAsync();
             }
 
-            return ResourceMessages.OnSuccessfulResourceAdd;
+            return ResourceMessages.SuccessfulResourceAdd;
         }
 
         public async Task<IEnumerable<ResourceModel>> GetMyResources()
@@ -247,11 +247,11 @@
             try
             {
                 await context.SaveChangesAsync();
-                return ResourceMessages.OnSuccessfulResourceEdit;
+                return ResourceMessages.SuccessfulResourceEdit;
             }
             catch (DbUpdateException)
             {
-                throw new Exception(ResourceMessages.OnUnsuccessfulResourceEdit);
+                throw new Exception(ResourceMessages.UnsuccessfulResourceEdit);
             }
         }
 
@@ -265,12 +265,12 @@
 
             if (resource.UserId != userId || resource.IsDeleted)
             {
-                throw new ServiceException(ResourceMessages.OnUnsuccessfulResourceRemove);
+                throw new ServiceException(ResourceMessages.UnsuccessfulResourceRemove);
             }
 
             context.Remove(resource);
             await context.SaveChangesAsync();
-            return ResourceMessages.OnSuccessfulResourceRemove;
+            return ResourceMessages.SuccessfulResourceRemove;
         }
 
         public async Task<string> ChangeVisibility(string id)

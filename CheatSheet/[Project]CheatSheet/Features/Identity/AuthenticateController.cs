@@ -1,6 +1,6 @@
 ﻿namespace _Project_CheatSheet.Features.Identity
 {
-    using Common.Filters;
+    using Common.Filters_and_Attributes.Filters;
 
     using Constants.GlobalConstants.User;
 
@@ -21,7 +21,7 @@
         }
 
         [HttpPost("login")]
-        [ActionHandlingFilter("", UserIdentityMessages.OnFailedLogin)]
+        [ActionHandlingFilter("", UserIdentityMessages.FailedLogin)]
         [ExceptionHandlingActionFilter()]
         public async Task<Response> Login(IdentityLoginModel identityLoginModel)
             => await service.AuthenticateLogin(identityLoginModel);

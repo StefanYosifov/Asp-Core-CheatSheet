@@ -1,13 +1,7 @@
 ﻿namespace _Project_CheatSheet.Area.AdminServices.Interfaces
 {
-    using _Project_CheatSheet.Area.AdminServices.Models.Courses;
-    using _Project_CheatSheet.Area.AdminServices.Models.Issues;
-
-    using Common.Pagination;
-
-    using Features.Issue.Enums;
-
-    using Models;
+    using Models.Courses;
+    using Models.Issues;
 
     public interface IAdminService
     {

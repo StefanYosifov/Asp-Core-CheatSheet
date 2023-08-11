@@ -1,6 +1,6 @@
 ﻿namespace _Project_CheatSheet.Features.Profile
 {
-    using Common.Filters;
+    using Common.Filters_and_Attributes.Filters;
     using Common.UserService.Interfaces;
 
     using Constants.GlobalConstants.Profile;
@@ -43,7 +43,7 @@
 
         [Authorize]
         [HttpPatch("update")]
-        [ActionHandlingFilter("", ProfileMessages.OnUnsuccessfulUserChange)]
+        [ActionHandlingFilter("", ProfileMessages.UnsuccessfulUserChange)]
         public async Task<ProfileUserEditModel> UpdateProfileData(ProfileUserEditModel profileUserModel)
             => await service.EditProfileData(profileUserModel);
     }

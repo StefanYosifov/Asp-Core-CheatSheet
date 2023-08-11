@@ -1,6 +1,9 @@
 import { MdSchool, MdWork } from "react-icons/md"
 
 export const ProfileContent = ({ profileData }) => {
+
+    console.log(profileData);    
+
     return (
         <>
             {profileData &&
@@ -25,24 +28,34 @@ export const ProfileContent = ({ profileData }) => {
                         </div>
                     </div>
                     <div className="text-center mt-12 flex flex-col">
-                        <img src={profileData.user.profilePictureUrl} className="rounded-full mx-auto max-w-2xl max-h-64" alt="Profile picture" />
+                    {profileData.profileUser.profilePictureUrl !== undefined ? (
+                            <img
+                                src={profileData.profileUser.profilePictureUrl}
+                                className="rounded-full mx-auto max-w-2xl max-h-64"
+                                alt="Profile picture"
+                            />
+                        ) : (
+                            <div className="text-xl font-bold text-blueGray-600">
+                                No Profile Picture
+                            </div>
+                        )}                        
                         <h3 className="text-4xl font-semibold leading-normal mb-2 text-blueGray-700">
-                            {profileData.user.userName}
+                            {profileData.profileUserName}
                         </h3>
                         <div className="text-sm leading-normal mt-0 mb-2 text-blueGray-400 font-bold uppercase">
                             <i className="fas fa-map-marker-alt mr-2 text-lg text-blueGray-400"></i>
-                            {profileData.user.useProfileDescription}
+                            {profileData.profileUser.useProfileDescription}
                         </div>
                         <div className="mb-2 text-blueGray-600 mt-10 flex justify-center">
                             <MdWork></MdWork>
                                 <span className="ml-2">
-                                    {profileData.user.userJob}
+                                    {profileData.profileUserJob}
                                     </span>
                         </div>
                         <div className="mb-2 text-blueGray-600 flex justify-center">
                             <MdSchool></MdSchool>
                             <span className="ml-2">
-                                {profileData.user.userEducation}
+                                {profileData.profileUserEducation}
                             </span>
 
                         </div>
@@ -51,7 +64,7 @@ export const ProfileContent = ({ profileData }) => {
                         <div className="flex flex-wrap justify-center">
                             <div className="w-full lg:w-9/12 px-4">
                                 <p className="mb-4 text-lg leading-relaxed text-blueGray-700">
-                                    {profileData.user.useProfileDescription}
+                                    {profileData.profileUser.useProfileDescription}
                                 </p>
                             </div>
                         </div>

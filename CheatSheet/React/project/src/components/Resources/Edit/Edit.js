@@ -30,7 +30,6 @@ export const Edit = () => {
         toolbar: ['bold', 'italic']
     };
 
-    console.log(resource);
     return (
         <>
             {!isLoading && resource && resource.allAvailableCategories && (
@@ -107,7 +106,7 @@ export const Edit = () => {
                         </div>
                         <select
                             className="mt-4 block w-64 p-2 border rounded"
-                            onChange={(event) => addCategory(event.target.value)}
+                            onChange={(event) => {console.log(event.target.validationMessage);addCategory(event.target.value)}}
                         >
                             {resource.allAvailableCategories.map((ctg) => (
                                 <option
@@ -116,7 +115,6 @@ export const Edit = () => {
                                         ? 'text-pinkUI-0 font-semibold'
                                         : 'font-bold'
                                         }`}                                >
-                                    {console.log(ctg)}
                                     {ctg.name}
                                 </option>
                             ))}

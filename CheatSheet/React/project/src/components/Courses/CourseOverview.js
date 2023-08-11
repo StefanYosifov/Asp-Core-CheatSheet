@@ -225,7 +225,6 @@ export const CourseOverView = () => {
         <div>
             <HeaderView></HeaderView>
             <Main></Main>
-            <div className="bg-bgGray-0 min-h-screen"></div>
         </div>
     );
 };

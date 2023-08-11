@@ -8,16 +8,16 @@
     {
         public int Id { get; set; }
 
-        [Required]
-        public int IssueCategoryId { get; set; }
+        [Required] public int IssueCategoryId { get; set; }
 
         [Required]
         [StringLength(IssueConstants.IssueTitleMaxLength, MinimumLength = IssueConstants.IssueTitleMinLength)]
-        public string Title { get; set; }
+        public string Title { get; set; } = null!;
 
         [Required]
-        [StringLength(IssueConstants.IssueDescriptionMaxLength, MinimumLength = IssueConstants.IssueDescriptionMinLength)]
-        public string Description { get; set; }
+        [StringLength(IssueConstants.IssueDescriptionMaxLength,
+            MinimumLength = IssueConstants.IssueDescriptionMinLength)]
+        public string Description { get; set; } = null!;
 
         public Guid TopicId { get; set; }
     }

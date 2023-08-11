@@ -44,6 +44,9 @@ export const editResource=(id,resource)=>{
         content:resource.content,
         categoryIds:resource.chosenCategories.map(x=>x.id)
     };
+
+    delete data.allAvailableCategories;
+
      return patch(`resource/patch/edit/${id}`,data);
 }
 

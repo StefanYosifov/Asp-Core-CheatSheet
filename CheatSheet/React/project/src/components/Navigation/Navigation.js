@@ -5,11 +5,15 @@ import { useUserDetails } from '../../stores/useUserDetails';
 import { URLS } from '../../constants/URLConstants';
 
 export const Navigation = () => {
+  const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
-  const userId = useUserDetails((state) => state.user.userId);
+  
+  const userState = useUserDetails((state) => state.user);
   const userIsAuthenticated = useUserDetails((state) => state.isAuthenticated);
   const userData = useUserDetails((state) => state.user);
-  const navigate = useNavigate();
+
+  const userId = userState ? userState.userId : null;
+
 
   const isAuthenticated = validateToken();
   console.log(isAuthenticated);

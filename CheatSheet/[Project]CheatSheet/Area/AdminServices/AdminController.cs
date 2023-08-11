@@ -1,8 +1,8 @@
 ﻿namespace _Project_CheatSheet.Area.AdminServices
 {
-    using _Project_CheatSheet.Area.AdminServices.Models.Courses;
-    using Common.Filters;
-    using Common.Pagination;
+    using Common.Filters_and_Attributes.Filters;
+
+    using Models.Courses;
 
     using Features;
 
@@ -10,8 +10,6 @@
 
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
-
-    using Models;
     using Models.Issues;
 
     [Authorize(Policy = "ElevatedRights")]
@@ -29,9 +27,7 @@
         [ActionHandlingFilter]
         [ExceptionHandlingActionFilter]
         public async Task<ICollection<ResourceAdminModel>> GetResources([FromQuery] ResourceAdminQueryModel query)
-        {
-            return await service.GetListOfCourses(query);
-        }
+            => await service.GetListOfCourses(query);
 
         [HttpGet("resource/{courseId}")]
         [ActionHandlingFilter]

@@ -24,6 +24,7 @@
         [StringLength(ResourceConstants.ContentMaxLength, MinimumLength = ResourceConstants.ContentMinLength)]
         public string Content { get; set; } = null!;
 
+        [Required]
         public ICollection<int> CategoryIds { get; set; }
     }
 }

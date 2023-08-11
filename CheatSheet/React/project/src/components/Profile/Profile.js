@@ -35,7 +35,7 @@ export const Profile = () => {
       case ACTIVE_ELEMENTS.POSTS:
         return <ProfileResouces />;
       case ACTIVE_ELEMENTS.EDIT:
-        return <ProfileEdit profileData={profileData.user} />;
+        return <ProfileEdit profileData={profileData.profileUser} />;
       default:
         return <ProfileContent profileData={profileData} />;
     }

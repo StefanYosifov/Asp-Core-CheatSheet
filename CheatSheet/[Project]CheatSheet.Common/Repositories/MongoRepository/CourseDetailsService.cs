@@ -36,19 +36,13 @@
             return true;
         }
 
-        public async Task<ICollection<CourseDetails>> Get()
-        {
-            return await context.Find(c => true).ToListAsync();
-        }
+        public async Task<ICollection<CourseDetails>> Get() 
+            => await context.Find(c => true).ToListAsync();
 
-        public async Task<CourseDetails> Get(string id)
-        {
-            return await context.Find(c => c.Id == id).FirstOrDefaultAsync();
-        }
+        public async Task<CourseDetails> Get(string id) 
+            => await context.Find(c => c.Id == id).FirstOrDefaultAsync();
 
-        public async Task<CourseDetails> GetByCourseId(string courseId)
-        {
-            return await context.Find(c => c.CourseId == courseId).FirstOrDefaultAsync();
-        }
+        public async Task<CourseDetails> GetByCourseId(string courseId) 
+            => await context.Find(c => c.CourseId == courseId).FirstOrDefaultAsync();
     }
 }

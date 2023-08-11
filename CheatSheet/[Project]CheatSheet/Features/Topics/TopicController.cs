@@ -1,6 +1,6 @@
 ﻿namespace _Project_CheatSheet.Features.Topics
 {
-    using Common.Filters;
+    using Common.Filters_and_Attributes.Filters;
 
     using Constants.GlobalConstants.Topic;
 
@@ -22,7 +22,7 @@
         }
 
         [HttpGet("{id}")]
-        [ActionHandlingFilter("", TopicMessages.OnUnsuccessful)]
+        [ActionHandlingFilter("", TopicMessages.Unsuccessful)]
         public async Task<TopicRespondModel?> GetTopic(string id)
             => await service.GetTopic(id);
 

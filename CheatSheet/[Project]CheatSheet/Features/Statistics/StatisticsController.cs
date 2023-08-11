@@ -1,11 +1,11 @@
 ﻿namespace _Project_CheatSheet.Features.Statistics
 {
-    using Common.Filters;
+    using Common.Filters_and_Attributes.Filters;
+
     using Interfaces;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using Models;
-    using System.Net;
 
     [Authorize]
     [Route("/statistics")]

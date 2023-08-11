@@ -1,10 +1,10 @@
 ﻿namespace _Project_CheatSheet.Features.Likes
 {
-    using Common.Filters;
+    using Common.Filters_and_Attributes.Filters;
+
     using Interfaces;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
-    using Microsoft.AspNetCore.Mvc.Filters;
     using Models;
 
     [Authorize]

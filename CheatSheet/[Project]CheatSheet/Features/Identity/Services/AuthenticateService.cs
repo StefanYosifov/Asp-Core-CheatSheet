@@ -1,10 +1,10 @@
 ﻿namespace _Project_CheatSheet.Features.Identity.Services;
 
-using _Project_CheatSheet.Common.Exceptions;
-using _Project_CheatSheet.Infrastructure.Data.SQL.Models;
-using _Project_CheatSheet.Infrastructure.Data.SQL.Models.Enums;
 using AutoMapper;
+using Common.Exceptions;
 using Constants.GlobalConstants.Authentication;
+using Infrastructure.Data.SQL.Models;
+using Infrastructure.Data.SQL.Models.Enums;
 using Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;

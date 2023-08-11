@@ -1,9 +1,10 @@
-﻿namespace _Project_CheatSheet.Common.Filters
+﻿namespace _Project_CheatSheet.Common.Filters_and_Attributes.Filters
 {
+    using System.Text;
+
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.Filters;
-    using System.Text;
 
     public class ActionHandlingFilter : Attribute, IAsyncResultFilter
     {
@@ -27,6 +28,7 @@
         {
             await next();
             var objectResult = context.Result as ObjectResult;
+
             if (objectResult?.Value == null)
             {
                 context.HttpContext.Response.StatusCode = failureStatusCode;
@@ -41,6 +43,7 @@
             {
                 context.Result = new OkObjectResult(successMessage);
             }
+
         }
     }
 }

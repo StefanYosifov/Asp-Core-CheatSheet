@@ -1,7 +1,8 @@
 ﻿namespace _Project_CheatSheet.Features.Course
 {
     using _Project_CheatSheet.Infrastructure.Data.MongoDb.Models;
-    using Common.Filters;
+
+    using Common.Filters_and_Attributes.Filters;
 
     using Constants.GlobalConstants.Course;
 
@@ -25,44 +26,48 @@
         }
 
         [HttpGet("{id}")]
-        [ActionHandlingFilter("", CourseMessages.OnUnsuccessfulCourseRetrieval, StatusCodes.Status404NotFound)]
-        public async Task<CourseRespondModel> GetCourse(string id)
+        [ActionHandlingFilter("", CourseMessages.UnsuccessfulCourseRetrieval, StatusCodes.Status404NotFound)]
+        public async Task<CourseModel> GetCourse(string id)
             => await service.GetCourseDetails(id);
 
         [HttpGet("payment/{id}")]
-        [ActionHandlingFilter("", CourseMessages.OnUnsuccessfulCourseRetrieval)]
-        public async Task<CourseRespondPaymentModel> GetCoursePaymentDetails(string id)
+        [ActionHandlingFilter("", CourseMessages.UnsuccessfulCourseRetrieval)]
+        public async Task<CoursePaymentModel> GetCoursePaymentDetails(string id)
             => await service.GetPaymentDetails(id.ToLower());
 
         [HttpGet("all/{page}")]
-        [ActionHandlingFilter()]
-        public async Task<CourseRespondAllPaginated> GetAllCourses([FromRoute]int page, [FromQuery] CourseRequestQueryModel query)
+        [ActionHandlingFilter]
+        public async Task<CourseAllPaginatedModel> GetAllCourses([FromRoute]int page, [FromQuery] CourseRequestQueryModel query)
             => await service.GetAllCourses(page, query);
 
         [HttpGet("my/{page}")]
-        [ActionHandlingFilter()]
-        public async Task<IEnumerable<CourseRespondAllModel>> GetMyCourses(int page, [FromQuery] string? toggle)
+        [ActionHandlingFilter]
+        public async Task<IEnumerable<CourseAllModel>> GetMyCourses(int page, [FromQuery] string? toggle)
             => await service.GetMyCourses(page, toggle);
 
         [HttpGet("languages")]
-        [ActionHandlingFilter()]
+        [ActionHandlingFilter]
         public async Task<CourseFilterModel> GetCoursesFilteringData()
             => await service.GetCoursesFilteringData();
 
         [HttpPost("payment/{id}")]
-        [ActionHandlingFilter(CourseMessages.OnSuccessfulPayment, CourseMessages.OnSuccessfulPayment, StatusCodes.Status403Forbidden)]
+        [ActionHandlingFilter(CourseMessages.SuccessfulPayment, CourseMessages.SuccessfulPayment, StatusCodes.Status403Forbidden)]
         public async Task<bool> JoinCourse(string id)
             => await service.JoinCourse(id);
 
         [HttpGet("upcomingFeatured")]
-        public async Task<ICollection<CourseRespondUpcomingModel>> GetUpcomingCourses()
+        [ActionHandlingFilter]
+        public async Task<ICollection<CourseUpcomingModel>> GetUpcomingCourses()
             => await service.GetUpcomingCourses();
 
         [HttpGet("preview/{id}")]
+        [ActionHandlingFilter]
         public async Task<CoursePreviewModel> GetCoursePreviewDetails(string id)
             => await service.GetPreviewCourseData(id);
 
         [HttpGet("preview/extra/{id}")]
+        [ActionHandlingFilter]
+        [ExceptionHandlingActionFilter]
         public async Task<CourseDetails> GetCourseExtraDetails(string id)
             => await mongoService.GetDetails(id);
     }

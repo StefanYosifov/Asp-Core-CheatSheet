@@ -12,6 +12,7 @@ namespace _Project_CheatSheet.Tests.Comments
 
     using Comment = Comment;
 
+
     public class CommentServiceTests : IClassFixture<ResourcesTestFixture>
     {
         private readonly ResourcesTestFixture fixture;
@@ -35,7 +36,7 @@ namespace _Project_CheatSheet.Tests.Comments
             };
 
             var result=await fixture.CommentService.CreateAComment(commentModel);
-            Assert.Equal(CommentMessages.OnSuccessfulPostComment,result);
+            Assert.Equal(CommentMessages.SuccessfulPostComment,result);
         }
 
         [Fact]
@@ -71,7 +72,7 @@ namespace _Project_CheatSheet.Tests.Comments
 
             var result = await fixture.CommentService.EditComment(findComment.Id.ToString(), editCommentModel);
 
-            Assert.Equal(CommentMessages.OnSuccessfulEditComment,result);
+            Assert.Equal(CommentMessages.SuccessfulEditComment,result);
         }
 
         [Fact]
@@ -121,7 +122,7 @@ namespace _Project_CheatSheet.Tests.Comments
 
             var result = await fixture.CommentService.DeleteComment(findComment.Id.ToString());
 
-            Assert.Equal(CommentMessages.OnSuccessfulDeleteComment,result);
+            Assert.Equal(CommentMessages.SuccessfulDeleteComment,result);
         }
 
         [Fact]

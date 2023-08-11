@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Navigate, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { getCoursePaymentDetails, joinCoursePayment } from "../../api/Requests/courses";
 
 export const CourseJoin = () => {

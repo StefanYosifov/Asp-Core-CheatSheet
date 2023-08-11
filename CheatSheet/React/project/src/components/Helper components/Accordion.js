@@ -11,7 +11,7 @@ export const Accordion = ({ topics }) => {
         <>
             {topicData && topicData.map((data) => (
                 <div key={data.id} className="divide-x divide-y">
-                    <div key={data.id} className="w-full bg-white cursor-pointer flex justify-between" onClick={() => setIsActive(!isActive)}>
+                    <div key={data.id} className="w-full bg-bgWhiteUI-0 cursor-pointer flex justify-between" onClick={() => setIsActive(!isActive)}>
                         <div className="px-4 py-4 text-lg">{data.name}</div>
                         <span className="px-4 py-2">{isActive ? '-' : '+'}</span>
                     </div>

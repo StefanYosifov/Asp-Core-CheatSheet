@@ -1,9 +1,8 @@
-import { create } from "zustand"
+import { create } from "zustand";
 import { getDetails } from "../api/Requests/details";
 import { changeVisibility, deleteResource, editResource, getResourceToEdit } from "../api/Requests/resources";
 import { dislikeResource, likeResource } from "../api/Requests/likes";
 import { toast } from "react-toastify";
-import { RESOURCE_VALIDATIONS } from "../constants/ResourceConstants/ResourceFormValidationConstants";
 import { resourceFormValidator } from "../constants/ResourceConstants/ResourceFormValidator";
 
 

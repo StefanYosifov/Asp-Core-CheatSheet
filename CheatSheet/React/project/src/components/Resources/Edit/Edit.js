@@ -1,4 +1,4 @@
-import { useLocation, useParams } from "react-router-dom"
+import { useLocation, useParams } from "react-router-dom";
 import { useEffect } from "react";
 import useDetailsStore from "../../../stores/useDetailsStore";
 import { FaTimes } from "react-icons/fa";

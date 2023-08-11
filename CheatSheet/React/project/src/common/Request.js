@@ -1,6 +1,5 @@
-import { useNavigate } from 'react-router-dom';
-import {SuccessfulAlert} from '../components/Helper components/SuccessfulAlert'
-import {UnsuccessfulAlert} from '../components/Helper components/UnsuccessfulAlert';
+import { SuccessfulAlert } from '../components/Helper components/SuccessfulAlert';
+import { UnsuccessfulAlert } from '../components/Helper components/UnsuccessfulAlert';
 
 
 export const GetRequest = (request,id, setState, message) => {

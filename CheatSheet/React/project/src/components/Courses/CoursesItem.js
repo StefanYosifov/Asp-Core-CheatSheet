@@ -14,7 +14,7 @@ export const CoursesItem = ({ course }) => {
     <div className="w-full">
       <div className="flex flex-wrap -mx-4">
         <div className="w-full sm:w-1/2 p-4">
-          <div className="c-card  bg-white shadow-md hover:shadow-xl rounded-lg overflow-hidden h-full flex flex-col">
+          <div className="c-card  bg-bgWhiteUI-0 shadow-md hover:shadow-xl rounded-lg overflow-hidden h-full flex flex-col">
             <div className="relative pb-48 overflow-hidden">
               <img className="absolute inset-0 h-full w-full object-cover" src={course.imageUrl} alt="courseImage" />
             </div>

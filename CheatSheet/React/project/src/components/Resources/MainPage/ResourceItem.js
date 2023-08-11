@@ -1,4 +1,4 @@
-import { Link, useFetcher, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { CategoryItem } from "../../Helper components/CategoryItem";
 import { FaHeart } from 'react-icons/fa';
 import { useEffect } from "react";

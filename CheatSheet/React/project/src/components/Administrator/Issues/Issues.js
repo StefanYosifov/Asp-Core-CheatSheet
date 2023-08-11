@@ -1,10 +1,8 @@
-import { useEffect, useState } from "react"
-import { getIssues, resolveIssue } from "../../../api/Requests/admin";
+import { useEffect, useState } from "react";
 import useAdminIssueStore from "../../../stores/useAdminIssueStore";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Pagination } from "../../Helper components/Pagination";
 import { DropDown } from "../../Helper components/DropDown";
-import { toast } from "react-toastify";
 
 
 

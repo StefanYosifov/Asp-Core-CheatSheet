@@ -4,8 +4,11 @@
     using AutoMapper.QueryableExtensions;
 
     using Common.Caching;
+    using Common.Exceptions;
     using Common.Pagination;
     using Common.UserService.Interfaces;
+
+    using Constants.GlobalConstants.Course;
 
     using Enums;
 
@@ -50,23 +53,24 @@
 
         public async Task<bool> JoinCourse(string id)
         {
-            var getCourse = await context.Courses.FindAsync(Guid.Parse(id));
+            var getCourse = await context.Courses
+                .Include(c => c.UsersCourses)
+                .FirstOrDefaultAsync(c => c.Id.ToString().ToLower() == id.ToLower());
 
             if (getCourse == null)
             {
-                return false;
+                throw new ServiceException(CourseMessages.CourseNotFound);
             }
 
             var userId = currentUserService.GetUserId();
 
             if (getCourse.UsersCourses.Any(uc => uc.UserId == userId))
             {
-                return false;
+                throw new ServiceException(CourseMessages.UserAlreadyInCourse);
             }
 
             var userCourse = new UserCourses
             {
-                Course = getCourse,
                 CourseId = getCourse.Id,
                 UserId = userId
             };
@@ -166,7 +170,7 @@
 
             var course = await context.Courses
                 .Include(u => u.UsersCourses)
-                .FirstOrDefaultAsync(c => c.Id.ToString() == id && 
+                .FirstOrDefaultAsync(c => c.Id.ToString() == id &&
                                           c.UsersCourses.Any(uc => uc.UserId == userId));
 
             if (course == null)

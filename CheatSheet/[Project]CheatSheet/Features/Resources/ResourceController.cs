@@ -21,6 +21,7 @@
         }
 
         [HttpGet("pages")]
+        [ActionHandlingFilter]
         public IActionResult GetPageCount()
             => Ok(resourceService.GetTotalPage());
 

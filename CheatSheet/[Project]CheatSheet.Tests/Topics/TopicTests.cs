@@ -29,6 +29,16 @@
         }
 
         [Fact]
+        public async Task GetTopicShouldNReturnEmptyCollectionIfIncorrectIdHasBeenPassed()
+        {
+            var randomId=Guid.NewGuid().ToString();
+
+            var result = await fixture.TopicService.GetAllTopics(randomId);
+
+            Assert.Empty(result);
+        }
+
+        [Fact]
         public async Task GetAllTopicsShouldNotReturn0IfValidDataHasBeenPassed()
         {
             var course = await fixture.DbContext.Courses.Where(c => c.Topics.Count > 0).FirstOrDefaultAsync();

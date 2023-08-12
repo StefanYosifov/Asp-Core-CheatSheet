@@ -18,5 +18,8 @@
 
         public const string UnSuccessfullyCreatedCourse = "You haven't been able to created a course";
         public const string SuccessfullyCreatedCourse = "You have successfully created a course";
+
+        public const string UserAlreadyInCourse =
+            "You have already joined this course, click on Courses > Mine to view it";
     }
 }

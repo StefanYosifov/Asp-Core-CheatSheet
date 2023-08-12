@@ -51,7 +51,8 @@
             => await service.GetCoursesFilteringData();
 
         [HttpPost("payment/{id}")]
-        [ActionHandlingFilter(CourseMessages.SuccessfulPayment, CourseMessages.SuccessfulPayment, StatusCodes.Status403Forbidden)]
+        [ActionHandlingFilter(CourseMessages.SuccessfulPayment, "", StatusCodes.Status403Forbidden)]
+        [ExceptionHandlingActionFilter]
         public async Task<bool> JoinCourse(string id)
             => await service.JoinCourse(id);
 

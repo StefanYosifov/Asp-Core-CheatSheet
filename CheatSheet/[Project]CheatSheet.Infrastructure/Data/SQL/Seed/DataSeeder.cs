@@ -9,11 +9,6 @@
     public class DataSeeder
     {
 
-        public static async Task Initializer(CheatSheetDbContext context)
-        {
-
-        }
-
         internal static ModelBuilder SeedRoles(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<IdentityRole>().HasData(

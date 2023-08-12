@@ -2,7 +2,7 @@
 {
     public class ServiceException : CustomException
     {
-        public ServiceException(string message):base(message)
+        public ServiceException(string message) : base(message)
         {
         }
 
